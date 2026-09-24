@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f8f4">
+  <meta name="description" content="รวมลิงก์เครื่องมือและคู่มือ Ragnarok Online ของ econDS">
+  <title>RO Tools — รวมเครื่องมือ Ragnarok Online</title>
+  <style>
+    :root { color-scheme: light; font-family: Tahoma, "Leelawadee UI", system-ui, sans-serif; color: #26362d; background: #f6f8f4; }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; min-width: 320px; line-height: 1.65; }
+    a { color: inherit; text-underline-offset: 4px; }
+    a:focus-visible { outline: 3px solid #155f39; outline-offset: 4px; border-radius: 3px; }
+    .skip { position: absolute; top: -100px; left: 16px; z-index: 2; padding: 10px 14px; background: #fff; }
+    .skip:focus { top: 12px; }
+    .wrap { width: min(100% - 40px, 1050px); margin: auto; }
+    header { border-bottom: 1px solid #d9e2d7; }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 76px; }
+    .brand { font-size: 15px; font-weight: 800; letter-spacing: .12em; text-decoration: none; white-space: nowrap; }
+    .brand span { color: #478661; }
+    header p { margin: 0; font-size: 12px; color: #56675b; }
+    main { padding: 68px 0 96px; }
+    .eyebrow { margin: 0 0 13px; color: #3d7653; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
+    h1 { max-width: 650px; margin: 0; font-size: clamp(32px, 5vw, 54px); line-height: 1.25; letter-spacing: -.035em; }
+    .intro { max-width: 650px; margin: 18px 0 0; color: #526459; font-size: 16px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 65px 0 20px; }
+    h2 { margin: 0; font-size: 22px; }
+    .section-head p { margin: 0; font-size: 13px; color: #526459; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card { display: flex; flex-direction: column; min-height: 255px; padding: 27px; background: #fff; border: 1px solid #d7e1d5; border-radius: 14px; box-shadow: 0 4px 18px rgba(26, 57, 33, .035); }
+    .category { align-self: start; padding: 4px 10px; border-radius: 100px; background: #eaf2e9; color: #315e3f; font-size: 11px; font-weight: 700; }
+    .card h3 { margin: 18px 0 5px; font-size: 21px; line-height: 1.45; }
+    .card p { margin: 0 0 22px; color: #526459; font-size: 14px; }
+    .card a { display: inline-flex; align-items: center; gap: 8px; align-self: start; min-height: 44px; margin-top: auto; color: #155f39; font-size: 14px; font-weight: 700; text-decoration-thickness: 1px; }
+    .card a:hover { color: #093f24; }
+    .card a span { font-size: 18px; }
+    footer { border-top: 1px solid #d9e2d7; color: #526459; font-size: 12px; }
+    footer .wrap { padding: 22px 0; }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 32px, 1050px); }
+      .header-inner { min-height: 65px; }
+      header p { display: none; }
+      main { padding: 45px 0 65px; }
+      .intro { font-size: 14px; }
+      .section-head { display: block; margin-top: 48px; }
+      .section-head p { margin-top: 5px; }
+      .grid { grid-template-columns: 1fr; gap: 13px; }
+      .card { min-height: 0; padding: 22px; }
+      .card h3 { font-size: 19px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#tools">ข้ามไปยังรายการเครื่องมือ</a>
+  <header><div class="wrap header-inner"><a class="brand" href="#top">RO <span>TOOLS</span></a><p>เครื่องมือ Ragnarok Online ของ econDS</p></div></header>
+  <main class="wrap" id="top">
+    <p class="eyebrow">RO TOOLS DIRECTORY</p>
+    <h1>เครื่องมือ RO<br>รวมไว้หน้าเดียว</h1>
+    <p class="intro">เลือกเครื่องมือที่ต้องการ แล้วเปิดใช้งานบนเว็บของเครื่องมือนั้นได้เลย</p>
+    <section id="tools" aria-labelledby="tools-title">
+      <div class="section-head"><h2 id="tools-title">เครื่องมือและคู่มือ</h2><p>4 ลิงก์</p></div>
+      <div class="grid">
+        <article class="card"><span class="category">เก็บเลเวล</span><h3>แผนที่เก็บเลเวล</h3><p>เปรียบเทียบ EXP ต่อมอนสเตอร์ HP และความหนาแน่นของแผนที่ตามการตั้งค่าของคุณ</p><a href="https://econds.github.io/ro-leveling-map/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
+        <article class="card"><span class="category">ทำอุปกรณ์</span><h3>Reform Workshop</h3><p>คำนวณ Enhancement Stone วัตถุดิบที่ต้องซื้อเพิ่ม และต้นทุนเตรียม Reform</p><a href="https://econds.github.io/ro-reform-preparation/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
+        <article class="card"><span class="category">ทำอุปกรณ์</span><h3>Dim Glacier Planner</h3><p>วางแผน Dim Glacier Weapon, Enchant และงบ Refine พร้อมเปรียบเทียบวิธีทำกับซื้อ</p><a href="https://econds.github.io/dim_glacier_planner/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
+        <article class="card"><span class="category">คู่มือย้อนหลัง</span><h3>Sessrumnir Ocean Week</h3><p>คู่มือเควสและคำสั่ง /navi สำหรับกิจกรรมรอบที่ผ่านมา</p><a href="https://econds.github.io/sessrumnir-ocean-week-guide/">อ่านคู่มือ <span aria-hidden="true">↗</span></a></article>
+      </div>
+    </section>
+  </main>
+  <footer><div class="wrap">RO Tools · econDS</div></footer>
+</body>
+</html>
