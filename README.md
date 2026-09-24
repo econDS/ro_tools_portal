@@ -1,15 +1,8 @@
-# RO Tools
+# RO Tools Portal
 
-หน้าเว็บรวมลิงก์เครื่องมือ Ragnarok Online ของ econDS
+รวมลิงก์เครื่องมือและคู่มือ Ragnarok Online ของ econDS พร้อมค้นหา หมวดเครื่องมือ ปักหมุด และโหมดสว่าง/มืด
 
-เปิด `index.html` ได้โดยตรง หรือให้ GitHub Pages เผยแพร่จาก root ของ branch `main` เมื่อเปิดใช้งาน Pages ใน repository แล้ว
-เว็บนี้เป็น HTML ไฟล์เดียว ไม่มีขั้นตอน build และไม่มี JavaScript
+ไฟล์เว็บสถิตที่พร้อมให้บริการ: `index.html` และ `assets/` ลิงก์หลักอยู่ใน HTML และเปิดได้แม้ปิด JavaScript
+GitHub Pages สามารถให้บริการจาก root ของ branch `main` เมื่อเปิดใช้งาน Pages แล้ว
 
-ลิงก์ที่แสดง:
-
-- แผนที่เก็บเลเวล
-- Reform Workshop
-- Dim Glacier Planner
-- Sessrumnir Ocean Week (คู่มือรอบที่ผ่านมา)
-
-ข้อมูลลิงก์และคำอธิบายอ้างจากงานสำรวจในเครื่องเมื่อ 2026-09-19 ยังไม่มีผลตรวจ HTTP ของปลายทางหรือการยืนยันข้อมูลเกมล่าสุด
+เอกสารแผนและไฟล์พัฒนาเก็บไว้เฉพาะในเครื่อง ไม่รวมใน repository นี้

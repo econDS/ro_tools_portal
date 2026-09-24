@@ -1,75 +1,93 @@
 <!doctype html>
 <html lang="th">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f6f8f4">
-  <meta name="description" content="รวมลิงก์เครื่องมือและคู่มือ Ragnarok Online ของ econDS">
-  <title>RO Tools — รวมเครื่องมือ Ragnarok Online</title>
-  <style>
-    :root { color-scheme: light; font-family: Tahoma, "Leelawadee UI", system-ui, sans-serif; color: #26362d; background: #f6f8f4; }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body { margin: 0; min-width: 320px; line-height: 1.65; }
-    a { color: inherit; text-underline-offset: 4px; }
-    a:focus-visible { outline: 3px solid #155f39; outline-offset: 4px; border-radius: 3px; }
-    .skip { position: absolute; top: -100px; left: 16px; z-index: 2; padding: 10px 14px; background: #fff; }
-    .skip:focus { top: 12px; }
-    .wrap { width: min(100% - 40px, 1050px); margin: auto; }
-    header { border-bottom: 1px solid #d9e2d7; }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 76px; }
-    .brand { font-size: 15px; font-weight: 800; letter-spacing: .12em; text-decoration: none; white-space: nowrap; }
-    .brand span { color: #478661; }
-    header p { margin: 0; font-size: 12px; color: #56675b; }
-    main { padding: 68px 0 96px; }
-    .eyebrow { margin: 0 0 13px; color: #3d7653; font-size: 11px; font-weight: 700; letter-spacing: .14em; }
-    h1 { max-width: 650px; margin: 0; font-size: clamp(32px, 5vw, 54px); line-height: 1.25; letter-spacing: -.035em; }
-    .intro { max-width: 650px; margin: 18px 0 0; color: #526459; font-size: 16px; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin: 65px 0 20px; }
-    h2 { margin: 0; font-size: 22px; }
-    .section-head p { margin: 0; font-size: 13px; color: #526459; }
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
-    .card { display: flex; flex-direction: column; min-height: 255px; padding: 27px; background: #fff; border: 1px solid #d7e1d5; border-radius: 14px; box-shadow: 0 4px 18px rgba(26, 57, 33, .035); }
-    .category { align-self: start; padding: 4px 10px; border-radius: 100px; background: #eaf2e9; color: #315e3f; font-size: 11px; font-weight: 700; }
-    .card h3 { margin: 18px 0 5px; font-size: 21px; line-height: 1.45; }
-    .card p { margin: 0 0 22px; color: #526459; font-size: 14px; }
-    .card a { display: inline-flex; align-items: center; gap: 8px; align-self: start; min-height: 44px; margin-top: auto; color: #155f39; font-size: 14px; font-weight: 700; text-decoration-thickness: 1px; }
-    .card a:hover { color: #093f24; }
-    .card a span { font-size: 18px; }
-    footer { border-top: 1px solid #d9e2d7; color: #526459; font-size: 12px; }
-    footer .wrap { padding: 22px 0; }
-    @media (max-width: 680px) {
-      .wrap { width: min(100% - 32px, 1050px); }
-      .header-inner { min-height: 65px; }
-      header p { display: none; }
-      main { padding: 45px 0 65px; }
-      .intro { font-size: 14px; }
-      .section-head { display: block; margin-top: 48px; }
-      .section-head p { margin-top: 5px; }
-      .grid { grid-template-columns: 1fr; gap: 13px; }
-      .card { min-height: 0; padding: 22px; }
-      .card h3 { font-size: 19px; }
-    }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-  </style>
-</head>
-<body>
-  <a class="skip" href="#tools">ข้ามไปยังรายการเครื่องมือ</a>
-  <header><div class="wrap header-inner"><a class="brand" href="#top">RO <span>TOOLS</span></a><p>เครื่องมือ Ragnarok Online ของ econDS</p></div></header>
-  <main class="wrap" id="top">
-    <p class="eyebrow">RO TOOLS DIRECTORY</p>
-    <h1>เครื่องมือ RO<br>รวมไว้หน้าเดียว</h1>
-    <p class="intro">เลือกเครื่องมือที่ต้องการ แล้วเปิดใช้งานบนเว็บของเครื่องมือนั้นได้เลย</p>
-    <section id="tools" aria-labelledby="tools-title">
-      <div class="section-head"><h2 id="tools-title">เครื่องมือและคู่มือ</h2><p>4 ลิงก์</p></div>
-      <div class="grid">
-        <article class="card"><span class="category">เก็บเลเวล</span><h3>แผนที่เก็บเลเวล</h3><p>เปรียบเทียบ EXP ต่อมอนสเตอร์ HP และความหนาแน่นของแผนที่ตามการตั้งค่าของคุณ</p><a href="https://econds.github.io/ro-leveling-map/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
-        <article class="card"><span class="category">ทำอุปกรณ์</span><h3>Reform Workshop</h3><p>คำนวณ Enhancement Stone วัตถุดิบที่ต้องซื้อเพิ่ม และต้นทุนเตรียม Reform</p><a href="https://econds.github.io/ro-reform-preparation/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
-        <article class="card"><span class="category">ทำอุปกรณ์</span><h3>Dim Glacier Planner</h3><p>วางแผน Dim Glacier Weapon, Enchant และงบ Refine พร้อมเปรียบเทียบวิธีทำกับซื้อ</p><a href="https://econds.github.io/dim_glacier_planner/">เปิดเครื่องมือ <span aria-hidden="true">↗</span></a></article>
-        <article class="card"><span class="category">คู่มือย้อนหลัง</span><h3>Sessrumnir Ocean Week</h3><p>คู่มือเควสและคำสั่ง /navi สำหรับกิจกรรมรอบที่ผ่านมา</p><a href="https://econds.github.io/sessrumnir-ocean-week-guide/">อ่านคู่มือ <span aria-hidden="true">↗</span></a></article>
-      </div>
-    </section>
-  </main>
-  <footer><div class="wrap">RO Tools · econDS</div></footer>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="รวมเครื่องมือและคู่มือ Ragnarok Online ของ econDS สำหรับเก็บเลเวล เตรียม Reform และวางแผน Dim Glacier">
+    <meta name="color-scheme" content="light dark">
+    <title>RO Tools Portal — เครื่องมือและคู่มือ Ragnarok Online</title>
+    <script type="module" crossorigin src="./assets/index-D4g-EOGm.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-BGZ7aaEk.css">
+  </head>
+  <body><a class="skip-link" href="#main">ข้ามไปเนื้อหา</a><div class="app-shell">
+  <header class="site-header"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">R<span>O</span></span><span>RO TOOLS<span class="brand-sub">เครื่องมือของ econDS</span></span></a><nav aria-label="เมนูหลัก"><a href="#journeys">เริ่มจากสิ่งที่อยากทำ</a><a href="#about">เกี่ยวกับ</a><button id="theme-toggle" type="button" hidden>โหมดมืด</button></nav></header>
+  <main id="main" tabindex="-1"><section class="hero" aria-labelledby="page-title"><div><p class="eyebrow"><span aria-hidden="true">✦</span> RAGNAROK ONLINE · TOOL COLLECTION</p><h1 id="page-title">วางแผนให้พร้อม<br><span>ก่อนออกผจญภัย</span></h1><p class="hero-copy">รวมเครื่องคำนวณและคู่มือ Ragnarok Online ไว้ในที่เดียว<br class="desktop-break"> เลือกสิ่งที่อยากทำ แล้วเปิดเครื่องมือที่ใช่ได้ทันที</p><a class="hero-link" href="#tools">ดูเครื่องมือทั้งหมด <span aria-hidden="true">↓</span></a></div><aside class="hero-note" aria-labelledby="destinations-title"><p id="destinations-title" class="note-index">เครื่องมือในชุดนี้</p><ul class="destinations"><li><a class="dest leveling" data-launch="leveling-map" href="https://econds.github.io/ro-leveling-map/"><span class="dest-icon" aria-hidden="true">⌖</span><span class="dest-body"><strong>แผนที่เก็บเลเวล</strong><span class="dest-url">econds.github.io/ro-leveling-map</span></span><span class="dest-arrow" aria-hidden="true">↗</span></a></li><li><a class="dest equipment" data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/"><span class="dest-icon" aria-hidden="true">◇</span><span class="dest-body"><strong>Reform Workshop</strong><span class="dest-url">econds.github.io/ro-reform-preparation</span></span><span class="dest-arrow" aria-hidden="true">↗</span></a></li><li><a class="dest equipment" data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/"><span class="dest-icon" aria-hidden="true">◇</span><span class="dest-body"><strong>Dim Glacier Planner</strong><span class="dest-url">econds.github.io/dim_glacier_planner</span></span><span class="dest-arrow" aria-hidden="true">↗</span></a></li><li><a class="dest events" data-launch="ocean-week-guide" href="https://econds.github.io/sessrumnir-ocean-week-guide/"><span class="dest-icon" aria-hidden="true">≋</span><span class="dest-body"><strong>Sessrumnir Ocean Week</strong><span class="dest-url">econds.github.io/sessrumnir-ocean-week-guide</span></span><span class="dest-arrow" aria-hidden="true">↗</span></a></li><li><span class="dest dest-planned equipment"><span class="dest-icon" aria-hidden="true">◇</span><span class="dest-body"><strong>Grade &amp; Refine Workshop</strong><span class="dest-url">อยู่ในแผน · ยังไม่เปิดให้ใช้</span></span></span></li></ul><span class="note-caption">กดเพื่อเปิดเว็บของเครื่องมือนั้นโดยตรง</span></aside></section>
+  <section id="quick-access" class="quick-access" hidden aria-label="ทางลัดส่วนตัว"><div><h2>เครื่องมือที่ปักหมุด</h2><ul id="favorites"></ul></div><div><h2>เปิดล่าสุด</h2><ul id="recent"></ul></div></section>
+  <section id="tools" aria-labelledby="tools-title"><div class="section-title"><div><p class="eyebrow">YOUR NEXT ADVENTURE</p><h2 id="tools-title">เลือกเครื่องมือของคุณ</h2></div><p>พร้อมใช้ 4 รายการ · อยู่ในแผน 1 รายการ</p></div>
+  <div id="search-controls" class="search-controls" hidden><label class="search-field" for="search"><span aria-hidden="true">⌕</span><span class="sr-only">ค้นหาเครื่องมือ</span><input id="search" type="search" maxlength="160" placeholder="ค้นหา เช่น เก็บเวล, Reform, Dim Glacier…" aria-describedby="search-help"></label><div class="filters" role="group" aria-label="หมวดเครื่องมือ"><button type="button" data-category="all" aria-pressed="true">ทั้งหมด</button><button type="button" data-category="leveling" aria-pressed="false">เก็บเลเวล</button><button type="button" data-category="equipment" aria-pressed="false">ทำอุปกรณ์</button><button type="button" data-category="events" aria-pressed="false">กิจกรรมและคู่มือ</button></div><p id="search-help">ค้นได้ทั้งชื่อ คำอธิบาย และคำสำคัญ ทั้งภาษาไทยและอังกฤษ</p><p id="result-count" role="status"></p></div>
+  <noscript><p class="notice">เปิดเครื่องมือได้จากลิงก์ด้านล่าง เปิด JavaScript เพื่อใช้การค้นหาและปักหมุด</p></noscript>
+  <div class="tool-grid"><article id="tool-leveling-map" class="tool-card leveling" data-tool="leveling-map" aria-labelledby="title-leveling-map">
+    <div class="card-art" aria-hidden="true"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><linearGradient id="art-leveling-map" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#285f3f"/><stop offset="1" stop-color="#9cc65b"/></linearGradient></defs><rect width="400" height="120" fill="url(#art-leveling-map)"/><path d="M0 0v120M32 0v120M64 0v120M96 0v120M128 0v120M160 0v120M192 0v120M224 0v120M256 0v120M288 0v120M320 0v120M352 0v120M384 0v120M0 30h400M0 60h400M0 90h400" stroke="#fff" stroke-opacity=".13"/><path d="M0 120 60 78l50 30 60-44 70 56Z" fill="#fff" fill-opacity=".1"/><path d="M28 98C90 36 140 112 206 64s110-30 160-10" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" stroke-opacity=".9"/><path d="M206 30c-9 0-16 7-16 16 0 12 16 26 16 26s16-14 16-26c0-9-7-16-16-16Z" fill="#f6d45c"/><circle cx="206" cy="46" r="6" fill="#285f3f"/><path d="M366 26c-7 0-12 5-12 12 0 9 12 20 12 20s12-11 12-20c0-7-5-12-12-12Z" fill="#fff" fill-opacity=".85"/><g fill="#fff" fill-opacity=".7"><rect x="300" y="92" width="8" height="18" rx="2"/><rect x="312" y="84" width="8" height="26" rx="2"/><rect x="324" y="74" width="8" height="36" rx="2"/></g></svg></div>
+    <div class="card-top"><span class="tool-icon" aria-hidden="true">⌖</span><span class="category-label">เก็บเลเวล<span class="kind"> · เครื่องคำนวณ</span></span><span class="card-number" aria-hidden="true">01</span></div>
+    <div class="card-heading"><h3 id="title-leveling-map">แผนที่เก็บเลเวล</h3><button class="pin" type="button" data-pin="leveling-map" aria-label="ปักหมุด แผนที่เก็บเลเวล" aria-pressed="false" hidden><span aria-hidden="true">☆</span></button></div>
+
+    <p class="description">เปรียบเทียบ EXP ต่อมอนสเตอร์ HP ความหนาแน่น และ Spotlight ตามการตั้งค่าของผู้เล่น</p>
+
+    <ul class="tags" aria-label="คำสำคัญ"><li>EXP</li><li>Spotlight</li><li>แผนที่</li><li>ปาร์ตี้</li></ul>
+    <div class="card-actions"><a class="launch" data-launch="leveling-map" href="https://econds.github.io/ro-leveling-map/"><span class="launch-text">เปิดเครื่องมือ<span class="launch-url">econds.github.io/ro-leveling-map</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div>
+    <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
+      <dl><dt>ทบทวนคำอธิบายล่าสุด</dt><dd>2026-09-19</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>ยังไม่ได้ยืนยัน</dd><dt>สถานะลิงก์</dt><dd>ยังไม่ได้ตรวจการเปิดเว็บ</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>ยังไม่มีผลตรวจ</dd></dl>
+      <p>แหล่งข้อมูล: <a href="https://github.com/econDS/ro-leveling-map/blob/main/README.md">S1</a> · <a href="https://github.com/econDS/ro-leveling-map/blob/main/assets/ui.js">S7</a></p>
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul><li><a data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/">Reform Workshop</a></li><li><a data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/">Dim Glacier Planner</a></li><li><a data-launch="ocean-week-guide" href="https://econds.github.io/sessrumnir-ocean-week-guide/">Sessrumnir Ocean Week</a></li></ul>
+    </details>
+  </article><article id="tool-reform-workshop" class="tool-card equipment" data-tool="reform-workshop" aria-labelledby="title-reform-workshop">
+    <div class="card-art" aria-hidden="true"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><linearGradient id="art-reform-workshop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6d3f0c"/><stop offset="1" stop-color="#e3a73d"/></linearGradient></defs><rect width="400" height="120" fill="url(#art-reform-workshop)"/><g fill="#fff" fill-opacity=".12"><circle cx="330" cy="30" r="70"/><circle cx="330" cy="30" r="44"/></g><path d="M236 58h124c0 13-15 20-34 22v12h16v14h-88v-14h16V80c-20-2-34-9-34-22Z" fill="#2b1a06" fill-opacity=".55"/><path d="m304 20 26 22-6 7-26-22Z" fill="#fff" fill-opacity=".85"/><rect x="286" y="10" width="26" height="14" rx="3" transform="rotate(40 299 17)" fill="#fff"/><g fill="#ffe7a8"><path d="m262 40 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/><path d="m350 46 2 5 5 2-5 2-2 5-2-5-5-2 5-2Z"/></g><g stroke="#fff" stroke-opacity=".7" stroke-width="1.5"><path d="M50 30 72 52 50 90 28 52Z" fill="#9fe3f0" fill-opacity=".8"/><path d="m104 50 16 16-16 28-16-28Z" fill="#f8b4d9" fill-opacity=".8"/><path d="m150 26 12 12-12 22-12-22Z" fill="#c6f29a" fill-opacity=".8"/></g></svg></div>
+    <div class="card-top"><span class="tool-icon" aria-hidden="true">◇</span><span class="category-label">ทำอุปกรณ์<span class="kind"> · เครื่องคำนวณ</span></span><span class="card-number" aria-hidden="true">02</span></div>
+    <div class="card-heading"><h3 id="title-reform-workshop">Reform Workshop</h3><button class="pin" type="button" data-pin="reform-workshop" aria-label="ปักหมุด Reform Workshop" aria-pressed="false" hidden><span aria-hidden="true">☆</span></button></div>
+
+    <p class="description">คำนวณ Enhancement Stone วัตถุดิบที่ต้องซื้อเพิ่ม และต้นทุนเตรียม Reform</p>
+
+    <ul class="tags" aria-label="คำสำคัญ"><li>Reform</li><li>Enhancement Stone</li><li>ต้นทุน</li><li>คลัง</li></ul>
+    <div class="card-actions"><a class="launch" data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/"><span class="launch-text">เปิดเครื่องมือ<span class="launch-url">econds.github.io/ro-reform-preparation</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div>
+    <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
+      <dl><dt>ทบทวนคำอธิบายล่าสุด</dt><dd>2026-09-19</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>ยังไม่ได้ยืนยัน</dd><dt>สถานะลิงก์</dt><dd>ยังไม่ได้ตรวจการเปิดเว็บ</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>ยังไม่มีผลตรวจ</dd></dl>
+      <p>แหล่งข้อมูล: <a href="https://github.com/econDS/ro-reform-preparation/blob/main/README.md">S2</a> · <a href="https://github.com/econDS/ro-reform-preparation/blob/main/app.js#L1-L90">S3</a></p>
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul><li>Grade &amp; Refine Workshop — อยู่ในแผน</li><li><a data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/">Dim Glacier Planner</a></li></ul>
+    </details>
+  </article><article id="tool-dim-glacier" class="tool-card equipment" data-tool="dim-glacier" aria-labelledby="title-dim-glacier">
+    <div class="card-art" aria-hidden="true"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><linearGradient id="art-dim-glacier" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#163f68"/><stop offset="1" stop-color="#7fd0e6"/></linearGradient></defs><rect width="400" height="120" fill="url(#art-dim-glacier)"/><g fill="#fff"><path d="M40 120 70 34l24 86Z" fill-opacity=".22"/><path d="m78 120 34-100 30 100Z" fill-opacity=".32"/><path d="m130 120 22-62 22 62Z" fill-opacity=".18"/><path d="m330 120 26-80 24 80Z" fill-opacity=".2"/></g><path d="M214 104 300 18l6 6-86 86Z" fill="#eafaff"/><path d="m300 18 16-6-6 16Z" fill="#fff"/><rect x="206" y="92" width="26" height="6" rx="2" transform="rotate(-45 219 95)" fill="#0d2a47"/><circle cx="208" cy="106" r="5" fill="#0d2a47"/><g stroke="#fff" stroke-opacity=".75" stroke-width="2" stroke-linecap="round"><path d="M370 18v28M356 32h28M360 22l20 20M380 22l-20 20"/><path d="M190 22v14M183 29h14"/></g></svg></div>
+    <div class="card-top"><span class="tool-icon" aria-hidden="true">◇</span><span class="category-label">ทำอุปกรณ์<span class="kind"> · เครื่องคำนวณ</span></span><span class="card-number" aria-hidden="true">03</span></div>
+    <div class="card-heading"><h3 id="title-dim-glacier">Dim Glacier Planner</h3><button class="pin" type="button" data-pin="dim-glacier" aria-label="ปักหมุด Dim Glacier Planner" aria-pressed="false" hidden><span aria-hidden="true">☆</span></button></div>
+
+    <p class="description">วางแผน Dim Glacier Weapon, Enchant และงบ Refine พร้อมเปรียบเทียบวิธีทำกับซื้อ</p>
+
+    <ul class="tags" aria-label="คำสำคัญ"><li>Dim Glacier</li><li>Enchant</li><li>ต้นทุน</li></ul>
+    <div class="card-actions"><a class="launch" data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/"><span class="launch-text">เปิดเครื่องมือ<span class="launch-url">econds.github.io/dim_glacier_planner</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div>
+    <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
+      <dl><dt>ทบทวนคำอธิบายล่าสุด</dt><dd>2026-09-19</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>ยังไม่ได้ยืนยัน</dd><dt>สถานะลิงก์</dt><dd>ยังไม่ได้ตรวจการเปิดเว็บ</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>ยังไม่มีผลตรวจ</dd></dl>
+      <p>แหล่งข้อมูล: <a href="https://github.com/econDS/dim_glacier_planner/blob/main/README.md">S4</a></p>
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul><li>Grade &amp; Refine Workshop — อยู่ในแผน</li><li><a data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/">Reform Workshop</a></li></ul>
+    </details>
+  </article><article id="tool-ocean-week-guide" class="tool-card events" data-tool="ocean-week-guide" aria-labelledby="title-ocean-week-guide">
+    <div class="card-art" aria-hidden="true"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><linearGradient id="art-ocean-week-guide" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0d4466"/><stop offset="1" stop-color="#43b1cf"/></linearGradient></defs><rect width="400" height="120" fill="url(#art-ocean-week-guide)"/><circle cx="320" cy="34" r="20" fill="#ffe08a"/><path d="M270 72h60l-10 14h-40Z" fill="#fff" fill-opacity=".9"/><path d="M298 38v34l-22-6Z" fill="#fff"/><g fill="none" stroke-linecap="round"><path d="M0 84q25-12 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0" stroke="#fff" stroke-opacity=".55" stroke-width="3"/></g><path d="M0 96q25-12 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V120H0Z" fill="#fff" fill-opacity=".18"/><path d="M0 108q25-10 50 0t50 0 50 0 50 0 50 0 50 0 50 0 50 0V120H0Z" fill="#082f4a" fill-opacity=".4"/><g fill="#fff" fill-opacity=".8"><path d="M70 40c10-8 22-8 30 0-8 8-20 8-30 0Zm30 0 8-6v12Z"/><circle cx="140" cy="30" r="3"/><circle cx="150" cy="44" r="2"/></g></svg></div>
+    <div class="card-top"><span class="tool-icon" aria-hidden="true">≋</span><span class="category-label">กิจกรรมและคู่มือ<span class="kind"> · คู่มือ</span></span><span class="card-number" aria-hidden="true">04</span></div>
+    <div class="card-heading"><h3 id="title-ocean-week-guide">Sessrumnir Ocean Week</h3><button class="pin" type="button" data-pin="ocean-week-guide" aria-label="ปักหมุด Sessrumnir Ocean Week" aria-pressed="false" hidden><span aria-hidden="true">☆</span></button></div>
+    <p class="archive-badge">คู่มือกิจกรรมรอบที่ผ่านมา</p>
+    <p class="description">คู่มือเควสและคำสั่ง /navi ของกิจกรรมรอบที่ระบุในหน้าเดิม</p>
+    <p class="event-period">ช่วงกิจกรรม 2026-05-06 – 2026-06-04 (เวลาไทย)<br>สิ้นสุดก่อนปิดปรับปรุงเซิร์ฟเวอร์</p>
+    <ul class="tags" aria-label="คำสำคัญ"><li>Ocean Week</li><li>เควส</li><li>NPC</li><li>ย้อนหลัง</li></ul>
+    <div class="card-actions"><a class="launch" data-launch="ocean-week-guide" href="https://econds.github.io/sessrumnir-ocean-week-guide/"><span class="launch-text">อ่านคู่มือย้อนหลัง<span class="launch-url">econds.github.io/sessrumnir-ocean-week-guide</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div>
+    <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
+      <dl><dt>ทบทวนคำอธิบายล่าสุด</dt><dd>2026-09-19</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>ยังไม่ได้ยืนยัน</dd><dt>สถานะลิงก์</dt><dd>ยังไม่ได้ตรวจการเปิดเว็บ</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>ยังไม่มีผลตรวจ</dd></dl>
+      <p>แหล่งข้อมูล: <a href="https://github.com/econDS/sessrumnir-ocean-week-guide/blob/master/README.md">S5</a> · <a href="https://github.com/econDS/sessrumnir-ocean-week-guide/blob/master/docs/index.html#L1380-L1500">S6</a></p>
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul><li><a data-launch="leveling-map" href="https://econds.github.io/ro-leveling-map/">แผนที่เก็บเลเวล</a></li></ul>
+    </details>
+  </article><article id="tool-grade-refine" class="tool-card equipment planned" data-tool="grade-refine" aria-labelledby="title-grade-refine">
+    <div class="card-art" aria-hidden="true"><svg viewBox="0 0 400 120" preserveAspectRatio="xMidYMid slice" focusable="false"><defs><linearGradient id="art-grade-refine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#4d5550"/><stop offset="1" stop-color="#9aa39d"/></linearGradient></defs><rect width="400" height="120" fill="url(#art-grade-refine)"/><path d="M0 0v120M32 0v120M64 0v120M96 0v120M128 0v120M160 0v120M192 0v120M224 0v120M256 0v120M288 0v120M320 0v120M352 0v120M384 0v120M0 30h400M0 60h400M0 90h400" stroke="#fff" stroke-opacity=".1"/><g fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2.5" stroke-dasharray="6 6"><rect x="240" y="30" width="70" height="30" rx="6"/><path d="M275 60v44"/></g><g fill="#fff" fill-opacity=".6" font-family="Georgia,serif" font-size="30"><text x="60" y="72">+7</text><text x="130" y="96" font-size="22">+9</text><text x="340" y="84" font-size="26">+10</text></g></svg></div>
+    <div class="card-top"><span class="tool-icon" aria-hidden="true">◇</span><span class="category-label">ทำอุปกรณ์<span class="kind"> · เครื่องคำนวณ</span></span><span class="card-number" aria-hidden="true">05</span></div>
+    <div class="card-heading"><h3 id="title-grade-refine">Grade &amp; Refine Workshop</h3></div>
+
+    <p class="description">แผนเครื่องมือเปรียบเทียบเส้นทางเกรด ตีบวก ค้อน BSB และความเสี่ยงด้านงบ</p>
+
+    <ul class="tags" aria-label="คำสำคัญ"><li>Grade</li><li>Refine</li><li>BSB</li><li>จำลอง</li></ul>
+    <div class="card-actions"><span class="planned-label">อยู่ในแผน · ยังไม่เปิดให้ใช้งาน</span></div>
+    <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
+      <dl><dt>ทบทวนคำอธิบายล่าสุด</dt><dd>2026-09-19</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>ยังไม่ได้ยืนยัน</dd><dt>สถานะลิงก์</dt><dd>ยังไม่มีเว็บปลายทาง</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>ยังไม่มีผลตรวจ</dd></dl>
+
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul><li><a data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/">Reform Workshop</a></li><li><a data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/">Dim Glacier Planner</a></li></ul>
+    </details>
+  </article></div><div id="no-results" class="empty-state" hidden><h3>ไม่พบเครื่องมือที่ตรงกัน</h3><p>ลองใช้คำอื่น หรือดูเครื่องมือทั้งหมด</p><button id="clear-filters" type="button">ล้างการค้นหาและตัวกรอง</button></div></section>
+  <section id="journeys" aria-labelledby="journeys-title"><div class="section-title"><div><p class="eyebrow">A PLACE TO START</p><h2 id="journeys-title">เริ่มจากสิ่งที่อยากทำ</h2></div></div><div class="journey-grid"><article class="journey"><span class="journey-index">01</span><div><h3>หาแผนที่เก็บเลเวล</h3><p>เปิดดูรายละเอียดและตั้งค่าให้ตรงกับการเล่นของคุณ</p><a class="launch" data-launch="leveling-map" href="https://econds.github.io/ro-leveling-map/"><span class="launch-text">เริ่มที่ แผนที่เก็บเลเวล<span class="launch-url">econds.github.io/ro-leveling-map</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div></article><article class="journey"><span class="journey-index">02</span><div><h3>เตรียมวัตถุดิบ Reform แล้ววางแผนเกรด/ตีบวก</h3><p>เริ่มวางแผนในเครื่องมือแรกได้เลย · การส่งแผนต่อไปยังเครื่องมือถัดไปยังอยู่ในแผน</p><a class="launch" data-launch="reform-workshop" href="https://econds.github.io/ro-reform-preparation/"><span class="launch-text">เริ่มที่ Reform Workshop<span class="launch-url">econds.github.io/ro-reform-preparation</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div></article><article class="journey"><span class="journey-index">03</span><div><h3>วางแผน Dim Glacier และส่งต่อช่วง Grade/Refine</h3><p>เริ่มวางแผนในเครื่องมือแรกได้เลย · การส่งแผนต่อไปยังเครื่องมือถัดไปยังอยู่ในแผน</p><a class="launch" data-launch="dim-glacier" href="https://econds.github.io/dim_glacier_planner/"><span class="launch-text">เริ่มที่ Dim Glacier Planner<span class="launch-url">econds.github.io/dim_glacier_planner</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div></article><article class="journey"><span class="journey-index">04</span><div><h3>เปิดคู่มือ Ocean Week รอบที่ผ่านมา</h3><p>เปิดดูรายละเอียดและตั้งค่าให้ตรงกับการเล่นของคุณ</p><a class="launch" data-launch="ocean-week-guide" href="https://econds.github.io/sessrumnir-ocean-week-guide/"><span class="launch-text">เริ่มที่ Sessrumnir Ocean Week<span class="launch-url">econds.github.io/sessrumnir-ocean-week-guide</span></span><span class="launch-arrow" aria-hidden="true">↗</span></a></div></article></div></section>
+  <section id="about" class="about" aria-labelledby="about-title"><div><p class="eyebrow">ABOUT THE COLLECTION</p><h2 id="about-title">จุดเริ่มต้นของแผนคุณ</h2><p>หน้านี้ช่วยให้ค้นหาและเปิดเครื่องมือได้เร็วขึ้น แต่ละเครื่องมือเก็บสูตร ราคา คลัง และการตั้งค่าไว้ในเว็บของตัวเอง การเปิดลิงก์จากหน้านี้จะไม่ส่งแผนหรือแก้ข้อมูลในเครื่องมืออื่น</p></div><div><h3>เกี่ยวกับข้อมูล</h3><p>คำอธิบายทบทวนล่าสุดเมื่อ 2026-09-19 จากแหล่งข้อมูลที่อ้างอิง ยังไม่ได้ยืนยันกฎเกมหรือทดสอบการเปิดเว็บจริง ดูสถานะของแต่ละเครื่องมือได้ในการ์ด</p><p>Sessrumnir Ocean Week เป็นคู่มือของกิจกรรมรอบที่ผ่านมา วันที่ในคู่มือไม่ได้ยืนยันว่าจะมีกิจกรรมรอบใหม่</p><button id="reset-portal" type="button" hidden>ล้างหมุดและประวัติของพอร์ทัล</button><p id="storage-status" class="storage-status" role="status"></p></div></section></main>
+  <footer><span class="footer-brand">RO TOOLS PORTAL</span><span>ทำขึ้นเพื่อช่วยผู้เล่นวางแผน · econDS</span><a href="#">กลับด้านบน ↑</a></footer></div></body>
 </html>
