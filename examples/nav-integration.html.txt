@@ -1,0 +1,15 @@
+<!-- TEMPLATE ONLY: install an actual reviewed local nav bundle first.
+     Local artifact: integrations/nav/releases/1.2.0/. See integrations/nav/README.md; portal deployment is still unverified. -->
+<ro-suite-nav
+  tool-id="reform-workshop"
+  portal-url="https://econds.github.io/ro_tools_portal/"
+  catalog-url="https://econds.github.io/ro_tools_portal/catalog/v1/tools.json">
+  <nav aria-label="เครื่องมือ RO">
+    <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
+  </nav>
+</ro-suite-nav>
+<script type="module" src="./assets/ro-suite/1.2.0/nav.js"></script>
+
+<!-- Do not ship this URL as working before the portal is published.
+     Production tool links should be populated from the approved registry.
+     For Ocean, place local assets inside docs/assets; the public URL has no /docs/. -->

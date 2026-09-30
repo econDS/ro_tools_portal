@@ -1,0 +1,27 @@
+Scope: design-kit JSON/schema/registration invariants only; NOT live-site, browser or game-rule tests.
+
+test_all_five_integration_prompts_exist (test_design_kit.DesignKitTests.test_all_five_integration_prompts_exist) ... ok
+test_categories_exist (test_design_kit.DesignKitTests.test_categories_exist) ... ok
+test_dim_slug_preserved (test_design_kit.DesignKitTests.test_dim_slug_preserved) ... ok
+test_exact_four_existing_repos (test_design_kit.DesignKitTests.test_exact_four_existing_repos) ... ok
+test_existing_urls_are_approved (test_design_kit.DesignKitTests.test_existing_urls_are_approved) ... ok
+test_journeys_reference_existing_ids (test_design_kit.DesignKitTests.test_journeys_reference_existing_ids) ... ok
+test_live_health_not_fabricated (test_design_kit.DesignKitTests.test_live_health_not_fabricated) ... ok
+test_manifest_template_makes_no_capability_claim (test_design_kit.DesignKitTests.test_manifest_template_makes_no_capability_claim) ... ok
+test_no_silent_game_data_verification (test_design_kit.DesignKitTests.test_no_silent_game_data_verification) ... ok
+test_no_suite_support_fabricated (test_design_kit.DesignKitTests.test_no_suite_support_fabricated) ... ok
+test_ocean_path_branch_and_period (test_design_kit.DesignKitTests.test_ocean_path_branch_and_period) ... ok
+test_planned_has_no_launch_or_repo_url (test_design_kit.DesignKitTests.test_planned_has_no_launch_or_repo_url) ... ok
+test_planned_launch_is_rejected_by_schema (test_design_kit.DesignKitTests.test_planned_launch_is_rejected_by_schema) ... ok
+test_related_ids_exist_and_not_self (test_design_kit.DesignKitTests.test_related_ids_exist_and_not_self) ... ok
+test_required_handoff_docs_exist (test_design_kit.DesignKitTests.test_required_handoff_docs_exist) ... ok
+test_schema_is_valid (test_design_kit.DesignKitTests.test_schema_is_valid) ... ok
+test_seed_validates (test_design_kit.DesignKitTests.test_seed_validates) ... ok
+test_sources_exist (test_design_kit.DesignKitTests.test_sources_exist) ... ok
+test_unique_tool_ids (test_design_kit.DesignKitTests.test_unique_tool_ids) ... ok
+test_urls_reject_dangerous_candidates (test_design_kit.DesignKitTests.test_urls_reject_dangerous_candidates) ... ok
+
+----------------------------------------------------------------------
+Ran 20 tests in 0.020s
+
+OK

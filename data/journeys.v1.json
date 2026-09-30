@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "journeys": [
+    {
+      "id": "choose-leveling-map",
+      "title": "หาแผนที่เก็บเลเวล",
+      "toolIds": [
+        "leveling-map"
+      ],
+      "availability": "navigation-only"
+    },
+    {
+      "id": "prepare-reform",
+      "title": "เตรียมวัตถุดิบ Reform แล้ววางแผนเกรด/ตีบวก",
+      "toolIds": [
+        "reform-workshop",
+        "grade-refine"
+      ],
+      "availability": "planned-handoff",
+      "note": "Reform currently produces a materials plan; verify an actual equipment result before exporting equipment state."
+    },
+    {
+      "id": "dim-equipment-plan",
+      "title": "วางแผน Dim Glacier และส่งต่อช่วง Grade/Refine",
+      "toolIds": [
+        "dim-glacier",
+        "grade-refine"
+      ],
+      "availability": "planned-handoff",
+      "note": "Do not double-count the existing Refine budget. Carry distinct cost segments."
+    },
+    {
+      "id": "ocean-reference",
+      "title": "เปิดคู่มือ Ocean Week รอบที่ผ่านมา",
+      "toolIds": [
+        "ocean-week-guide"
+      ],
+      "availability": "navigation-only"
+    }
+  ]
+}

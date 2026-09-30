@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "0.1.0-design",
+  "tools": [
+    {
+      "id": "leveling-map",
+      "title": "แผนที่เก็บเลเวล",
+      "canonicalUrl": "https://econds.github.io/ro-leveling-map/",
+      "listingStatus": "listed"
+    },
+    {
+      "id": "reform-workshop",
+      "title": "Reform Workshop",
+      "canonicalUrl": "https://econds.github.io/ro-reform-preparation/",
+      "listingStatus": "listed"
+    },
+    {
+      "id": "dim-glacier",
+      "title": "Dim Glacier Planner",
+      "canonicalUrl": "https://econds.github.io/dim_glacier_planner/",
+      "listingStatus": "listed"
+    },
+    {
+      "id": "ocean-week-guide",
+      "title": "Sessrumnir Ocean Week",
+      "canonicalUrl": "https://econds.github.io/sessrumnir-ocean-week-guide/",
+      "listingStatus": "listed"
+    },
+    {
+      "id": "grade-refine",
+      "title": "Grade & Refine Workshop",
+      "canonicalUrl": null,
+      "listingStatus": "planned"
+    }
+  ]
+}

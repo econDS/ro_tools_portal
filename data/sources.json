@@ -1,0 +1,149 @@
+{
+  "schemaVersion": 1,
+  "sources": [
+    {
+      "id": "S1",
+      "title": "RO General Map EXP Tool — README",
+      "url": "https://github.com/econDS/ro-leveling-map/blob/main/README.md",
+      "sourceBlobSha": "0b81787eddeb9c4c0cf60f8b6c34e6fed5c442c2",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "purpose",
+        "declared Pages URL",
+        "settings sharing",
+        "historical events"
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "Reform Workshop — README",
+      "url": "https://github.com/econDS/ro-reform-preparation/blob/main/README.md",
+      "sourceBlobSha": "8efa8571bf367b5284d2587705fa99bf3f7cf1aa",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "purpose",
+        "declared Pages URL",
+        "inventory and prices",
+        "limits of existing calculator"
+      ]
+    },
+    {
+      "id": "S3",
+      "title": "Reform Workshop — app.js lines 1–90",
+      "url": "https://github.com/econDS/ro-reform-preparation/blob/main/app.js#L1-L90",
+      "sourceBlobSha": "c077ede69fa5b911cd709436f6fff5c06ac59755",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "reform-workshop.v1 storage key",
+        "migration flags",
+        "item ID mapping"
+      ]
+    },
+    {
+      "id": "S4",
+      "title": "Dim Glacier Ultimate Planner — README",
+      "url": "https://github.com/econDS/dim_glacier_planner/blob/main/README.md",
+      "sourceBlobSha": "47f6eb00865d04bc61eda5035125d2d776c489ff",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "purpose",
+        "declared Pages URL",
+        "existing refine budget",
+        "JSON CSV Excel export/import"
+      ]
+    },
+    {
+      "id": "S5",
+      "title": "Sessrumnir Ocean Week — README",
+      "url": "https://github.com/econDS/sessrumnir-ocean-week-guide/blob/master/README.md",
+      "sourceBlobSha": "8e0044527e749277d4585b998beb35efb94dbb9e",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "docs publishing source",
+        "master branch observed"
+      ]
+    },
+    {
+      "id": "S6",
+      "title": "Sessrumnir guide — dated event content",
+      "url": "https://github.com/econDS/sessrumnir-ocean-week-guide/blob/master/docs/index.html#L1380-L1500",
+      "sourceBlobSha": "801e795cd4c59ccafae2cc742230d75b8ead0431",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "2026-05-06 to 2026-06-04 before maintenance as stated by guide",
+        "quest and navigation content"
+      ]
+    },
+    {
+      "id": "S7",
+      "title": "RO leveling map — UI entry module",
+      "url": "https://github.com/econDS/ro-leveling-map/blob/main/assets/ui.js",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "UI separated from main HTML",
+        "modal and sorting integration constraints"
+      ]
+    },
+    {
+      "id": "D1",
+      "title": "GitHub Docs — What is GitHub Pages?",
+      "url": "https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "static hosting",
+        "project site paths",
+        "user-site distinction"
+      ]
+    },
+    {
+      "id": "D2",
+      "title": "MDN — Window.localStorage",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "origin storage",
+        "storage failure exceptions",
+        "clear removes all keys"
+      ]
+    },
+    {
+      "id": "D3",
+      "title": "MDN — Same-origin policy",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/Security/Defenses/Same-origin_policy",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "origin defined by scheme host port",
+        "path is not a security boundary"
+      ]
+    },
+    {
+      "id": "D4",
+      "title": "MDN — Using shadow DOM",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "CSS encapsulation",
+        "not a security mechanism"
+      ]
+    },
+    {
+      "id": "D5",
+      "title": "Vite — Deploying a Static Site",
+      "url": "https://vite.dev/guide/static-deploy",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "GitHub Pages base path",
+        "build preview"
+      ]
+    },
+    {
+      "id": "D6",
+      "title": "MDN — ServiceWorkerContainer.register",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorkerContainer/register",
+      "checkedOn": "2026-09-19",
+      "supports": [
+        "service-worker scope constraints"
+      ]
+    }
+  ]
+}

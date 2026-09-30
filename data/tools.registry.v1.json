@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "0.1.0-design",
+  "reviewedOn": "2026-09-19",
+  "portal": {
+    "id": "ro-tools-portal",
+    "title": "RO Tools Portal",
+    "proposedRepository": "econDS/ro_tools_portal",
+    "proposedUrl": "https://econds.github.io/ro_tools_portal/",
+    "deploymentStatus": "published"
+  },
+  "categories": [
+    {
+      "id": "leveling",
+      "label": "เก็บเลเวล"
+    },
+    {
+      "id": "equipment",
+      "label": "ทำอุปกรณ์"
+    },
+    {
+      "id": "events",
+      "label": "กิจกรรมและคู่มือ"
+    }
+  ],
+  "tools": [
+    {
+      "id": "leveling-map",
+      "title": "แผนที่เก็บเลเวล",
+      "description": "เปรียบเทียบ EXP ต่อมอนสเตอร์ HP ความหนาแน่น และ Spotlight ตามการตั้งค่าของผู้เล่น",
+      "repository": "econDS/ro-leveling-map",
+      "repositoryUrl": "https://github.com/econDS/ro-leveling-map",
+      "canonicalUrl": "https://econds.github.io/ro-leveling-map/",
+      "listingStatus": "listed",
+      "contentType": "calculator",
+      "contentLifecycle": "evergreen",
+      "categories": [
+        "leveling"
+      ],
+      "tags": [
+        "EXP",
+        "Spotlight",
+        "แผนที่",
+        "ปาร์ตี้"
+      ],
+      "searchAliases": [
+        "เก็บเวล",
+        "เก็บเลเวล",
+        "แมพ",
+        "leveling",
+        "exp"
+      ],
+      "identity": {
+        "accent": "#2f7a4f",
+        "icon": "map"
+      },
+      "relatedToolIds": [
+        "reform-workshop",
+        "dim-glacier",
+        "ocean-week-guide"
+      ],
+      "defaultBranchObserved": "main",
+      "publishingSourceObserved": "root",
+      "declaredExistingFeatures": [
+        "settings-share-link",
+        "local-settings",
+        "historical-spotlight-selection"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1",
+        "tool-manifest.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Source and declared URLs inspected; live HTTP verification was unavailable in this session."
+      },
+      "urlEvidence": "repository-readme",
+      "metadataReviewedOn": "2026-09-19",
+      "gameDataVerifiedOn": null,
+      "event": null,
+      "sourceIds": [
+        "S1",
+        "S7"
+      ]
+    },
+    {
+      "id": "reform-workshop",
+      "title": "Reform Workshop",
+      "description": "คำนวณ Enhancement Stone วัตถุดิบที่ต้องซื้อเพิ่ม และต้นทุนเตรียม Reform",
+      "repository": "econDS/ro-reform-preparation",
+      "repositoryUrl": "https://github.com/econDS/ro-reform-preparation",
+      "canonicalUrl": "https://econds.github.io/ro-reform-preparation/",
+      "listingStatus": "listed",
+      "contentType": "calculator",
+      "contentLifecycle": "evergreen",
+      "categories": [
+        "equipment"
+      ],
+      "tags": [
+        "Reform",
+        "Enhancement Stone",
+        "ต้นทุน",
+        "คลัง"
+      ],
+      "searchAliases": [
+        "รีฟอร์ม",
+        "reform",
+        "หิน",
+        "shadowdecon"
+      ],
+      "identity": {
+        "accent": "#9a5b12",
+        "icon": "anvil"
+      },
+      "relatedToolIds": [
+        "grade-refine",
+        "dim-glacier"
+      ],
+      "defaultBranchObserved": "main",
+      "publishingSourceObserved": "root",
+      "declaredExistingFeatures": [
+        "materials-and-inventory-planning",
+        "local-prices"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1",
+        "tool-manifest.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Source and declared URLs inspected; live HTTP verification was unavailable in this session."
+      },
+      "urlEvidence": "repository-readme",
+      "metadataReviewedOn": "2026-09-19",
+      "gameDataVerifiedOn": null,
+      "event": null,
+      "sourceIds": [
+        "S2",
+        "S3"
+      ]
+    },
+    {
+      "id": "dim-glacier",
+      "title": "Dim Glacier Planner",
+      "description": "วางแผน Dim Glacier Weapon, Enchant และงบ Refine พร้อมเปรียบเทียบวิธีทำกับซื้อ",
+      "repository": "econDS/dim_glacier_planner",
+      "repositoryUrl": "https://github.com/econDS/dim_glacier_planner",
+      "canonicalUrl": "https://econds.github.io/dim_glacier_planner/",
+      "listingStatus": "listed",
+      "contentType": "calculator",
+      "contentLifecycle": "evergreen",
+      "categories": [
+        "equipment"
+      ],
+      "tags": [
+        "Dim Glacier",
+        "Enchant",
+        "ต้นทุน"
+      ],
+      "searchAliases": [
+        "ดิม",
+        "กลาซีเยร์",
+        "glacier",
+        "enchant",
+        "อาวุธ"
+      ],
+      "identity": {
+        "accent": "#2b6fa3",
+        "icon": "snowflake"
+      },
+      "relatedToolIds": [
+        "grade-refine",
+        "reform-workshop"
+      ],
+      "defaultBranchObserved": "main",
+      "publishingSourceObserved": "root",
+      "declaredExistingFeatures": [
+        "json-csv-xlsx-import-export",
+        "zeny-thb-prices",
+        "refine-budget"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1",
+        "tool-manifest.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Source and declared URLs inspected; live HTTP verification was unavailable in this session."
+      },
+      "urlEvidence": "repository-readme",
+      "metadataReviewedOn": "2026-09-19",
+      "gameDataVerifiedOn": null,
+      "event": null,
+      "sourceIds": [
+        "S4"
+      ]
+    },
+    {
+      "id": "ocean-week-guide",
+      "title": "Sessrumnir Ocean Week",
+      "description": "คู่มือเควสและคำสั่ง /navi ของกิจกรรมรอบที่ระบุในหน้าเดิม",
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "repositoryUrl": "https://github.com/econDS/sessrumnir-ocean-week-guide",
+      "canonicalUrl": "https://econds.github.io/sessrumnir-ocean-week-guide/",
+      "listingStatus": "listed",
+      "contentType": "guide",
+      "contentLifecycle": "archived-period",
+      "categories": [
+        "events"
+      ],
+      "tags": [
+        "Ocean Week",
+        "เควส",
+        "NPC",
+        "ย้อนหลัง"
+      ],
+      "searchAliases": [
+        "ocean",
+        "เซสรูมเนียร์",
+        "ราเชล",
+        "rachel",
+        "navi"
+      ],
+      "identity": {
+        "accent": "#0f7686",
+        "icon": "wave"
+      },
+      "relatedToolIds": [
+        "leveling-map"
+      ],
+      "defaultBranchObserved": "master",
+      "publishingSourceObserved": "docs",
+      "declaredExistingFeatures": [
+        "navigation-copy",
+        "quest-guide"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1",
+        "tool-manifest.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Source and declared URLs inspected; live HTTP verification was unavailable in this session."
+      },
+      "urlEvidence": "derived-project-url",
+      "metadataReviewedOn": "2026-09-19",
+      "gameDataVerifiedOn": null,
+      "event": {
+        "editionId": "sessrumnir-ocean-week-2026",
+        "startsOn": "2026-05-06",
+        "endsOn": "2026-06-04",
+        "timeZone": "Asia/Bangkok",
+        "endBoundary": "before-maintenance",
+        "exactEndAt": null,
+        "periodEvidence": "existing-guide",
+        "stateAsOfReview": "past-stated-period"
+      },
+      "sourceIds": [
+        "S5",
+        "S6"
+      ]
+    },
+    {
+      "id": "grade-refine",
+      "title": "Grade & Refine Workshop",
+      "description": "แผนเครื่องมือเปรียบเทียบเส้นทางเกรด ตีบวก ค้อน BSB และความเสี่ยงด้านงบ",
+      "repository": "econDS/ro-grade-refine-planner",
+      "repositoryUrl": null,
+      "canonicalUrl": null,
+      "listingStatus": "planned",
+      "contentType": "calculator",
+      "contentLifecycle": "planned",
+      "categories": [
+        "equipment"
+      ],
+      "tags": [
+        "Grade",
+        "Refine",
+        "BSB",
+        "จำลอง"
+      ],
+      "searchAliases": [
+        "เกรด",
+        "ตีบวก",
+        "ค้อน",
+        "bsb",
+        "refine"
+      ],
+      "identity": {
+        "accent": "#636c67",
+        "icon": "gem"
+      },
+      "relatedToolIds": [
+        "reform-workshop",
+        "dim-glacier"
+      ],
+      "defaultBranchObserved": null,
+      "publishingSourceObserved": null,
+      "declaredExistingFeatures": [],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1",
+        "tool-manifest.v1",
+        "equipment-plan.import.v1"
+      ],
+      "linkHealth": {
+        "state": "not-applicable",
+        "lastCheckedAt": null,
+        "reason": "Planned in this conversation; no deployed site asserted."
+      },
+      "urlEvidence": "not-created",
+      "metadataReviewedOn": "2026-09-19",
+      "gameDataVerifiedOn": null,
+      "event": null,
+      "sourceIds": []
+    }
+  ]
+}

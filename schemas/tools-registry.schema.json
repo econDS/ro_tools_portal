@@ -1,0 +1,347 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "RO Tools Portal registry (design v1)",
+  "type": "object",
+  "required": [
+    "schemaVersion",
+    "catalogVersion",
+    "reviewedOn",
+    "portal",
+    "categories",
+    "tools"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "catalogVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reviewedOn": {
+      "type": "string",
+      "format": "date"
+    },
+    "portal": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "proposedRepository",
+        "proposedUrl",
+        "deploymentStatus"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "const": "ro-tools-portal"
+        },
+        "title": {
+          "type": "string"
+        },
+        "proposedRepository": {
+          "type": "string"
+        },
+        "proposedUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "deploymentStatus": {
+          "enum": [
+            "planned",
+            "published"
+          ]
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "label"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/tool"
+      }
+    }
+  },
+  "$defs": {
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "nullableString": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "description",
+        "repository",
+        "repositoryUrl",
+        "canonicalUrl",
+        "listingStatus",
+        "contentType",
+        "contentLifecycle",
+        "categories",
+        "tags",
+        "searchAliases",
+        "identity",
+        "relatedToolIds",
+        "defaultBranchObserved",
+        "publishingSourceObserved",
+        "declaredExistingFeatures",
+        "suiteCapabilitiesConfirmed",
+        "plannedSuiteCapabilities",
+        "linkHealth",
+        "urlEvidence",
+        "metadataReviewedOn",
+        "gameDataVerifiedOn",
+        "event",
+        "sourceIds"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "repository": {
+          "type": "string",
+          "pattern": "^econDS/[A-Za-z0-9_-]+$"
+        },
+        "repositoryUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "canonicalUrl": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "uri"
+        },
+        "listingStatus": {
+          "enum": [
+            "listed",
+            "planned",
+            "hidden"
+          ]
+        },
+        "contentType": {
+          "enum": [
+            "calculator",
+            "guide",
+            "reference"
+          ]
+        },
+        "contentLifecycle": {
+          "enum": [
+            "evergreen",
+            "archived-period",
+            "planned"
+          ]
+        },
+        "categories": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "tags": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "searchAliases": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "identity": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "accent",
+            "icon"
+          ],
+          "properties": {
+            "accent": {
+              "type": "string",
+              "pattern": "^#[0-9a-f]{6}$"
+            },
+            "icon": {
+              "enum": [
+                "map",
+                "anvil",
+                "snowflake",
+                "wave",
+                "gem"
+              ]
+            }
+          }
+        },
+        "relatedToolIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "declaredExistingFeatures": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "suiteCapabilitiesConfirmed": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "plannedSuiteCapabilities": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "sourceIds": {
+          "$ref": "#/$defs/stringArray"
+        },
+        "defaultBranchObserved": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "publishingSourceObserved": {
+          "$ref": "#/$defs/nullableString"
+        },
+        "linkHealth": {
+          "type": "object",
+          "required": [
+            "state",
+            "lastCheckedAt",
+            "reason"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "state": {
+              "enum": [
+                "unverified",
+                "ok",
+                "warning",
+                "unreachable",
+                "not-applicable"
+              ]
+            },
+            "lastCheckedAt": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "reason": {
+              "type": "string"
+            }
+          }
+        },
+        "urlEvidence": {
+          "enum": [
+            "repository-readme",
+            "derived-project-url",
+            "not-created",
+            "confirmed-http"
+          ]
+        },
+        "metadataReviewedOn": {
+          "type": "string",
+          "format": "date"
+        },
+        "gameDataVerifiedOn": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "event": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "editionId": {
+              "type": "string"
+            },
+            "startsOn": {
+              "type": "string",
+              "format": "date"
+            },
+            "endsOn": {
+              "type": "string",
+              "format": "date"
+            },
+            "timeZone": {
+              "type": "string"
+            },
+            "endBoundary": {
+              "type": "string"
+            },
+            "exactEndAt": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "format": "date-time"
+            },
+            "periodEvidence": {
+              "type": "string"
+            },
+            "stateAsOfReview": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "listingStatus": {
+                "const": "planned"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "canonicalUrl": {
+                "type": "null"
+              },
+              "repositoryUrl": {
+                "type": "null"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

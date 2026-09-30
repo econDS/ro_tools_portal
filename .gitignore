@@ -1,27 +1,9 @@
-# Keep local planning and development material off the public repository.
-AGENTS.md
-CODEX_START_PROMPT.md
-PLAN.md
-.claude/
-.publish-draft/
-data/
-docs/
-examples/
-integrations/
-prompts/
-schemas/
-scripts/
-src/
-tests/
+# Dependencies, build output and local test artefacts. Sources, docs and prompts are tracked so cloud agents can work from GitHub.
 node_modules/
 dist/
 test-results/
 playwright-report/
 .venv/
-package.json
-package-lock.json
-playwright.config.ts
-tsconfig.json
-vite.config.ts
-vite.nav.config.ts
 __pycache__/
+.publish-draft/
+*.tmp.mjs
