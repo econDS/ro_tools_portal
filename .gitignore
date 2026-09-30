@@ -7,3 +7,9 @@ playwright-report/
 __pycache__/
 .publish-draft/
 *.tmp.mjs
+# Planning documents and design-phase prompts stay local.
+PLAN.md
+CODEX_START_PROMPT.md
+docs/
+prompts/0*.md
+tests/VALIDATION_REPORT.txt

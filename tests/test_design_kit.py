@@ -97,11 +97,14 @@ class DesignKitTests(unittest.TestCase):
         self.assertEqual(m['manifestState'],'template-not-deployed')
         self.assertEqual(m['implementedSuiteCapabilities'],[])
         self.assertIsNone(m['appVersion'])
+    # Planning docs and design-phase prompts are kept locally only (not in the public repository).
+    @unittest.skipUnless((ROOT/'PLAN.md').is_file(), 'planning docs are local-only')
     def test_required_handoff_docs_exist(self):
         for fn in ['PLAN.md','AGENTS.md','CODEX_START_PROMPT.md',
                    'docs/ARCHITECTURE.md','docs/NAV_CONTRACT.md','docs/HANDOFF_CONTRACT.md',
                    'docs/REPOSITORY_ROLLOUT.md','docs/ACCEPTANCE_TESTS.md','docs/SOURCES.md']:
             self.assertTrue((ROOT/fn).is_file(), fn)
+    @unittest.skipUnless((ROOT/'PLAN.md').is_file(), 'planning docs are local-only')
     def test_all_five_integration_prompts_exist(self):
         self.assertEqual(len(list((ROOT/'prompts').glob('*.md'))),5)
     def test_no_silent_game_data_verification(self):

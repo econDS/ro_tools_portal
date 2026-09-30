@@ -3,7 +3,7 @@
 รวมลิงก์เครื่องมือและคู่มือ Ragnarok Online ของ econDS พร้อมค้นหา หมวดเครื่องมือ ปักหมุด และโหมดสว่าง/มืด
 เว็บ: https://econds.github.io/ro_tools_portal/
 
-อ่าน `AGENTS.md`, `PLAN.md` และ `docs/` ก่อนแก้งาน
+อ่าน `AGENTS.md` ก่อนแก้งาน เอกสารแผน (`PLAN.md`, `docs/`, prompt ช่วงออกแบบ) เก็บไว้ในเครื่องเท่านั้น ไม่อยู่ใน repository นี้
 
 ## โครงสร้าง
 

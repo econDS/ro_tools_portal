@@ -18,7 +18,7 @@ SHA-256 ที่ต้องได้ (ต้องตรงกับ `nav.lock
 - `nav.js`: `d75be916445feb4febeaada437841a1b3be68db16a00673198c78fd6f6c8dc5f`
 - `catalog.snapshot.json`: `800bb9c9d2b52a7fbae58e436b05529e69820fee3627d199da545a6f5e28f7dd`
 
-อ่านเอกสารก่อนเริ่ม: `integrations/nav/README.md` และ `docs/NAV_CONTRACT.md` ใน repo เดียวกันที่ tag นั้น
+อ่านเอกสารก่อนเริ่ม: `integrations/nav/README.md` ใน repo เดียวกันที่ tag นั้น
 URL จริงของพอร์ทัลคือ `https://econds.github.io/ro_tools_portal/` (มีขีดล่าง)
 
 ## ขั้นตอน

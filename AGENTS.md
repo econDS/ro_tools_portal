@@ -1,7 +1,7 @@
 # Project instructions for Codex
 
 Build ro-tools-portal as a static portal, not a replacement for every app.
-Read PLAN.md and docs/ before implementation. Respect evidence limits in data/sources.json.
+Read PLAN.md and docs/ before implementation when present; they are kept locally and are not in the public repository, so if absent follow this file, README.md and integrations/nav/README.md. Respect evidence limits in data/sources.json.
 Do not change existing repositories during portal-only work. For a child-repo task, work only in its selected checkout and preserve unrelated edits.
 Do not create/push remote repositories, change GitHub Pages settings or deploy unless separately authorized.
 Do not use git reset --hard, git clean, force push or overwrite user data to make integration easier.
