@@ -1,6 +1,6 @@
 {
   "bundleVersion": "1.2.0",
-  "sourceCommit": "4b94692bc2fca084a1181efdfa87d1ed939f1773",
+  "sourceCommit": "a3966bdda412f05b0756b5d139915e44894c0ee0",
   "sourceNote": "Check source file hashes against this commit; the working tree may contain edits.",
   "sourceHashes": {
     "src/urls.ts": "1fd4bbb108fa5ac868466fea4f22dd7ce1b9c5c25c2bbf8de9cefb9c49c4f9c1",
