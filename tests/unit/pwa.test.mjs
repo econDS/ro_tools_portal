@@ -109,7 +109,7 @@ test('online navigation bypasses old shell and does not contaminate its cache', 
   assert.equal(await (await w.fetch(base, { mode: 'navigate' })).text(), 'new online shell');
   assert.equal(w.requests.at(-1).options.cache, 'no-cache');
   w.network(async () => { throw new TypeError('offline'); });
-  assert.match(await (await w.fetch(base, { mode: 'navigate' })).text(), /วางแผนให้พร้อม/);
+  assert.match(await (await w.fetch(base, { mode: 'navigate' })).text(), /วางแผนก่อนลงมือ/);
 });
 
 test('temporary server errors get the shell; real not-found remains not-found', async () => {
@@ -123,7 +123,7 @@ test('temporary server errors get the shell; real not-found remains not-found', 
 test('a stalled navigation is bounded and falls back to the stored shell', async () => {
   const w = worker(); await w.lifecycle('install');
   w.network((_request, options) => new Promise((_resolve, reject) => options.signal.addEventListener('abort', () => reject(new Error('aborted')))));
-  assert.match(await (await w.fetch(base, { mode: 'navigate' })).text(), /วางแผนให้พร้อม/);
+  assert.match(await (await w.fetch(base, { mode: 'navigate' })).text(), /วางแผนก่อนลงมือ/);
 });
 
 

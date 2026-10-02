@@ -30,3 +30,37 @@ jobs:
           name: portal-browser-evidence
           path: test-results/
           retention-days: 14
+  task-first-baseline:
+    if: github.head_ref == 'feat/task-first-portal'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          path: candidate
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: f17c9fd03c33b4519a9594999123ac8ca7ef9add
+          persist-credentials: false
+          fetch-depth: 0
+          path: baseline
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 24.19.0
+      - working-directory: baseline
+        run: npm ci && npx playwright install --with-deps chromium && npm run check
+      - working-directory: baseline
+        run: |
+          cp ../candidate/qa/task-first/capture-baseline.mjs capture-baseline.mjs
+          npx vite preview --host 127.0.0.1 --port 4173 --strictPort &
+          SERVER=$!
+          trap 'kill "$SERVER"' EXIT
+          for i in $(seq 1 30); do curl -fsS http://127.0.0.1:4173/ro_tools_portal/ > /dev/null && break; sleep 1; done
+          node capture-baseline.mjs
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: task-first-baseline-f17c9fd
+          path: baseline/test-results/
+          retention-days: 14

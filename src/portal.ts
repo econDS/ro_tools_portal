@@ -24,6 +24,7 @@ function filter(updateUrl = true) {
     card.hidden = !matches(tool, search.value, category);
     if (!card.hidden) count++;
   }
+  for (const group of document.querySelectorAll<HTMLElement>('[data-tool-group]')) group.hidden = !group.querySelector('[data-tool]:not([hidden])');
   for (const button of categoryButtons) button.setAttribute('aria-pressed', String(category === button.dataset.category));
   get('result-count').textContent = `แสดง ${count} จาก ${tools.length} รายการ`;
   get('no-results').hidden = count > 0;
@@ -49,6 +50,10 @@ function renderShortcuts(id: string, ids: string[], placeholder: string) {
   }
 }
 function renderState() {
+  get('quick-access').hidden = !state.favorites.length && !state.recent.length;
+  get('shortcut-hint').hidden = !get('quick-access').hidden;
+  get('favorites-panel').hidden = !state.favorites.length;
+  get('recent-panel').hidden = !state.recent.length;
   renderShortcuts('favorites', state.favorites, 'กด ☆ บนการ์ดเพื่อปักหมุดเครื่องมือที่ใช้บ่อยไว้ตรงนี้');
   renderShortcuts('recent', state.recent, 'เครื่องมือที่เปิดจากหน้านี้จะแสดงที่นี่');
   for (const button of pins) {
@@ -93,7 +98,7 @@ function applyTheme() {
 }
 get('theme-toggle').addEventListener('click', () => { theme = theme === 'light' ? 'dark' : 'light'; applyTheme(); store.saveTheme(theme); });
 applyTheme(); renderState(); filter(false);
-for (const id of ['search-controls', 'quick-access', 'reset-portal', 'theme-toggle']) get(id).hidden = false;
+for (const id of ['search-controls', 'reset-portal', 'theme-toggle']) get(id).hidden = false;
 pins.forEach(button => { button.hidden = false; });
 
 registerPortalWorker();
