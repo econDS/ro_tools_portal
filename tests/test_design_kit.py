@@ -36,10 +36,10 @@ class DesignKitTests(unittest.TestCase):
     def test_unique_tool_ids(self):
         ids=[t['id'] for t in REG['tools']]
         self.assertEqual(len(ids), len(set(ids)))
-    def test_exact_four_existing_repos(self):
+    def test_exact_five_existing_repos(self):
         self.assertEqual({t['repository'] for t in REG['tools'] if t['listingStatus']=='listed'}, {
           'econDS/ro-leveling-map','econDS/ro-reform-preparation',
-          'econDS/dim_glacier_planner','econDS/sessrumnir-ocean-week-guide'})
+          'econDS/dim_glacier_planner','econDS/sessrumnir-ocean-week-guide','econDS/ro-best-status'})
     def test_existing_urls_are_approved(self):
         for t in REG['tools']:
             if t['listingStatus']=='listed': self.assertTrue(approved_launch_url(t['canonicalUrl']))
@@ -75,6 +75,16 @@ class DesignKitTests(unittest.TestCase):
         self.assertEqual(t['contentLifecycle'],'archived-period')
         self.assertLess(date.fromisoformat(t['event']['endsOn']), date.fromisoformat(REG['reviewedOn']))
         self.assertIsNone(t['event']['exactEndAt'])
+    def test_best_status_evidence_and_capability_limits(self):
+        t=next(t for t in REG['tools'] if t['id']=='best-status')
+        self.assertEqual(t['canonicalUrl'],'https://econds.github.io/ro-best-status/')
+        self.assertEqual(t['defaultBranchObserved'],'main')
+        self.assertEqual(t['publishingSourceObserved'],'root')
+        self.assertEqual(t['categories'],['crafting'])
+        self.assertEqual(t['identity'],{'accent':'#7047a8','icon':'gem'})
+        self.assertEqual(t['sourceIds'],['S8','S9'])
+        self.assertNotIn('settings-share-link',t['declaredExistingFeatures'])
+        self.assertNotIn('equipment-plan.import.v1',t['plannedSuiteCapabilities'])
     def test_dim_slug_preserved(self):
         t=next(t for t in REG['tools'] if t['id']=='dim-glacier')
         self.assertTrue(t['canonicalUrl'].endswith('/dim_glacier_planner/'))

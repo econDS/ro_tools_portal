@@ -1,15 +1,17 @@
 import { test, expect, type Page } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
+import { NAV_VERSION } from '../../scripts/nav-version.mjs';
 import AxeBuilder from '@axe-core/playwright';
 import { snapshot, validateNavCatalog, CATALOG_URL } from '../../integrations/nav/src/catalog';
 
-const script = await readFile('integrations/nav/releases/1.2.0/nav.js', 'utf8');
-const toolPaths = ['/ro-leveling-map/', '/ro-reform-preparation/', '/dim_glacier_planner/', '/sessrumnir-ocean-week-guide/'];
+const script = await readFile(`integrations/nav/releases/${NAV_VERSION}/nav.js`, 'utf8');
+const toolPaths = ['/ro-leveling-map/', '/ro-reform-preparation/', '/dim_glacier_planner/', '/sessrumnir-ocean-week-guide/', '/ro-best-status/'];
 async function fixture(page: Page, { id = 'reform-workshop', remote = false, blocked = false, path = '/ro-reform-preparation/', theme = '' } = {}) {
-  const html = `<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Nav fixture only</title><style>body{margin:8px;font:16px Tahoma}button{background:rgb(255,0,0)}h1{font-size:28px}table{border:3px solid blue}td{padding:10px}</style><ro-suite-nav tool-id="${id}" ${theme ? `theme="${theme}"` : ''} portal-url="https://econds.github.io/ro_tools_portal/" ${remote ? `catalog-url="${CATALOG_URL}"` : ''}><nav aria-label="เมนูสำรอง"><a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a></nav></ro-suite-nav><h1>เครื่องคิดเลขจำลองสำหรับทดสอบเมนู</h1><label>จำนวน <input id="quantity" type="number" value="2"></label><button id="calculate">คำนวณ fixture</button><output id="total">20</output><table><tr><td>ตารางเดิม</td></tr></table><dialog id="dialog">หน้าต่างเดิม<button id="close">ปิด</button></dialog><button id="open">เปิดหน้าต่าง</button><script>document.querySelector('#calculate').onclick=()=>document.querySelector('#total').textContent=Number(document.querySelector('#quantity').value)*10;document.querySelector('#open').onclick=()=>document.querySelector('#dialog').showModal();document.querySelector('#close').onclick=()=>document.querySelector('#dialog').close()</script><script type="module" src="./assets/ro-suite/1.2.0/nav.js"></script></html>`;
+  const html = `<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Nav fixture only</title><style>body{margin:8px;font:16px Tahoma}button{background:rgb(255,0,0)}h1{font-size:28px}table{border:3px solid blue}td{padding:10px}</style><ro-suite-nav tool-id="${id}" ${theme ? `theme="${theme}"` : ''} portal-url="https://econds.github.io/ro_tools_portal/" ${remote ? `catalog-url="${CATALOG_URL}"` : ''}><nav aria-label="เมนูสำรอง"><a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a></nav></ro-suite-nav><h1>เครื่องคิดเลขจำลองสำหรับทดสอบเมนู</h1><label>จำนวน <input id="quantity" type="number" value="2"></label><button id="calculate">คำนวณ fixture</button><output id="total">20</output><table><tr><td>ตารางเดิม</td></tr></table><dialog id="dialog">หน้าต่างเดิม<button id="close">ปิด</button></dialog><button id="open">เปิดหน้าต่าง</button><script>document.querySelector('#calculate').onclick=()=>document.querySelector('#total').textContent=Number(document.querySelector('#quantity').value)*10;document.querySelector('#open').onclick=()=>document.querySelector('#dialog').showModal();document.querySelector('#close').onclick=()=>document.querySelector('#dialog').close()</script><script type="module" src="./assets/ro-suite/${NAV_VERSION}/nav.js"></script></html>`;
   await page.route(`**${path}`, route => route.fulfill({ contentType: 'text/html', body: html }));
-  await page.route('**/assets/ro-suite/1.2.0/nav.js', route => blocked ? route.abort() : route.fulfill({ contentType: 'text/javascript', body: script }));
+  await page.route(`**/assets/ro-suite/${NAV_VERSION}/nav.js`, route => blocked ? route.abort() : route.fulfill({ contentType: 'text/javascript', body: script }));
   await page.goto(new URL(path, test.info().project.use.baseURL!).href);
   if (!blocked) await page.waitForFunction(() => !!document.querySelector('ro-suite-nav')?.shadowRoot);
 }
@@ -31,9 +33,13 @@ test('nav validation rejects unsafe catalogs and strips unused fields', () => {
 });
 
 test('release checksums match actual files and source hashes', async () => {
-  const lock = JSON.parse(await readFile('integrations/nav/releases/1.2.0/nav.lock.json', 'utf8'));
-  for (const [path, value] of Object.entries(lock.files) as [string, {sha256: string}][]) expect(createHash('sha256').update(await readFile(`integrations/nav/releases/1.2.0/${path}`)).digest('hex')).toBe(value.sha256);
-  for (const [path, hash] of Object.entries(lock.sourceHashes)) expect(createHash('sha256').update(await readFile(path)).digest('hex')).toBe(hash);
+  const lock = JSON.parse(await readFile(`integrations/nav/releases/${NAV_VERSION}/nav.lock.json`, 'utf8'));
+  for (const [path, value] of Object.entries(lock.files) as [string, {sha256: string}][]) expect(createHash('sha256').update(await readFile(`integrations/nav/releases/${NAV_VERSION}/${path}`)).digest('hex')).toBe(value.sha256);
+  expect(lock.sourceCommit).toMatch(/^[0-9a-f]{40}$/);
+  for (const [path, hash] of Object.entries(lock.sourceHashes)) {
+    expect(createHash('sha256').update(await readFile(path)).digest('hex')).toBe(hash);
+    expect(createHash('sha256').update(execFileSync('git', ['show', `${lock.sourceCommit}:${path}`])).digest('hex')).toBe(hash);
+  }
 });
 
 test('keyboard toggle, Escape focus return, current page, CSS and calculator isolation', async ({ page }) => {
@@ -62,7 +68,7 @@ for (const path of toolPaths) test(`local fixture uses correct asset and destina
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   await expect(page.locator('[aria-current="page"]')).toHaveAttribute('href', `https://econds.github.io${path}`);
   await expect(page.getByRole('link', {name: 'Sessrumnir Ocean Week', exact: true})).toHaveAttribute('href', 'https://econds.github.io/sessrumnir-ocean-week-guide/');
-  expect(await page.locator('script[type="module"]').getAttribute('src')).toBe('./assets/ro-suite/1.2.0/nav.js');
+  expect(await page.locator('script[type="module"]').getAttribute('src')).toBe(`./assets/ro-suite/${NAV_VERSION}/nav.js`);
 });
 
 test('blocked script retains visible light-DOM fallback', async ({ page }) => {
@@ -146,4 +152,23 @@ for (const [scheme, theme, expected] of [['light', '', LIGHT_BG], ['dark', '', D
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   const results = await new AxeBuilder({ page }).include('ro-suite-nav').withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
   expect(results.violations).toEqual([]);
+});
+
+for (const width of [390, 1440]) test(`Best Status current identity and keyboard navigation at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 900 });
+  await fixture(page, { id: 'best-status', path: '/ro-best-status/' });
+  await expect(page.locator('ro-suite-nav .current')).toHaveText('Best Status');
+  await expect(page.locator('ro-suite-nav .current .chip svg')).toHaveCount(1);
+  const toggle = page.getByRole('button', { name: 'เครื่องมืออื่น' });
+  await toggle.focus(); await page.keyboard.press('Enter');
+  const current = page.getByRole('link', { name: 'Best Status', exact: true });
+  await expect(current).toHaveAttribute('aria-current', 'page');
+  await expect(current).toHaveAttribute('href', 'https://econds.github.io/ro-best-status/');
+  await expect(page.getByRole('link', { name: /Grade & Refine/ })).toHaveCount(0);
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: `test-results/best-status-nav-${width}.png`, fullPage: true });
+  await page.keyboard.press('Escape'); await expect(toggle).toBeFocused();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  await toggle.click(); await toggle.click();
+  await expect(toggle).toHaveAttribute('aria-expanded', 'false');
 });

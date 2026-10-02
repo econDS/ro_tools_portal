@@ -39,6 +39,9 @@ test('offline relaunch keeps filters, pins and theme and clearly limits offline 
   await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
   await expect(page.locator('#favorites')).toContainText('แผนที่เก็บเลเวล');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'light');
+  await page.getByRole('searchbox').fill('Best Status');
+  await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
+  await expect(page.locator('[data-tool="best-status"] a.launch')).toHaveAttribute('href', 'https://econds.github.io/ro-best-status/');
   await page.getByRole('searchbox').fill('');
   await expect(page.locator('[data-tool="grade-refine"] a.launch')).toHaveCount(0);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -55,7 +58,7 @@ test('offline relaunch keeps filters, pins and theme and clearly limits offline 
 test('controlled page passes catalog, releases, sibling and cross-origin requests through', async ({ page, context }) => {
   await control(page);
   const origin = new URL(page.url()).origin;
-  const paths = [`${BASE}catalog/v1/tools.json`, `${BASE}integrations/nav/releases/1.2.0/nav.js`, '/dim_glacier_planner/'];
+  const paths = [`${BASE}catalog/v1/tools.json`, `${BASE}integrations/nav/releases/1.2.0/nav.js`, '/dim_glacier_planner/', '/ro-best-status/'];
   for (const pathname of paths) {
     const url = `${origin}${pathname}`;
     await context.route(url, route => route.fulfill({ body: 'uncached fixture' }));

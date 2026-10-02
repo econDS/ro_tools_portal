@@ -28,7 +28,8 @@ npm run publish:root   # build แล้วคัดลอกผลไปที�
 
 ## ออก nav รุ่นใหม่
 
-1. แก้ `integrations/nav/src/` แล้วเพิ่มเลขรุ่นใน `scripts/nav-version.mjs` ห้ามเขียนทับโฟลเดอร์รุ่นเดิม
-2. `npm run build:nav` แล้ว `npm test`
-3. `npm run prompts:nav` เพื่ออัปเดต prompt ของ repo ลูกให้ชี้รุ่นใหม่และ SHA-256 ใหม่
-4. commit แล้วสร้าง tag `nav-v<version>` เพื่อให้ repo ลูกดึงไฟล์จาก tag นั้น
+1. แก้ source/registry แล้วเพิ่มเลขรุ่นใน `scripts/nav-version.mjs` ห้ามเขียนทับโฟลเดอร์รุ่นเดิม
+2. `node scripts/generate-nav-snapshot.mjs` แล้ว commit source ทั้งหมดก่อน build
+3. `npm run build:nav` แล้ว `npm test` ตรวจ `sourceCommit` และ SHA-256; commit artifact แยกจาก source
+4. `npm run prompts:nav` ใช้เฉพาะเมื่ออัปเกรด prompt ของ repo ลูกเป็นงานที่อนุมัติแล้ว
+5. งาน Best Status เตรียม 1.3.0 สำหรับ Draft PR เท่านั้น ไม่มี tag/release/deploy; bundle ของ repo อื่นยังคง pin รุ่นเดิม ดู [ขอบเขตและลำดับการรวมงาน](integrations/nav/README.md)
