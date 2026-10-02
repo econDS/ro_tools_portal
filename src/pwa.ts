@@ -24,7 +24,7 @@ export function registerPortalWorker() {
       const registration = await navigator.serviceWorker.register(`${BASE}sw.js`, { scope: BASE, updateViaCache: 'none' });
       const showUpdate = () => {
         const notice = document.getElementById('pwa-update');
-        if (notice && registration.waiting) notice.hidden = false;
+        if (notice) notice.hidden = !(registration.active && registration.waiting);
       };
       showUpdate();
       const watchInstalling = () => registration.installing?.addEventListener('statechange', showUpdate);

@@ -7,6 +7,7 @@ const BASE = '/ro_tools_portal/';
 async function control(page: Page) {
   await page.goto('./');
   await page.evaluate(() => navigator.serviceWorker.ready.then(() => true));
+  await expect(page.locator('#pwa-update')).toBeHidden();
   await page.reload();
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
 }
