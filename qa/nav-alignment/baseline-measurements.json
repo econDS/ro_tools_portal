@@ -1,0 +1,2885 @@
+{
+  "schemaVersion": 1,
+  "stage": "before",
+  "method": "Actual Chromium DOM geometry; fresh browser context per width/theme; no app CSS/DOM/storage edits",
+  "browserVersion": "153.0.8010.12",
+  "startedAt": "2026-10-02T23:04:36.635Z",
+  "finishedAt": "2026-10-02T23:05:24.660Z",
+  "viewports": [
+    320,
+    360,
+    390,
+    430,
+    768,
+    1440
+  ],
+  "height": 1000,
+  "failures": [],
+  "apps": [
+    {
+      "id": "leveling",
+      "repository": "econDS/ro-leveling-map",
+      "documentRoot": ".",
+      "expectedCommit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": "main",
+        "header": "body > header",
+        "headerInner": "header .brand",
+        "title": "header h1"
+      },
+      "alignmentReference": "Main content box; existing app header has different legacy mobile/wide padding",
+      "publicPath": "ro-leveling-map",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "dirty": "",
+      "indexHash": "938a9f3e295c7044e4f8c8d18f0662de027f4c5907873803f1e68e790a8a6607",
+      "checkout": ".nav-qa-apps/leveling"
+    },
+    {
+      "id": "reform",
+      "repository": "econDS/ro-reform-preparation",
+      "documentRoot": ".",
+      "expectedCommit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": ".header-inner",
+        "header": ".site-header",
+        "headerInner": ".header-inner",
+        "title": ".brand-text"
+      },
+      "alignmentReference": "Header-inner content box per app header, including 18px padding at 641–900px",
+      "publicPath": "ro-reform-preparation",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "dirty": "",
+      "indexHash": "5d897b78b063231a1f73046065e9294731e04f41cd7cf612469dc0171f01c131",
+      "checkout": ".nav-qa-apps/reform"
+    },
+    {
+      "id": "dim",
+      "repository": "econDS/dim_glacier_planner",
+      "documentRoot": ".",
+      "expectedCommit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": ".container",
+        "header": "body > h1",
+        "title": "body > h1"
+      },
+      "alignmentReference": "Container edges; the app's 20px body padding stays unchanged",
+      "publicPath": "dim_glacier_planner",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "dirty": "",
+      "indexHash": "8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4",
+      "checkout": ".nav-qa-apps/dim"
+    },
+    {
+      "id": "best",
+      "repository": "econDS/ro-best-status",
+      "documentRoot": ".",
+      "expectedCommit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "themes": [
+        "dark"
+      ],
+      "themeMode": "fixed-dark",
+      "selectors": {
+        "shell": "main.shell",
+        "header": ".site-header",
+        "title": ".site-header .brand"
+      },
+      "alignmentReference": "Main .shell content box; existing shared .shell padding must not be doubled",
+      "publicPath": "ro-best-status",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "dirty": "",
+      "indexHash": "f9b4af2d76af9916a93559ff0371d3f1dc4dcf2eae8834f66ee11ea22378d055",
+      "checkout": ".nav-qa-apps/best"
+    },
+    {
+      "id": "ocean",
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "documentRoot": "docs",
+      "expectedCommit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": "main.page",
+        "header": "main.page > header",
+        "title": "main.page > header h1"
+      },
+      "alignmentReference": "Page container edges in docs publishing root; original master branch stays unchanged",
+      "publicPath": "sessrumnir-ocean-week-guide",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "dirty": "",
+      "indexHash": "d46fd8bb3921ddda4924c24744f0786b4dd3b77aab1b45e3671b2c8d4b54d6c4",
+      "checkout": ".nav-qa-apps/ocean"
+    }
+  ],
+  "sourceEvidence": {
+    "runId": 37075741836,
+    "artifactId": 11255584700,
+    "artifactSha256": "7711fa1cbda529e1c433b7a009bbdae5c21112bd837f67f77e9027aa59a8a0ac",
+    "reportSha256": "1e01d2ae550b265e826f090f391d553fd27d28dd0b621780d43bdbaf9f03cf92"
+  },
+  "samples": [
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 320,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 360,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 390,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 430,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 768,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 3,
+            "right": -3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": 3,
+            "right": -3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 1440,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -9,
+            "right": 9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": -9,
+            "right": 9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(245, 246, 248)",
+              "color": "rgb(31, 37, 45)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 320,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 360,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 390,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 430,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 18,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 768,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 3,
+            "right": -3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": 3,
+            "right": -3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "leveling",
+      "commit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "width": 1440,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [
+        {
+          "url": "http://127.0.0.1:36805/ro-leveling-map/manifest.webmanifest",
+          "error": "net::ERR_ABORTED"
+        }
+      ],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -9,
+            "right": 9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": -9,
+            "right": 9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 22,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(15, 20, 26)",
+              "color": "rgb(227, 233, 240)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 320,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 360,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 390,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 430,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 768,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 1440,
+      "theme": "light",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -73,
+            "right": 73
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": -73,
+            "right": 73
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 242, 236)",
+              "color": "rgb(24, 33, 30)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 320,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 360,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 390,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 430,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": -7,
+            "right": 7
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 10.047,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 768,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": -3,
+            "right": 3
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "reform",
+      "commit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "width": 1440,
+      "theme": "dark",
+      "themeMode": "automatic-device",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -73,
+            "right": 73
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": -73,
+            "right": 73
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 15.906,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(11, 16, 14)",
+              "color": "rgb(232, 239, 234)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 320,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 409.781
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 360,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 390,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 430,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 768,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "dim",
+      "commit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "width": 1440,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 18.75,
+          "gapToTitle": 18.75,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(244, 247, 246)",
+              "color": "rgb(44, 62, 80)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 320,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 409.781
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 360,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 390,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 430,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 21.5,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 768,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 32,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 32,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "best",
+      "commit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "width": 1440,
+      "theme": "dark",
+      "themeMode": "fixed-dark",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 32,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 32,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(13, 23, 34)",
+              "color": "rgb(237, 242, 239)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 320,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 409.781
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 360,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 390,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 430,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 98
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 393
+            }
+          },
+          "barEdgeDelta": {
+            "left": 9,
+            "right": -9
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 65,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 768,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 73,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 193
+            }
+          },
+          "barEdgeDelta": {
+            "left": 15,
+            "right": -15
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 73,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    },
+    {
+      "app": "ocean",
+      "commit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "width": 1440,
+      "theme": "light",
+      "themeMode": "fixed-light",
+      "keyboard": {
+        "escapeCloses": true,
+        "focusReturned": true,
+        "enterOpens": true,
+        "spaceCloses": true
+      },
+      "pageErrors": [],
+      "badResponses": [],
+      "failedRequests": [],
+      "states": {
+        "closed": {
+          "nav": {
+            "border": {
+              "height": 68
+            }
+          },
+          "barEdgeDelta": {
+            "left": -187,
+            "right": 187
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 73,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        },
+        "open": {
+          "nav": {
+            "border": {
+              "height": 143
+            }
+          },
+          "barEdgeDelta": {
+            "left": -187,
+            "right": 187
+          },
+          "pageOverflow": 0,
+          "gapToHeader": 0,
+          "gapToTitle": 73,
+          "current": {
+            "count": 1
+          },
+          "actualTheme": {
+            "body": {
+              "background": "rgb(238, 248, 252)",
+              "color": "rgb(16, 43, 67)"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

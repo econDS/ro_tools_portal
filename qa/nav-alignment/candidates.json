@@ -1,0 +1,125 @@
+{
+  "widths": [
+    320,
+    360,
+    390,
+    430,
+    768,
+    1440
+  ],
+  "apps": [
+    {
+      "id": "leveling",
+      "repository": "econDS/ro-leveling-map",
+      "checkout": ".nav-qa-candidates/leveling",
+      "documentRoot": ".",
+      "expectedCommit": "e728221caee019f53f61179a193fed02225e2afb",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": "main",
+        "header": "body > header",
+        "headerInner": "header .brand",
+        "title": "header h1"
+      },
+      "alignmentReference": "Main content box; existing app header has different legacy mobile/wide padding",
+      "publicPath": "ro-leveling-map",
+      "toolId": "leveling-map",
+      "expectedTitle": "แผนที่เก็บเลเวล"
+    },
+    {
+      "id": "reform",
+      "repository": "econDS/ro-reform-preparation",
+      "checkout": ".nav-qa-candidates/reform",
+      "documentRoot": ".",
+      "expectedCommit": "b7b4c88215ac7957b67a58ec429fd084dddfb3d9",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": ".header-inner",
+        "header": ".site-header",
+        "headerInner": ".header-inner",
+        "title": ".brand-text"
+      },
+      "alignmentReference": "Header-inner content box per app header, including 18px padding at 641–900px",
+      "publicPath": "ro-reform-preparation",
+      "toolId": "reform-workshop",
+      "expectedTitle": "Reform Workshop"
+    },
+    {
+      "id": "dim",
+      "repository": "econDS/dim_glacier_planner",
+      "checkout": ".nav-qa-candidates/dim",
+      "documentRoot": ".",
+      "expectedCommit": "bd94adf369ff586d8ad07a8d5ad84f85697ce4f0",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": ".container",
+        "header": "body > h1",
+        "title": "body > h1"
+      },
+      "alignmentReference": "Container edges; the app's 20px body padding stays unchanged",
+      "publicPath": "dim_glacier_planner",
+      "toolId": "dim-glacier",
+      "expectedTitle": "Dim Glacier Planner"
+    },
+    {
+      "id": "best",
+      "repository": "econDS/ro-best-status",
+      "checkout": ".nav-qa-candidates/best",
+      "documentRoot": ".",
+      "expectedCommit": "ebdc4bf48dd2d50ed5089e2a0192c891804d52f4",
+      "themes": [
+        "dark"
+      ],
+      "themeMode": "fixed-dark",
+      "selectors": {
+        "shell": "main.shell",
+        "header": ".site-header",
+        "title": ".site-header .brand"
+      },
+      "alignmentReference": "Main .shell content box; existing shared .shell padding must not be doubled",
+      "publicPath": "ro-best-status",
+      "toolId": "best-status",
+      "expectedTitle": "Best Status"
+    },
+    {
+      "id": "ocean",
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "checkout": ".nav-qa-candidates/ocean",
+      "documentRoot": "docs",
+      "expectedCommit": "85afced653db4cbcd4502ec28c394b3991a390ef",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": "main.page",
+        "header": "main.page > header",
+        "title": "main.page > header h1"
+      },
+      "alignmentReference": "Page container edges in docs publishing root; original master branch stays unchanged",
+      "publicPath": "sessrumnir-ocean-week-guide",
+      "toolId": "ocean-week-guide",
+      "expectedTitle": "Sessrumnir Ocean Week"
+    }
+  ],
+  "release": {
+    "version": "1.4.0",
+    "directory": "integrations/nav/releases/1.4.0",
+    "files": [
+      "nav.js",
+      "catalog.snapshot.json",
+      "nav.lock.json"
+    ]
+  }
+}

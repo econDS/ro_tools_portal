@@ -1,0 +1,104 @@
+name: Navigation layout comparison
+on:
+  pull_request:
+    paths:
+      - 'qa/nav-alignment/**'
+      - '.github/workflows/nav-layout-candidate.yml'
+      - 'integrations/nav/releases/1.4.0/**'
+permissions:
+  contents: read
+jobs:
+  compare-pinned-apps:
+    if: github.head_ref == 'ui/nav-alignment-weight'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-leveling-map
+          ref: 87b50f729270cc134c7094e169e34d02f2d2ae27
+          path: .nav-qa-apps/leveling
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-reform-preparation
+          ref: b49eeb427e3874d6462d922e2b07c52e1a297759
+          path: .nav-qa-apps/reform
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/dim_glacier_planner
+          ref: 92e2ee6e484d8901168c86e8625b2463e8e186d7
+          path: .nav-qa-apps/dim
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-best-status
+          ref: 3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a
+          path: .nav-qa-apps/best
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/sessrumnir-ocean-week-guide
+          ref: 159a9d12ee1d1f2e6713297fcbd379952f1b69ab
+          path: .nav-qa-apps/ocean
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-leveling-map
+          ref: e728221caee019f53f61179a193fed02225e2afb
+          path: .nav-qa-candidates/leveling
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-reform-preparation
+          ref: b7b4c88215ac7957b67a58ec429fd084dddfb3d9
+          path: .nav-qa-candidates/reform
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/dim_glacier_planner
+          ref: bd94adf369ff586d8ad07a8d5ad84f85697ce4f0
+          path: .nav-qa-candidates/dim
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-best-status
+          ref: ebdc4bf48dd2d50ed5089e2a0192c891804d52f4
+          path: .nav-qa-candidates/best
+          persist-credentials: false
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/sessrumnir-ocean-week-guide
+          ref: 85afced653db4cbcd4502ec28c394b3991a390ef
+          path: .nav-qa-candidates/ocean
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Reproduce untouched baseline from immutable child commits
+        run: node qa/nav-alignment/capture-nav-layout.mjs --config qa/nav-alignment/apps.json --out qa-results/nav-alignment-before-replay --stage before
+      - name: Capture pinned candidate apps and real geometry
+        run: node qa/nav-alignment/capture-nav-layout.mjs --config qa/nav-alignment/candidates.json --out qa-results/nav-alignment-after --stage after
+      - name: Compare candidates with reproduced baseline
+        if: always()
+        run: node qa/nav-alignment/compare-nav-layout.mjs qa-results/nav-alignment-before-replay/report.json qa-results/nav-alignment-after/report.json qa-results/nav-alignment-comparison-replay.json
+      - name: Compare candidates with original saved baseline evidence
+        if: always()
+        run: node qa/nav-alignment/compare-nav-layout.mjs qa/nav-alignment/baseline-measurements.json qa-results/nav-alignment-after/report.json qa-results/nav-alignment-comparison-original.json
+      - name: Release hashes, keyboard, state, fallback and separate failure fixtures
+        if: always()
+        run: node qa/nav-alignment/candidate-behavior.mjs --config qa/nav-alignment/candidates.json --out qa-results/nav-alignment-behavior
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nav-alignment-candidate-${{ github.sha }}
+          path: qa-results/
+          if-no-files-found: error

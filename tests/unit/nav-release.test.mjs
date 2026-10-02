@@ -20,6 +20,7 @@ test('new nav artifact and all sources match the recorded committed source', asy
   const lock = JSON.parse(await readFile(`${dir}/nav.lock.json`, 'utf8'));
   assert.equal(lock.bundleVersion, NAV_VERSION);
   assert.match(lock.sourceCommit, /^[0-9a-f]{40}$/);
+  execFileSync('git', ['merge-base', '--is-ancestor', lock.sourceCommit, 'HEAD']);
   for (const [file, info] of Object.entries(lock.files)) assert.equal(digest(await readFile(`${dir}/${file}`)), info.sha256);
   for (const [file, hash] of Object.entries(lock.sourceHashes)) {
     if (!['data/tools.registry.v1.json', 'scripts/package-nav.mjs'].includes(file)) assert.equal(digest(await readFile(file)), hash, file);
