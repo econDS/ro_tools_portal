@@ -3,7 +3,8 @@
   "journeys": [
     {
       "id": "choose-leveling-map",
-      "title": "หาแผนที่เก็บเลเวล",
+      "title": "หาแมพเก็บเลเวล",
+      "description": "เทียบ EXP, HP, จำนวนครั้งที่ตี และความหนาแน่น",
       "toolIds": [
         "leveling-map"
       ],
@@ -11,27 +12,35 @@
     },
     {
       "id": "prepare-reform",
-      "title": "เตรียมวัตถุดิบ Reform แล้ววางแผนเกรด/ตีบวก",
+      "title": "เตรียมของสำหรับ Reform",
+      "description": "ดูว่าต้องซื้ออะไรเพิ่ม ใช้เงินเท่าไร และแลก NPC ตามลำดับไหน",
       "toolIds": [
-        "reform-workshop",
-        "grade-refine"
+        "reform-workshop"
       ],
-      "availability": "planned-handoff",
-      "note": "Reform currently produces a materials plan; verify an actual equipment result before exporting equipment state."
+      "availability": "navigation-only"
     },
     {
       "id": "dim-equipment-plan",
-      "title": "วางแผน Dim Glacier และส่งต่อช่วง Grade/Refine",
+      "title": "วางแผน Dim Glacier",
+      "description": "เริ่มจากของที่มี แล้วคำนวณ Enchant, Refine และงบรวม",
       "toolIds": [
-        "dim-glacier",
-        "grade-refine"
+        "dim-glacier"
       ],
-      "availability": "planned-handoff",
-      "note": "Do not double-count the existing Refine budget. Carry distinct cost segments."
+      "availability": "navigation-only"
+    },
+    {
+      "id": "crafting-status",
+      "title": "หา Status สำหรับสายคราฟต์",
+      "description": "จัด DEX / LUK / INT สำหรับ Rune, Poison และ Potion",
+      "toolIds": [
+        "best-status"
+      ],
+      "availability": "navigation-only"
     },
     {
       "id": "ocean-reference",
-      "title": "เปิดคู่มือ Ocean Week รอบที่ผ่านมา",
+      "title": "ดูคู่มือ Ocean Week รอบที่ผ่านมา",
+      "description": "NPC, /navi และขั้นตอนของกิจกรรมรอบเดิม",
       "toolIds": [
         "ocean-week-guide"
       ],

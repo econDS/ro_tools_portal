@@ -65,7 +65,8 @@ test('favorites, recent launches, theme, reset preserve unrelated storage bytes'
   expect(after[PORTAL_KEY]).toBeUndefined();
   expect(after[PREFS_KEY]).toBe(before[PREFS_KEY]);
   for (const key of Object.keys(before).filter(key => !key.startsWith('ro-suite:'))) expect(after[key]).toBe(before[key]);
-  await expect(page.locator('#favorites')).toContainText('กด ☆');
+  await expect(page.locator('#quick-access')).toBeHidden();
+  await expect(page.locator('#shortcut-hint')).toContainText('กด ☆');
 });
 
 for (const mode of ['blocked', 'quota', 'corrupt']) test(`storage ${mode} does not disable launch or controls`, async ({ page }) => {
@@ -117,15 +118,12 @@ test('public catalog has only navigation fields and no capabilities or private s
   expect(Object.keys(catalog.tools[0]).sort()).toEqual(['canonicalUrl', 'id', 'identity', 'listingStatus', 'title']);
 });
 
-test('each tool card and destination carries its catalog accent and icon', async ({ page }) => {
+test('each tool card keeps its catalog accent and icon', async ({ page }) => {
   await page.goto('./');
   for (const tool of tools) {
-    for (const selector of [`[data-tool="${tool.id}"]`, `.dest[data-launch="${tool.id}"]`]) {
-      if (selector.startsWith('.dest') && tool.listingStatus !== 'listed') continue;
-      const element = page.locator(selector);
-      expect(await element.evaluate(el => getComputedStyle(el).getPropertyValue('--tool-accent').trim())).toBe(tool.identity.accent);
-      await expect(element.locator('.tool-icon svg, .dest-icon svg')).toHaveCount(1);
-    }
+    const element = page.locator(`[data-tool="${tool.id}"]`);
+    expect(await element.evaluate(el => getComputedStyle(el).getPropertyValue('--tool-accent').trim())).toBe(tool.identity.accent);
+    await expect(element.locator('.tool-icon svg')).toHaveCount(1);
   }
 });
 
