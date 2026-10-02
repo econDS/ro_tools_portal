@@ -13,3 +13,4 @@ CODEX_START_PROMPT.md
 docs/
 prompts/0*.md
 tests/VALIDATION_REPORT.txt
+.nav-build/

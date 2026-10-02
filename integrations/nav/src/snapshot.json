@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "0.1.0-design",
+  "catalogVersion": "0.2.0",
   "tools": [
     {
       "id": "leveling-map",
@@ -40,6 +40,16 @@
       "identity": {
         "accent": "#0f7686",
         "icon": "wave"
+      }
+    },
+    {
+      "id": "best-status",
+      "title": "Best Status",
+      "canonicalUrl": "https://econds.github.io/ro-best-status/",
+      "listingStatus": "listed",
+      "identity": {
+        "accent": "#7047a8",
+        "icon": "gem"
       }
     },
     {

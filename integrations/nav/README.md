@@ -1,55 +1,58 @@
-# ro-suite-nav 1.2.0 — local artifact
+# ro-suite-nav 1.3.0 — local artifact
 
-Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.2.0/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
-ทดสอบใน fixture แล้วตามรายงานโครงการ แต่ยังไม่ได้ติดตั้งใน repository ของแอปใด
+Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.3.0/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
 
-## เปลี่ยนใน 1.2.0
-- รองรับธีมมืด: attribute `theme="light"` หรือ `theme="dark"` บังคับสีแถบให้ตรงกับธีมของแอป ถ้าไม่ใส่หรือใส่ค่าอื่นจะเปลี่ยนตาม prefers-color-scheme
-- แถบรับธีมจากแอปเท่านั้น ไม่อ่าน localStorage และไม่แก้ธีมของแอป ส่วน `--ro-suite-background` กับ `--ro-suite-color` ยังใช้ override ได้เหมือนเดิม
-- ห้ามติดตั้ง 1.1.0 ใช้ 1.2.0 แทน
+## เปลี่ยนใน 1.3.0
+- เพิ่ม `best-status` / **Best Status** ใน snapshot และ exact URL allowlist: `https://econds.github.io/ro-best-status/`
+- ใช้ไอคอน `gem` ที่มีอยู่แล้วและสี `#7047a8` (white contrast ≥ 4.5) สำหรับการ์ด Portal และแถบใน Best Status
+- Registry อ้างอิง README/app source แบบ pinned commit; ไม่ยืนยันกฎเกม ผล HTTP ปัจจุบัน หรือ suite import/share ที่ยังไม่ได้ทดสอบ
+- มีหมวดคราฟต์และค่าสเตตัส พร้อมคำค้น Rune/Poison/Potion และภาษาไทย
+- รุ่น 1.0.0–1.2.0 คงเดิมทุก byte; build ใน staging แล้วตรวจ release เดิมแทนการเขียนทับ
 
-## เปลี่ยนจาก 1.0.0 (ใน 1.1.0)
-- URL พอร์ทัลเปลี่ยนเป็นของจริง `https://econds.github.io/ro_tools_portal/` (1.0.0 ชี้ไป `ro-tools-portal` ซึ่งตอบ 404) โฟลเดอร์ 1.0.0 เก็บไว้เป็นประวัติ ห้ามนำไปติดตั้ง
-- แสดงตัวตนของเครื่องมือจากแคตตาล็อก (`identity.accent` + `identity.icon`): ช่องไอคอนหน้าชื่อเครื่องมือปัจจุบัน เส้นสีใต้แถบ และไอคอนในเมนูสลับเครื่องมือ
-- `identity` เป็นฟิลด์ไม่บังคับใน catalog schema major 1 ต้องเป็น hex ที่ไอคอนสีขาวอ่านได้ (contrast ≥ 4.5) และชื่อไอคอนที่รู้จัก ไม่งั้นทั้ง catalog ถูกปฏิเสธแล้วใช้ snapshot ถ้า catalog ระยะไกลไม่มี identity จะใช้ของ snapshot แทน
+งานนี้เตรียม artifact สำหรับ review เท่านั้น ไม่สร้าง tag/release, merge หรือ deploy และไม่อัปเกรด bundle ในแอปอื่นที่ยัง pin 1.2.0 จึงยังไม่มี Best Status ในเมนูของแอปเหล่านั้นจนกว่าจะมีงานอัปเกรดแยก Optional catalog แก้ข้อนี้ไม่ได้ เพราะ allowlist ของ 1.2.0 ยังไม่มี URL ใหม่
 
-## ก่อนติดตั้ง
+## สร้าง release แบบตรวจซ้ำได้
 
-ตรวจ URL พอร์ทัลจริงก่อนใช้ในแอปที่เผยแพร่ ขณะนี้ทะเบียนยังระบุพอร์ทัลเป็น planned
-workspace เริ่มต้นไม่มี Git repository จึงบันทึก `sourceCommit: null` อย่างชัดเจน พร้อม SHA-256 ของ source files และ artifact; ต้องบันทึก commit ที่ review แล้วก่อน release จริง ห้ามอ้าง source hash ว่าเป็น Git commit
-เมื่อ release แล้ว ให้ถือไฟล์ของรุ่นนั้น immutable; เปลี่ยนเลขรุ่นและ review เมื่อแก้ bundle
+1. เพิ่มเลขรุ่นใน `scripts/nav-version.mjs` แล้วแก้ source/registry
+2. `node scripts/generate-nav-snapshot.mjs` และ commit source ทั้งหมดก่อน
+3. `npm run build:nav` สร้างใน `.nav-build/` ก่อน package ไปยังโฟลเดอร์รุ่นใหม่ โดยทุก `sourceHashes` ต้องตรงกับ `sourceCommit` ที่ commit แล้ว
+4. ตรวจ SHA-256 และ tests แล้ว commit artifact แยกจาก source
+5. การ build ซ้ำต้องได้ byte เดิมและเก็บ `sourceCommit` เดิม ไม่เขียนทับไฟล์รุ่นเก่า หากเปลี่ยน source ให้เพิ่มรุ่นใหม่
+
+Source commit ต้องอยู่ใน Git history ของ checkout (CI ใช้ `fetch-depth: 0`) ไม่ใช้ source hash แทน Git commit ก่อน merge ให้ตรวจ Portal และ Best Status Draft PR คู่กัน; merge Portal ก่อนเป็นลำดับที่แนะนำเพื่อให้ catalog/navigation source อยู่บน main จากนั้น Best Status ใช้ไฟล์ local ที่ตรวจ hash แล้วโดยไม่ต้องรอ tag หรือโหลด remote executable code
 
 ## ติดตั้งใน selected checkout ของแอป (งานแยก)
 
 1. เก็บ baseline การคำนวณ storage keys share URLs และ publishing path ก่อนแก้
-2. คัดลอกไฟล์ release ทั้งสามลง `assets/ro-suite/1.2.0/` ใน publishing root ของแอป ตรวจ SHA-256 ตาม lock
-3. ใส่ light-DOM fallback ก่อน script ตาม `examples/nav-integration.html.txt` ใช้ `tool-id` จากทะเบียน ไม่เปลี่ยน header เดิม
-4. Ocean ใช้ `docs/assets/ro-suite/1.2.0/` บน branch ที่ตรวจพบ `master` และวางเมนูนอก `.page` โดยทดสอบ layout จริง; URL สาธารณะไม่มี `/docs/`
-5. รัน baseline เดิม พร้อมตรวจมือถือ คีย์บอร์ด modal ตาราง share/export และกรณีบล็อก nav.js/catalog
-6. Rollback โดยย้อนเฉพาะ integration/ไฟล์เมนู ไม่ย้อนสูตรหรือข้อมูลคลัง
+2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.3.0/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
+3. ใส่ light-DOM fallback ก่อน script; ใช้ `tool-id` จากทะเบียน ไม่เปลี่ยน header เดิม
+4. Ocean ยังคงใช้ `docs/` บน branch `master` และ URL สาธารณะไม่มี `/docs/` แต่ไม่ได้แก้ Ocean ในงานนี้
+5. ทดสอบมือถือ คีย์บอร์ด modal ตาราง share/export และกรณีบล็อก nav.js/catalog
+6. Rollback เฉพาะ integration/ไฟล์เมนู ไม่ย้อนสูตรหรือข้อมูลคลัง
 
 ```html
-<ro-suite-nav tool-id="reform-workshop"
+<ro-suite-nav tool-id="best-status"
   portal-url="https://econds.github.io/ro_tools_portal/">
   <nav aria-label="เครื่องมือ RO">
     <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
   </nav>
 </ro-suite-nav>
-<script type="module" src="./assets/ro-suite/1.2.0/nav.js"></script>
+<script type="module" src="./assets/ro-suite/1.3.0/nav.js"></script>
 ```
 
-ตัวอย่าง URL นี้เป็นเป้าหมายที่เสนอจนกว่าจะเผยแพร่และตรวจจริง ไม่ใช่คำยืนยันว่าเว็บเปิดแล้ว
+## Optional catalog และความปลอดภัย
 
-## Optional catalog
-
-เพิ่ม `catalog-url="https://econds.github.io/ro_tools_portal/catalog/v1/tools.json"` หลังปลายทางพร้อมเท่านั้น
-เริ่ม request เมื่อผู้ใช้เปิดเมนูครั้งแรก ใช้ snapshot ทันที, timeout 1.5 วินาที, สูงสุด 32 KiB และ 50 รายการ, schema major 1, ไม่ส่ง credentials, ปฏิเสธ redirect และ URL นอก allowlist
-JSON ไม่ถูกประมวลผลเป็นโค้ด ข้อความใช้ textContent ค่า optional ที่ไม่ใช้ไม่ถูกนำไปเขียน state; ไม่ cache หรือ retry loop
-เพิ่มปลายทางนอก allowlist ต้อง review และอัปเกรด bundle เดิมด้วย การอัปเดต JSON ภายในปลายทางที่อนุมัติแล้วไม่ต้องเปลี่ยน component
+`catalog-url="https://econds.github.io/ro_tools_portal/catalog/v1/tools.json"` เป็นตัวเลือกหลังปลายทางพร้อมเท่านั้น ไม่จำเป็นต่อการเปิดเมนู
+เริ่ม request เมื่อเปิดเมนูครั้งแรก ใช้ snapshot ทันที, timeout 1.5 วินาที, สูงสุด 32 KiB และ 50 รายการ, schema major 1, ไม่ส่ง credentials, ปฏิเสธ redirect และ URL นอก exact allowlist
+JSON ไม่ประมวลผลเป็นโค้ด ข้อความใช้ textContent; ไม่มี cache หรือ retry loop เพิ่มปลายทางนอก allowlist ต้อง review และอัปเกรด bundle
+Grade & Refine ยังคงเป็น planned/non-launchable
 
 ## Styling and behavior
 
-Shadow DOM แยก CSS ภายใน แต่ไม่ใช่ security boundary; component อยู่ใน document flow และไม่เขียน body/global styles
-ปรับเฉพาะ `--ro-suite-background` และ `--ro-suite-color` ได้ โดยแอปต้องตรวจ contrast เอง; ไม่บังคับธีมของเครื่องคิดเลข
-ปุ่มเปิด/ปิดรองรับ Enter/Space, Escape ปิดและคืน focus, Tab เดินตามลำดับลิงก์ `aria-current="page"` อยู่ที่เครื่องมือปัจจุบัน
-ไม่ intercept shortcuts ไม่แก้ URL hash/query ไม่อ่าน localStorage และไม่เปลี่ยนสูตรหรือราคาของแอป
+รองรับ `theme="light"` หรือ `theme="dark"`; ถ้าไม่ระบุหรือค่าอื่นจะตาม prefers-color-scheme แถบรับธีมจากแอปเท่านั้น ไม่อ่าน localStorage หรือเปลี่ยนธีมของแอป
+Shadow DOM แยก CSS แต่ไม่ใช่ security boundary; component อยู่ใน document flow ไม่เขียน body/global styles
+ปรับ `--ro-suite-background` และ `--ro-suite-color` ได้ โดยแอปต้องตรวจ contrast เอง
+Enter/Space เปิดปิด, Escape ปิดและคืน focus, Tab ตามลำดับลิงก์; `aria-current="page"` ระบุเครื่องมือปัจจุบัน
+ไม่ intercept shortcuts ไม่แก้ URL hash/query ไม่อ่าน localStorage ไม่เปลี่ยนสูตรหรือราคาของแอป
+
+รุ่นเก่า: 1.2.0 เพิ่ม theme support; 1.1.0 แก้ URL Portal และเพิ่ม identity; 1.0.0 ชี้ URL Portal เก่าที่ไม่ถูกต้อง จึงห้ามติดตั้งใหม่

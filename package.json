@@ -13,8 +13,9 @@
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test": "playwright test",
     "build:nav": "node scripts/generate-nav-snapshot.mjs && vite build --config vite.nav.config.ts && node scripts/package-nav.mjs",
+    "test:nav": "node --test tests/unit/nav-release.test.mjs",
     "test:pwa": "node --test tests/unit/pwa.test.mjs",
-    "check": "npm run build && npm run build:nav && npm run test:pwa && npm test",
+    "check": "npm run build && npm run build:nav && npm run test:nav && npm run test:pwa && npm test",
     "publish:root": "npm run build && node scripts/publish-root.mjs",
     "prompts:nav": "node scripts/fill-nav-prompts.mjs"
   },

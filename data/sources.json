@@ -144,6 +144,31 @@
       "supports": [
         "service-worker scope constraints"
       ]
+    },
+    {
+      "id": "S8",
+      "title": "RO Best Status — README at reviewed source commit",
+      "url": "https://github.com/econDS/ro-best-status/blob/cb6f4aa775e1afc8efc450b6d31cd5fb73f9fd74/README.md",
+      "sourceBlobSha": "524bb7d9da1b3899c95888cef941a165a07cbaf9",
+      "checkedOn": "2026-10-02",
+      "supports": [
+        "declared Pages URL",
+        "Rune Mastery, Create Deadly Poison and Prepare Potion purpose",
+        "exact stat allocation and per-class job bonuses",
+        "published formula limitations; not game-server verification"
+      ]
+    },
+    {
+      "id": "S9",
+      "title": "RO Best Status — application at reviewed source commit",
+      "url": "https://github.com/econDS/ro-best-status/blob/cb6f4aa775e1afc8efc450b6d31cd5fb73f9fd74/app.js",
+      "sourceBlobSha": "77da7b31f96c1eb33bc973f6dca8c90aa8f19b39",
+      "checkedOn": "2026-10-02",
+      "supports": [
+        "local settings",
+        "shared equipment and buffs",
+        "per-card class and job controls"
+      ]
     }
   ]
 }

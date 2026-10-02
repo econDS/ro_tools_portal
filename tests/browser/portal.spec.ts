@@ -38,7 +38,7 @@ test('Thai and English search, filters, no results, URL and keyboard reset', asy
   await page.getByRole('button', {name: 'ล้างการค้นหาและตัวกรอง'}).focus();
   await page.keyboard.press('Enter');
   await expect(search).toBeFocused();
-  await expect(page.locator('[data-tool]:visible')).toHaveCount(5);
+  await expect(page.locator('[data-tool]:visible')).toHaveCount(6);
   expect(page.url()).toContain('?keep=1#tools');
   await page.goto('./?q=รีฟอร์ม&category=equipment');
   await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
@@ -85,7 +85,7 @@ for (const mode of ['blocked', 'quota', 'corrupt']) test(`storage ${mode} does n
 test('runtime network failure and script blocking preserve static navigation', async ({ page }) => {
   await page.route('**/*.js', route => route.abort());
   await page.goto('./');
-  await expect(page.locator('.tool-card a.launch')).toHaveCount(4);
+  await expect(page.locator('.tool-card a.launch')).toHaveCount(5);
   await expect(page.locator('.tool-card').first()).toBeVisible();
 });
 
@@ -113,7 +113,7 @@ test('public catalog has only navigation fields and no capabilities or private s
   expect(response.ok()).toBe(true);
   const catalog = await response.json();
   expect(catalog.schemaVersion).toBe(1);
-  expect(catalog.tools).toHaveLength(5);
+  expect(catalog.tools).toHaveLength(6);
   expect(Object.keys(catalog.tools[0]).sort()).toEqual(['canonicalUrl', 'id', 'identity', 'listingStatus', 'title']);
 });
 
@@ -127,4 +127,28 @@ test('each tool card and destination carries its catalog accent and icon', async
       await expect(element.locator('.tool-icon svg, .dest-icon svg')).toHaveCount(1);
     }
   }
+});
+
+test('Best Status supports Thai/English search, crafting filter, pinning and ordinary launch', async ({ page, context }) => {
+  const url = 'https://econds.github.io/ro-best-status/';
+  await context.route(url, route => route.fulfill({ contentType: 'text/html', body: '<title>Best Status destination fixture</title>' }));
+  await page.goto('./');
+  const search = page.getByRole('searchbox');
+  for (const query of ['Best Status', 'รูน', 'ยาแอส', 'ปรุงยา', 'Prepare Potion']) {
+    await search.fill(query);
+    await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
+    await expect(page.locator('[data-tool="best-status"]')).toBeVisible();
+  }
+  await search.fill('');
+  await page.getByRole('button', { name: 'คราฟต์และค่าสเตตัส', exact: true }).click();
+  await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
+  const card = page.locator('[data-tool="best-status"]');
+  await card.getByRole('button', { name: 'ปักหมุด Best Status', exact: true }).click();
+  await expect(page.locator('#favorites')).toContainText('Best Status');
+  await page.reload();
+  await expect(page.locator('#favorites')).toContainText('Best Status');
+  await expect(card.locator('a.launch')).toHaveAttribute('href', url);
+  await card.locator('a.launch').click(); await page.waitForURL(url);
+  await page.goBack();
+  await expect(page.locator('#recent')).toContainText('Best Status');
 });

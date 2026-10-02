@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "0.1.0-design",
-  "reviewedOn": "2026-09-19",
+  "catalogVersion": "0.2.0",
+  "reviewedOn": "2026-10-02",
   "portal": {
     "id": "ro-tools-portal",
     "title": "RO Tools Portal",
@@ -17,6 +17,10 @@
     {
       "id": "equipment",
       "label": "ทำอุปกรณ์"
+    },
+    {
+      "id": "crafting",
+      "label": "คราฟต์และค่าสเตตัส"
     },
     {
       "id": "events",
@@ -266,6 +270,74 @@
       "sourceIds": [
         "S5",
         "S6"
+      ]
+    },
+    {
+      "id": "best-status",
+      "title": "Best Status",
+      "description": "หา Status ที่เหมาะที่สุดตามสูตร Rune Mastery, Create Deadly Poison และ Prepare Potion พร้อมโบนัส Job แยกอาชีพและอุปกรณ์/บัฟ",
+      "repository": "econDS/ro-best-status",
+      "repositoryUrl": "https://github.com/econDS/ro-best-status",
+      "canonicalUrl": "https://econds.github.io/ro-best-status/",
+      "listingStatus": "listed",
+      "contentType": "calculator",
+      "contentLifecycle": "evergreen",
+      "categories": [
+        "crafting"
+      ],
+      "tags": [
+        "Status",
+        "Rune",
+        "Poison",
+        "Potion"
+      ],
+      "searchAliases": [
+        "best status",
+        "ro best status",
+        "สเตตัส",
+        "สเตตัสคราฟต์",
+        "รูน",
+        "ยาแอส",
+        "ปรุงยา",
+        "rune mastery",
+        "create deadly poison",
+        "prepare potion",
+        "dex",
+        "luk",
+        "int"
+      ],
+      "identity": {
+        "accent": "#7047a8",
+        "icon": "gem"
+      },
+      "relatedToolIds": [
+        "leveling-map",
+        "reform-workshop"
+      ],
+      "defaultBranchObserved": "main",
+      "publishingSourceObserved": "root",
+      "declaredExistingFeatures": [
+        "exact-stat-allocation",
+        "per-class-job-bonuses",
+        "shared-equipment-and-buffs",
+        "local-settings"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Pinned README and source inspected; no live HTTP health check is asserted by this catalog review."
+      },
+      "urlEvidence": "repository-readme",
+      "metadataReviewedOn": "2026-10-02",
+      "gameDataVerifiedOn": null,
+      "event": null,
+      "sourceIds": [
+        "S8",
+        "S9"
       ]
     },
     {
