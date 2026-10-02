@@ -40,7 +40,7 @@ Use `candidates.json` for the five exact reviewed child commit pins. `candidates
 
 The candidate geometry comparison additionally verifies supported real themes; a genuinely smaller single-row closed bar; full current accessible name (mobile visual ellipsis is explicitly permitted); six exact anchor destinations; all full open-menu names; a non-launchable Grade & Refine item; named toggle; actual disclosure state; unchanged app body colors; unchanged storage values and query/hash after navigation; and no new HTTP or request failures. It normalizes ephemeral local server ports when comparing failed requests. The original Leveling manifest ERR_ABORTED entries are retained in baseline evidence and are not mistaken for new failures.
 
-`candidate-support.mjs` verifies source hashes at the immutable Portal source commit, checks the release lock's bundle digests, and requires all three local consumer artifacts to be byte-identical to Portal 1.4.0. Candidate checkouts must be clean at exact recorded commits.
+`candidate-support.mjs` verifies source hashes at the immutable Portal source commit, checks the release lock's bundle digests, and requires all three local consumer artifacts to be byte-identical to Portal 1.4.1. Candidate checkouts must be clean at exact recorded commits.
 
 `candidate-behavior.mjs` covers:
 
@@ -53,3 +53,5 @@ The candidate geometry comparison additionally verifies supported real themes; a
 - Axe WCAG2A/AA and2.1AA, including rendered color contrast: real app nav closed/open at 390 for both immutable baseline replay and candidate; candidate fallback nav at 390. Incomplete/manual findings are retained for review rather than silently called passing
 
 The geometry capture and the normal app scenarios do not swallow the intentional fixture failures into production errors. No Chromium certificate warnings are bypassed. The assigned process sandbox still cannot launch Chromium; source/syntax checks are local, while actual geometry and behavior claims require successful CI artifacts.
+
+Final candidate version is 1.4.1. The optional catalogue fixture holds its request pending and verifies that the connected, empty role=status node is displayed and visible inside the open panel before releasing the network failure. This establishes rendered live-region availability, not actual screen-reader speech. Immutable 1.4.0 bytes remain preserved.

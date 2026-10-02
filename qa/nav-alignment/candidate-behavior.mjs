@@ -113,16 +113,20 @@ try{
   // Deliberately separate standalone fixture: production integrations are not edited
   // to pretend they enable an optional catalogue. The fixture explicitly enables it.
   {
-   const subject=`optional-catalog-failure-fixture/${app.id}/${theme}`,context=await browser.newContext({viewport:{width:390,height:1000},colorScheme:theme,reducedMotion:'reduce',serviceWorkers:'block',locale:'th-TH'}),page=await context.newPage();let requests=0;
-   await page.route(CATALOG,route=>{requests++;return route.abort('failed');});const entry={app:app.id,theme,fixtureOnly:true};
+   const subject=`optional-catalog-failure-fixture/${app.id}/${theme}`,context=await browser.newContext({viewport:{width:390,height:1000},colorScheme:theme,reducedMotion:'reduce',serviceWorkers:'block',locale:'th-TH'}),page=await context.newPage();let requests=0,signalRequest,releaseRequest;const requested=new Promise(r=>{signalRequest=r;}),release=new Promise(r=>{releaseRequest=r;});
+   await page.route(CATALOG,async route=>{requests++;signalRequest();await release;return route.abort('failed');});const entry={app:app.id,theme,fixtureOnly:true};
    try{
     await page.goto(`${server.origin}/__nav_qa_catalog_failure__/${app.id}?theme=${theme}`,{waitUntil:'networkidle'});await page.waitForFunction(()=>!!document.querySelector('ro-suite-nav')?.shadowRoot?.querySelector('button'));const button=page.locator('ro-suite-nav').getByRole('button');
-    check(subject,'Catalogue lazy until menu opens',requests===0);await button.click();await page.waitForFunction(()=>document.querySelector('ro-suite-nav').shadowRoot.querySelector('[role="status"]').textContent.length>0);
+    check(subject,'Catalogue lazy until menu opens',requests===0);await button.click();
+    let pendingTimer;try{await Promise.race([requested,new Promise((_,reject)=>{pendingTimer=setTimeout(()=>reject(new Error('Optional catalogue request never started')),5000);})]);}finally{clearTimeout(pendingTimer);}
+    entry.pendingLiveRegion=await page.evaluate(()=>{const s=document.querySelector('ro-suite-nav').shadowRoot,p=s.querySelector('[role="status"]'),panel=s.querySelector('#tools'),style=getComputedStyle(p);return {connected:p.isConnected,role:p.getAttribute('role'),text:p.textContent,display:style.display,visibility:style.visibility,panelHidden:panel.hidden,ariaHidden:p.getAttribute('aria-hidden')};});
+    check(subject,'Empty status live region stays rendered while request is pending',entry.pendingLiveRegion.connected&&entry.pendingLiveRegion.role==='status'&&entry.pendingLiveRegion.text===''&&entry.pendingLiveRegion.display!=='none'&&entry.pendingLiveRegion.visibility==='visible'&&!entry.pendingLiveRegion.panelHidden&&entry.pendingLiveRegion.ariaHidden!=='true',{pending:entry.pendingLiveRegion,scope:'DOM/CSS availability only; no actual assistive-technology speech claim'});
+    releaseRequest();await page.waitForFunction(()=>document.querySelector('ro-suite-nav').shadowRoot.querySelector('[role="status"]').textContent.length>0);
     entry.result=await page.evaluate(()=>{const s=document.querySelector('ro-suite-nav').shadowRoot;return {notice:s.querySelector('[role="status"]').textContent,hrefs:[...s.querySelectorAll('a')].map(a=>a.href).sort(),current:s.querySelector('.current').textContent.trim(),open:!s.querySelector('#tools').hidden};});
     check(subject,'Failure keeps six bundled destinations',JSON.stringify(entry.result.hrefs)===JSON.stringify(DESTINATIONS));check(subject,'Failure keeps full current identity',entry.result.current===app.expectedTitle);check(subject,'Failure notice and usable open menu',entry.result.notice.length>0&&entry.result.open);
     await button.click();await button.click();check(subject,'No retry loop on repeated open',requests===1,{requests});entry.requests=requests;entry.screenshot=`fixture-catalog-failure-${app.id}-390-${theme}.png`;await page.screenshot({path:resolve(out,entry.screenshot),fullPage:false});
    }catch(e){entry.error=e.stack;check(subject,'Scenario completed',false,{error:e.message});}
-   finally{report.catalogFailureFixtures.push(entry);await context.close();await store();}
+   finally{releaseRequest();report.catalogFailureFixtures.push(entry);await context.close();await store();}
   }
  }
 }catch(e){check('runner','Candidate suite completed',false,{error:e.stack});}

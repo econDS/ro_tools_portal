@@ -31,7 +31,7 @@ export async function loadCandidates(configPath){
 }
 export async function verifyRelease(config,apps){
  const version=config.release.version,sourceRoot=resolve(config.release.directory),files=['nav.js','catalog.snapshot.json','nav.lock.json'];
- if(version!=='1.4.0'||JSON.stringify(config.release.files)!==JSON.stringify(files))throw new Error('Expected immutable navigation 1.4.0, all three release files');
+ if(version!=='1.4.1'||JSON.stringify(config.release.files)!==JSON.stringify(files))throw new Error('Expected immutable navigation 1.4.1, all three release files');
  const sourceBytes=Object.fromEntries(await Promise.all(files.map(async name=>[name,await readFile(resolve(sourceRoot,name))])));
  const lock=JSON.parse(sourceBytes['nav.lock.json']);
  if(lock.bundleVersion!==version||!/^[0-9a-f]{40}$/.test(lock.sourceCommit))throw new Error('Invalid source release provenance');

@@ -13,7 +13,7 @@
       "repository": "econDS/ro-leveling-map",
       "checkout": ".nav-qa-candidates/leveling",
       "documentRoot": ".",
-      "expectedCommit": "e728221caee019f53f61179a193fed02225e2afb",
+      "expectedCommit": "3fb15909885adf02d9cd1b632c3dba0a58bfa623",
       "themes": [
         "light",
         "dark"
@@ -35,7 +35,7 @@
       "repository": "econDS/ro-reform-preparation",
       "checkout": ".nav-qa-candidates/reform",
       "documentRoot": ".",
-      "expectedCommit": "b7b4c88215ac7957b67a58ec429fd084dddfb3d9",
+      "expectedCommit": "a7900d509ee1f3d624d57ecf2e19e719ba2d476a",
       "themes": [
         "light",
         "dark"
@@ -57,7 +57,7 @@
       "repository": "econDS/dim_glacier_planner",
       "checkout": ".nav-qa-candidates/dim",
       "documentRoot": ".",
-      "expectedCommit": "bd94adf369ff586d8ad07a8d5ad84f85697ce4f0",
+      "expectedCommit": "7aacf1e620581ec4d588cc50204932f52b4cf24d",
       "themes": [
         "light"
       ],
@@ -77,7 +77,7 @@
       "repository": "econDS/ro-best-status",
       "checkout": ".nav-qa-candidates/best",
       "documentRoot": ".",
-      "expectedCommit": "ebdc4bf48dd2d50ed5089e2a0192c891804d52f4",
+      "expectedCommit": "84af5003981c04b9c4bee2f0c18609c3360df214",
       "themes": [
         "dark"
       ],
@@ -97,7 +97,7 @@
       "repository": "econDS/sessrumnir-ocean-week-guide",
       "checkout": ".nav-qa-candidates/ocean",
       "documentRoot": "docs",
-      "expectedCommit": "85afced653db4cbcd4502ec28c394b3991a390ef",
+      "expectedCommit": "5978d3071ea4ff825f9ea3df3fee6d0e17acd91d",
       "themes": [
         "light"
       ],
@@ -114,8 +114,8 @@
     }
   ],
   "release": {
-    "version": "1.4.0",
-    "directory": "integrations/nav/releases/1.4.0",
+    "version": "1.4.1",
+    "directory": "integrations/nav/releases/1.4.1",
     "files": [
       "nav.js",
       "catalog.snapshot.json",

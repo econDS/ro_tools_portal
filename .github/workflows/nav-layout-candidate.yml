@@ -4,7 +4,7 @@ on:
     paths:
       - 'qa/nav-alignment/**'
       - '.github/workflows/nav-layout-candidate.yml'
-      - 'integrations/nav/releases/1.4.0/**'
+      - 'integrations/nav/releases/1.4.1/**'
 permissions:
   contents: read
 jobs:
@@ -50,31 +50,31 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: econDS/ro-leveling-map
-          ref: e728221caee019f53f61179a193fed02225e2afb
+          ref: 3fb15909885adf02d9cd1b632c3dba0a58bfa623
           path: .nav-qa-candidates/leveling
           persist-credentials: false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: econDS/ro-reform-preparation
-          ref: b7b4c88215ac7957b67a58ec429fd084dddfb3d9
+          ref: a7900d509ee1f3d624d57ecf2e19e719ba2d476a
           path: .nav-qa-candidates/reform
           persist-credentials: false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: econDS/dim_glacier_planner
-          ref: bd94adf369ff586d8ad07a8d5ad84f85697ce4f0
+          ref: 7aacf1e620581ec4d588cc50204932f52b4cf24d
           path: .nav-qa-candidates/dim
           persist-credentials: false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: econDS/ro-best-status
-          ref: ebdc4bf48dd2d50ed5089e2a0192c891804d52f4
+          ref: 84af5003981c04b9c4bee2f0c18609c3360df214
           path: .nav-qa-candidates/best
           persist-credentials: false
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           repository: econDS/sessrumnir-ocean-week-guide
-          ref: 85afced653db4cbcd4502ec28c394b3991a390ef
+          ref: 5978d3071ea4ff825f9ea3df3fee6d0e17acd91d
           path: .nav-qa-candidates/ocean
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
