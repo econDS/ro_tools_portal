@@ -12,14 +12,14 @@ const files = JSON.parse(script.match(/const FILES = (\[.*\]);/)[1]);
 const current = script.match(/const CACHE_NAME = `\$\{CACHE_PREFIX\}([^`]+)`;/)[1];
 const contents = new Map(await Promise.all(files.map(async path => [new URL(path, origin).href, await readFile(new URL(`dist/${path.slice(base.length)}`, root))])));
 function worker() {
-  const listeners = new Map(), stores = new Map(), requests = [];
+  const listeners = new Map(), stores = new Map(), requests = [], matches = [];
   let network = async request => new Response(contents.get(request.url));
   const key = value => new URL(typeof value === 'string' ? value : value.url, origin).href;
   const caches = {
     async open(name) {
       if (!stores.has(name)) stores.set(name, new Map());
       const map = stores.get(name);
-      return { async put(url, response) { map.set(key(url), response.clone()); }, async match(url) { return map.get(key(url))?.clone(); } };
+      return { async put(url, response) { map.set(key(url), response.clone()); }, async match(url) { matches.push(url); return map.get(key(url))?.clone(); } };
     },
     async keys() { return [...stores.keys()]; },
     async delete(name) { return stores.delete(name); },
@@ -31,7 +31,7 @@ function worker() {
     fetch: async (request, options) => { requests.push({ request, options }); return network(request, options); },
   });
   return {
-    stores, requests, caches,
+    stores, requests, caches, matches,
     network: value => { network = value; },
     async lifecycle(name) { let promise; listeners.get(name)({ waitUntil: value => { promise = value; } }); await promise; },
     fetch(url, options = {}) { let response; listeners.get('fetch')({ request: { url: new URL(url, origin).href, method: 'GET', mode: 'cors', ...options }, respondWith: value => { response = value; } }); return response; },
@@ -133,4 +133,14 @@ test('CDN/deploy skew with HTTP 200 cannot install HTML from a different build',
   w.network(async request => new Response(request.url.endsWith('index.html') ? '<html><script src="assets/index-wrong.js"></script></html>' : contents.get(request.url)));
   await assert.rejects(w.lifecycle('install'), /Mismatched portal shell/);
   assert.deepEqual(await w.caches.keys(), ['ro-tools-portal:pwa:old']);
+});
+
+
+test('verified public assets use canonical cache keys independent of Vary request headers', async () => {
+  const w = worker(); await w.lifecycle('install');
+  w.network(async () => { throw new TypeError('offline'); });
+  const asset = files.find(path => path.endsWith('.js'));
+  const response = await w.fetch(asset, { headers: { Origin: origin } });
+  assert.equal(response.status, 200);
+  assert.equal(w.matches.at(-1), `${origin}${asset}`);
 });

@@ -71,6 +71,8 @@ self.addEventListener('fetch', event => {
   if (!ALLOWED.has(url.href) || url.href === HOME) return;
   event.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
-    return (await cache.match(request)) || fetch(request);
+    // Entries were stored by canonical URL without request headers. Looking up
+    // by the full request could miss Vary: Origin responses for module scripts.
+    return (await cache.match(url.href)) || fetch(request);
   })());
 });
