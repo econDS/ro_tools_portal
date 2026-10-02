@@ -1,0 +1,17 @@
+{
+  "id": "/ro_tools_portal/",
+  "name": "RO Tools Portal",
+  "short_name": "RO Tools",
+  "description": "รวมเครื่องมือและคู่มือ Ragnarok Online ของ econDS",
+  "lang": "th",
+  "start_url": "/ro_tools_portal/",
+  "scope": "/ro_tools_portal/",
+  "display": "standalone",
+  "theme_color": "#121a16",
+  "background_color": "#121a16",
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "./icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

@@ -1,3 +1,4 @@
+import { registerPortalWorker } from './pwa';
 import { tools, categories, matches } from './catalog';
 import { preferenceStore, PORTAL_KEY, type Theme } from './preferences';
 
@@ -87,9 +88,12 @@ window.addEventListener('storage', event => { if (event.key === PORTAL_KEY) { st
 let theme: Theme = store.theme() || 'dark';
 function applyTheme() {
   document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'light' ? '#f5f7f1' : '#121a16');
   get('theme-toggle').textContent = theme === 'light' ? 'โหมดมืด' : 'โหมดสว่าง';
 }
 get('theme-toggle').addEventListener('click', () => { theme = theme === 'light' ? 'dark' : 'light'; applyTheme(); store.saveTheme(theme); });
 applyTheme(); renderState(); filter(false);
 for (const id of ['search-controls', 'quick-access', 'reset-portal', 'theme-toggle']) get(id).hidden = false;
 pins.forEach(button => { button.hidden = false; });
+
+registerPortalWorker();

@@ -12,4 +12,8 @@ for (const name of await readdir(new URL('assets/', dist))) await copyFile(new U
 await mkdir(new URL('catalog/v1/', root), { recursive: true });
 await copyFile(new URL('catalog/v1/tools.json', dist), new URL('catalog/v1/tools.json', root));
 await copyFile(new URL('favicon.svg', dist), new URL('favicon.svg', root));
+// These are generated PWA assets, separate from immutable shared-nav releases.
+for (const name of ['manifest.webmanifest', 'sw.js']) await copyFile(new URL(name, dist), new URL(name, root));
+await mkdir(new URL('icons/', root), { recursive: true });
+for (const name of await readdir(new URL('icons/', dist))) await copyFile(new URL(`icons/${name}`, dist), new URL(`icons/${name}`, root));
 console.log('Published dist/ to repository root');
