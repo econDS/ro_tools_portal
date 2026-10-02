@@ -1,0 +1,106 @@
+{
+  "widths": [
+    320,
+    360,
+    390,
+    430,
+    768,
+    1440
+  ],
+  "apps": [
+    {
+      "id": "leveling",
+      "repository": "econDS/ro-leveling-map",
+      "checkout": ".nav-qa-apps/leveling",
+      "documentRoot": ".",
+      "expectedCommit": "87b50f729270cc134c7094e169e34d02f2d2ae27",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": "main",
+        "header": "body > header",
+        "headerInner": "header .brand",
+        "title": "header h1"
+      },
+      "alignmentReference": "Main content box; existing app header has different legacy mobile/wide padding",
+      "publicPath": "ro-leveling-map"
+    },
+    {
+      "id": "reform",
+      "repository": "econDS/ro-reform-preparation",
+      "checkout": ".nav-qa-apps/reform",
+      "documentRoot": ".",
+      "expectedCommit": "b49eeb427e3874d6462d922e2b07c52e1a297759",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": ".header-inner",
+        "header": ".site-header",
+        "headerInner": ".header-inner",
+        "title": ".brand-text"
+      },
+      "alignmentReference": "Header-inner content box per app header, including 18px padding at 641–900px",
+      "publicPath": "ro-reform-preparation"
+    },
+    {
+      "id": "dim",
+      "repository": "econDS/dim_glacier_planner",
+      "checkout": ".nav-qa-apps/dim",
+      "documentRoot": ".",
+      "expectedCommit": "92e2ee6e484d8901168c86e8625b2463e8e186d7",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": ".container",
+        "header": "body > h1",
+        "title": "body > h1"
+      },
+      "alignmentReference": "Container edges; the app's 20px body padding stays unchanged",
+      "publicPath": "dim_glacier_planner"
+    },
+    {
+      "id": "best",
+      "repository": "econDS/ro-best-status",
+      "checkout": ".nav-qa-apps/best",
+      "documentRoot": ".",
+      "expectedCommit": "3b7dd2ce37a8b3844a9a7774dda6caae2ff3fc0a",
+      "themes": [
+        "dark"
+      ],
+      "themeMode": "fixed-dark",
+      "selectors": {
+        "shell": "main.shell",
+        "header": ".site-header",
+        "title": ".site-header .brand"
+      },
+      "alignmentReference": "Main .shell content box; existing shared .shell padding must not be doubled",
+      "publicPath": "ro-best-status"
+    },
+    {
+      "id": "ocean",
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "checkout": ".nav-qa-apps/ocean",
+      "documentRoot": "docs",
+      "expectedCommit": "159a9d12ee1d1f2e6713297fcbd379952f1b69ab",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": "main.page",
+        "header": "main.page > header",
+        "title": "main.page > header h1"
+      },
+      "alignmentReference": "Page container edges in docs publishing root; original master branch stays unchanged",
+      "publicPath": "sessrumnir-ocean-week-guide"
+    }
+  ]
+}
