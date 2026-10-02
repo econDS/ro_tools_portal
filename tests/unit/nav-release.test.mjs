@@ -45,3 +45,8 @@ test('current registry navigation projection still matches immutable release', a
   for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `8a3683579bb8281e2243a000d6f2ebbac64ffbd9:${path}`])), path);
   assert.equal(await readFile('integrations/nav/releases/1.4.0/catalog.snapshot.json', 'utf8'), await readFile('integrations/nav/releases/1.3.0/catalog.snapshot.json', 'utf8'));
 });
+
+test('reviewed 1.4.0 candidate remains frozen when the accessibility patch supersedes it', async () => {
+  const files = {'nav.js':'629b6da9aab2b0e6470f0a955d112261fc2406275a6260145d9056b612a98735','catalog.snapshot.json':'a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d','nav.lock.json':'558e1a00ad34b2b4921934380d7e12205a99be361307b16d43bc60825e36f098'};
+  for (const [file, expected] of Object.entries(files)) assert.equal(digest(await readFile(`integrations/nav/releases/1.4.0/${file}`)), expected);
+});

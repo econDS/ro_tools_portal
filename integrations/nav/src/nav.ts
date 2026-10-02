@@ -29,7 +29,8 @@ li span{display:inline-flex;align-items:center;padding:8px 10px;min-height:44px;
 li .chip{padding:0;min-height:0;color:#fff}
 [aria-current=page]{font-weight:bold;background:var(--current)}
 p{font:12px/1.6 Tahoma,sans-serif;margin:4px 0;color:var(--muted)}
-p:empty,[hidden]{display:none!important}
+p:empty{margin:0}
+[hidden]{display:none!important}
 @media(max-width:480px){.bar{gap:8px}.menu-label{display:none}button{padding:8px;width:44px}ul{display:block}li a{width:100%;justify-content:flex-start}}
 `;
 function link(label: string, href: string) { const a = document.createElement('a'); a.textContent = label; a.href = href; return a; }

@@ -1,6 +1,12 @@
-# ro-suite-nav 1.4.0 — local artifact
+# ro-suite-nav 1.4.1 — local artifact
 
-Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.4.0/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.4.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+
+## เปลี่ยนใน 1.4.1
+- แก้ accessibility ของ optional catalog: empty `role="status"` คงอยู่ใน accessibility tree ก่อนข้อความ async มาถึง โดยใช้ margin:0 แทน display:none
+- เป้าหมายความสูง/การจัดแนวและพฤติกรรมผู้ใช้ทั่วไปเหมือน 1.4.0; ไม่มีค่า catalog-url ใน consumer ทั้งห้า
+- 1.4.0 เป็น candidate ที่พบความเสี่ยงนี้ระหว่าง review และไม่เคย merge/deploy ในงานนี้ เก็บ artifact เดิมทุก byte และใช้ patch 1.4.1 สำหรับ rollout แทน ไม่เขียนทับ release เดิม
+- Browser tests ตรวจ empty-region exposure ก่อน fetch ล้มเหลว; การฟังด้วย screen reader จริงยังไม่ได้ทดสอบ
 
 ## เปลี่ยนใน 1.4.0
 - Utility surface เส้นล่างบาง 1px ไม่มีกรอบการ์ดโค้งหรือแถบสีหนา; ลดขนาด icon/padding โดยยังคง hit target อย่างน้อย 44×44px
@@ -20,7 +26,7 @@ Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.
 - มีหมวดคราฟต์และค่าสเตตัส พร้อมคำค้น Rune/Poison/Potion และภาษาไทย
 - รุ่น 1.0.0–1.2.0 คงเดิมทุก byte; build ใน staging แล้วตรวจ release เดิมแทนการเขียนทับ
 
-งานนี้เตรียม 1.4.0 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.3.0 สำหรับ rollback
+งานนี้เตรียม 1.4.1 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.3.0 สำหรับ rollback
 
 ## สร้าง release แบบตรวจซ้ำได้
 
@@ -35,7 +41,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
 ## ติดตั้งใน selected checkout ของแอป (งานแยก)
 
 1. เก็บ baseline การคำนวณ storage keys share URLs และ publishing path ก่อนแก้
-2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.4.0/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
+2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.4.1/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
 3. ใส่ light-DOM fallback ก่อน script; ใช้ `tool-id` จากทะเบียน ไม่เปลี่ยน header เดิม
 4. Ocean ยังคงใช้ `docs/` บน branch `master` และ URL สาธารณะไม่มี `/docs/` ใน rollout นี้ต้องรักษาโครงสร้างดังกล่าว
 5. ทดสอบมือถือ คีย์บอร์ด modal ตาราง share/export และกรณีบล็อก nav.js/catalog
@@ -48,7 +54,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
     <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
   </nav>
 </ro-suite-nav>
-<script type="module" src="./assets/ro-suite/1.4.0/nav.js"></script>
+<script type="module" src="./assets/ro-suite/1.4.1/nav.js"></script>
 ```
 
 ## Optional catalog และความปลอดภัย

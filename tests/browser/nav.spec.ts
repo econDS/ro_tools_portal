@@ -199,3 +199,18 @@ for (const width of [320, 360, 390, 430, 768, 1440]) test(`compact utility bar p
   await page.keyboard.press('Escape'); await expect(toggle).toBeFocused();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
 });
+
+test('empty catalogue status region stays exposed before its asynchronous message', async ({ page }) => {
+  let rejectRequest!: () => void;
+  const gate = new Promise<void>(resolve => { rejectRequest = resolve; });
+  await page.route(CATALOG_URL, async route => { await gate; await route.abort(); });
+  await fixture(page, { remote: true });
+  await page.getByRole('button', { name: 'เครื่องมืออื่น' }).click();
+  const notice = page.locator('ro-suite-nav p[role="status"]');
+  expect(await notice.textContent()).toBe('');
+  expect(await notice.evaluate(el => getComputedStyle(el).display)).not.toBe('none');
+  expect(await notice.evaluate(el => getComputedStyle(el).visibility)).toBe('visible');
+  expect(await notice.evaluate(el => el.closest('[hidden]'))).toBeNull();
+  rejectRequest();
+  await expect(notice).toHaveText('อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้');
+});
