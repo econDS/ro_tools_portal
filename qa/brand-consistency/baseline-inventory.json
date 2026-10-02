@@ -1,0 +1,96 @@
+{
+  "baseCommit": "e497e33ca172a62fce5432c735c91c7b75d1a52c",
+  "initialGitStatus": "clean",
+  "surfaces": [
+    {
+      "path": "README.md",
+      "sha256": "3cb7f417489c57c16fc16fcc82d13f30185e9910e5b3f78581377ea083f69432",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "assets/index-DKHOlQZR.js",
+      "sha256": "fe1c08813728ab6193a650f401ff6790a2751fdf2a5b057dee44722fcca4a14f",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "catalog/v1/tools.json",
+      "sha256": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "data/sources.json",
+      "sha256": "e6be359f096f146a055497fda1a8da542ece044d9a0fb180b5a8639317844861",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "data/tools.registry.v1.json",
+      "sha256": "31793b139e2bf02303643f7f78472f7c5406d7134a157c1d9e0c876d809364e5",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "index.html",
+      "sha256": "62d469962bd3c93486872bac3bcbc18c1db7030577b02a72cc1c0398979b28af",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "integrations/nav/README.md",
+      "sha256": "3ea5e6d05dd3d8097131c69917cf99acffb2970a8246ed167a94a92690c5322b",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "integrations/nav/releases/1.3.0/catalog.snapshot.json",
+      "sha256": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+      "surface": "immutable-release"
+    },
+    {
+      "path": "integrations/nav/releases/1.3.0/nav.js",
+      "sha256": "e0a75bce3f8ba21d73aff8aa28af1c624d977f1e8e3de483c6dd40785b3b84d2",
+      "surface": "immutable-release"
+    },
+    {
+      "path": "integrations/nav/src/snapshot.json",
+      "sha256": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "scripts/render.ts",
+      "sha256": "c6db62f86026d705456d8e78fe94fee96dab7677f1ebab75688f30dde11f846d",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "src/index.html",
+      "sha256": "9fee8da7a82d3d0001fedba7d2e80691aacde12aac536a8fb4821cc756404b77",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "src/urls.ts",
+      "sha256": "8483a6702aefec53ecb741353f37a9133f44b759c9535dfbc11fe59ed1bece82",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "tests/browser/nav.spec.ts",
+      "sha256": "12ba4ddf375bb910ddf171fb41d85d7e5f31f47ee6847ffb1561e574bf60de86",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "tests/browser/portal.spec.ts",
+      "sha256": "b997612d01a18b908aaecb1916e439e1c280e7dd41ec36103744a61c45adfaf8",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "tests/browser/pwa.spec.ts",
+      "sha256": "5d53fa9dcffb267612de7872629d08e480d40b50599dc57ed531e7022e565f04",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "tests/test_design_kit.py",
+      "sha256": "03663edd9e671fcfde1c3b2707571697805db413e83576baf4d76cf3c51ef9b2",
+      "surface": "source/documentation"
+    },
+    {
+      "path": "tests/unit/nav-release.test.mjs",
+      "sha256": "c8d6bf933546571592364c03741e74de7ddeed76039a06e1309d5902e8ddfd0f",
+      "surface": "source/documentation"
+    }
+  ]
+}

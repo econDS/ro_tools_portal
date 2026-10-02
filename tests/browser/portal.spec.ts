@@ -134,7 +134,7 @@ test('Best Status supports Thai/English search, crafting filter, pinning and ord
   await context.route(url, route => route.fulfill({ contentType: 'text/html', body: '<title>Best Status destination fixture</title>' }));
   await page.goto('./');
   const search = page.getByRole('searchbox');
-  for (const query of ['Best Status', 'รูน', 'ยาแอส', 'ปรุงยา', 'Prepare Potion']) {
+  for (const query of ['Best Status', 'STAT FORGE', 'สเตตัส', 'รูน', 'ยาแอส', 'ปรุงยา', 'Prepare Potion']) {
     await search.fill(query);
     await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
     await expect(page.locator('[data-tool="best-status"]')).toBeVisible();
@@ -143,7 +143,7 @@ test('Best Status supports Thai/English search, crafting filter, pinning and ord
   await page.getByRole('button', { name: 'คราฟต์และค่าสเตตัส', exact: true }).click();
   await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
   const card = page.locator('[data-tool="best-status"]');
-  await card.getByRole('button', { name: 'ปักหมุด Best Status', exact: true }).click();
+  await card.getByRole('button', { name: 'ปักหมุด Best Status — STAT FORGE', exact: true }).click();
   await expect(page.locator('#favorites')).toContainText('Best Status');
   await page.reload();
   await expect(page.locator('#favorites')).toContainText('Best Status');
@@ -151,4 +151,19 @@ test('Best Status supports Thai/English search, crafting filter, pinning and ord
   await card.locator('a.launch').click(); await page.waitForURL(url);
   await page.goBack();
   await expect(page.locator('#recent')).toContainText('Best Status');
+});
+
+for (const width of [390, 1440]) test(`Best Status branding is discoverable and readable at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 900 });
+  await page.goto('./');
+  for (const query of ['Best Status', 'STAT FORGE', 'สเตตัส', 'rune', 'poison', 'potion', 'dex', 'luk', 'int']) {
+    await page.getByRole('searchbox').fill(query);
+    const card = page.locator('[data-tool="best-status"]');
+    await expect(card).toBeVisible();
+    await expect(card.locator('h3')).toHaveText('Best Status — STAT FORGE');
+    await expect(card.locator('a.launch')).toHaveAttribute('href', 'https://econds.github.io/ro-best-status/');
+  }
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.locator('[data-tool="best-status"]').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `test-results/brand-consistency-portal-${width}.png`, fullPage: true });
 });

@@ -1,7 +1,13 @@
 import registry from '../data/tools.registry.v1.json' with { type: 'json' };
 
 export type Tool = typeof registry.tools[number];
-export const tools = registry.tools.filter(tool => tool.listingStatus !== 'hidden');
+// Portal presentation only. Registry/public navigation keep the compact immutable label.
+export const tools = registry.tools.filter(tool => tool.listingStatus !== 'hidden').map(tool => tool.id === 'best-status' ? {
+  ...tool,
+  title: 'Best Status — STAT FORGE',
+  description: 'จัดสเตตัสสำหรับ Rune, Poison และ Potion พร้อมหาค่าที่เหมาะที่สุดตามงบแต้ม',
+  searchAliases: [...new Set([...tool.searchAliases, 'stat forge'])],
+} : tool);
 export const categories = registry.categories;
 export const catalog = registry;
 export const normalize = (value: string) => value.normalize('NFKC').toLocaleLowerCase('th').trim();
