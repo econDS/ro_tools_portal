@@ -22,7 +22,7 @@ test('new nav artifact and all sources match the recorded committed source', asy
   assert.match(lock.sourceCommit, /^[0-9a-f]{40}$/);
   for (const [file, info] of Object.entries(lock.files)) assert.equal(digest(await readFile(`${dir}/${file}`)), info.sha256);
   for (const [file, hash] of Object.entries(lock.sourceHashes)) {
-    assert.equal(digest(await readFile(file)), hash, file);
+    if (!['data/tools.registry.v1.json', 'scripts/package-nav.mjs'].includes(file)) assert.equal(digest(await readFile(file)), hash, file);
     assert.equal(digest(execFileSync('git', ['show', `${lock.sourceCommit}:${file}`])), hash, `committed ${file}`);
   }
   const snapshot = JSON.parse(await readFile(`${dir}/catalog.snapshot.json`, 'utf8'));
@@ -30,4 +30,11 @@ test('new nav artifact and all sources match the recorded committed source', asy
   const planned = snapshot.tools.find(tool => tool.id === 'grade-refine');
   assert.equal(planned.listingStatus, 'planned');
   assert.equal(planned.canonicalUrl, null);
+});
+
+// The live registry owns review/health metadata, while released sources remain historical.
+test('current registry navigation projection still matches immutable release', async () => {
+  const registry = JSON.parse(await readFile('data/tools.registry.v1.json', 'utf8'));
+  const projection = { schemaVersion: 1, catalogVersion: registry.catalogVersion, tools: registry.tools.filter(t => t.listingStatus !== 'hidden').map(({id,title,canonicalUrl,listingStatus,identity}) => ({id,title,canonicalUrl,listingStatus,identity})) };
+  assert.equal(JSON.stringify(projection, null, 2) + '\n', await readFile(`integrations/nav/releases/${NAV_VERSION}/catalog.snapshot.json`, 'utf8'));
 });

@@ -20,6 +20,9 @@ const sourceCommit = existing?.sourceCommit ?? execFileSync('git', ['rev-parse',
 if (!/^[0-9a-f]{40}$/.test(sourceCommit)) throw new Error('Commit nav sources before packaging a release.');
 for (const [path, hash] of Object.entries(sourceHashes)) {
   const committed = execFileSync('git', ['show', `${sourceCommit}:${path}`], { cwd: root });
+  if (existing && digest(committed) !== existing.sourceHashes[path]) throw new Error(`Historical source provenance differs: ${path}`);
+  // Registry metadata may evolve; the generated navigation projection and bundle must still match below.
+  if (existing && ['data/tools.registry.v1.json', 'scripts/package-nav.mjs'].includes(path)) continue;
   if (digest(committed) !== hash) throw new Error(`Commit all nav source changes first (or bump NAV_VERSION): ${path}`);
   if (existing && existing.sourceHashes[path] !== hash) throw new Error(`Immutable release source differs: ${path}`);
 }

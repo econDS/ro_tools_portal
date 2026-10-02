@@ -63,10 +63,19 @@ class DesignKitTests(unittest.TestCase):
         for t in REG['tools']: self.assertTrue(set(t['sourceIds']) <= SOURCE_IDS)
     def test_live_health_not_fabricated(self):
         for t in REG['tools']:
-            self.assertIn(t['linkHealth']['state'], ['unverified','not-applicable'])
-            self.assertIsNone(t['linkHealth']['lastCheckedAt'])
+            if t['id'] == 'ocean-week-guide':
+                evidence = load('qa/ocean-status/live-http.json')[0]
+                self.assertEqual(evidence['url'], t['canonicalUrl'])
+                self.assertEqual(evidence['status'], 200)
+                self.assertEqual(t['linkHealth']['state'], 'ok')
+                self.assertIsNotNone(t['linkHealth']['lastCheckedAt'])
+            else:
+                self.assertIn(t['linkHealth']['state'], ['unverified','not-applicable'])
+                self.assertIsNone(t['linkHealth']['lastCheckedAt'])
     def test_no_suite_support_fabricated(self):
-        for t in REG['tools']: self.assertEqual(t['suiteCapabilitiesConfirmed'], [])
+        for t in REG['tools']:
+            self.assertEqual(t['suiteCapabilitiesConfirmed'], ['navigation.v1'] if t['id'] == 'ocean-week-guide' else [])
+            self.assertIsNone(t['gameDataVerifiedOn'])
     def test_ocean_path_branch_and_period(self):
         t=next(t for t in REG['tools'] if t['id']=='ocean-week-guide')
         self.assertEqual(t['defaultBranchObserved'],'master')

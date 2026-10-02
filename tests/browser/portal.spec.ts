@@ -20,7 +20,7 @@ test('static anchors remain without JavaScript and show evidence accurately', as
   await expect(page.locator('[data-tool="grade-refine"] a.launch')).toHaveCount(0);
   await expect(page.locator('[data-tool="ocean-week-guide"]')).toContainText('คู่มือกิจกรรมรอบที่ผ่านมา');
   await page.locator('[data-tool="ocean-week-guide"] summary').click();
-  await expect(page.locator('[data-tool="ocean-week-guide"]')).toContainText('ยังไม่ได้ตรวจการเปิดเว็บ');
+  await expect(page.locator('[data-tool="ocean-week-guide"]')).toContainText('เปิดเว็บได้ ณ เวลาที่ตรวจ');
   await expect(page.locator('[data-tool="ocean-week-guide"]')).toContainText('ยังไม่ได้ยืนยัน');
   await expect(page.locator('#search-controls')).toBeHidden();
   await context.close();
@@ -166,4 +166,28 @@ for (const width of [390, 1440]) test(`Best Status branding is discoverable and 
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   await page.locator('[data-tool="best-status"]').scrollIntoViewIfNeeded();
   await page.screenshot({ path: `test-results/brand-consistency-portal-${width}.png`, fullPage: true });
+});
+
+test('Ocean status dimensions stay separate and event metadata remains historical', async ({ page }, info) => {
+  const ocean = tools.find(tool => tool.id === 'ocean-week-guide')!;
+  expect(ocean.contentType).toBe('guide');
+  expect(ocean.contentLifecycle).toBe('archived-period');
+  expect(ocean.listingStatus).toBe('listed');
+  expect(ocean.event).toMatchObject({ editionId: 'sessrumnir-ocean-week-2026', startsOn: '2026-05-06', endsOn: '2026-06-04', timeZone: 'Asia/Bangkok', endBoundary: 'before-maintenance', exactEndAt: null, stateAsOfReview: 'past-stated-period' });
+  expect(ocean.suiteCapabilitiesConfirmed).toContain('navigation.v1');
+  expect(ocean.plannedSuiteCapabilities).not.toContain('navigation.v1');
+  expect(ocean.gameDataVerifiedOn).toBeNull();
+  await page.goto('./');
+  const card = page.locator('[data-tool="ocean-week-guide"]');
+  await expect(card.getByRole('link', { name: /อ่านคู่มือย้อนหลัง/ })).toHaveAttribute('href', 'https://econds.github.io/sessrumnir-ocean-week-guide/');
+  await card.locator('summary').click();
+  await expect(card).toContainText('ทบทวน metadata ล่าสุด');
+  await expect(card).toContainText('ติดตั้งและทดสอบแล้ว');
+  await expect(card).toContainText('ยังไม่ได้ยืนยัน');
+  for (const width of [390, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await card.scrollIntoViewIfNeeded();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    await page.screenshot({ path: info.outputPath(`ocean-status-${width}.png`), fullPage: true });
+  }
 });
