@@ -97,4 +97,4 @@ export function renderPortal() {
   <footer><span class="footer-brand">RO TOOLS PORTAL</span><span>ทำขึ้นเพื่อช่วยผู้เล่นวางแผน · econDS</span><a href="#">กลับด้านบน ↑</a></footer></div>`.replace(/[ \t]+$/gm, '');
 }
 
-export const publicCatalog = () => ({ schemaVersion: 1, catalogVersion: catalog.catalogVersion, tools: tools.map(({ id, title, canonicalUrl, listingStatus, identity }) => ({ id, title, canonicalUrl, listingStatus, identity })) });
+export const publicCatalog = () => ({ schemaVersion: 1, catalogVersion: catalog.catalogVersion, tools: catalog.tools.filter(tool => tool.listingStatus !== 'hidden').map(({ id, title, canonicalUrl, listingStatus, identity }) => ({ id, title, canonicalUrl, listingStatus, identity })) });
