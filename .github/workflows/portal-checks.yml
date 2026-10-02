@@ -1,0 +1,31 @@
+name: Portal checks
+on:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run check
+      - name: Verify committed Pages output is current
+        run: |
+          npm run publish:root
+          git diff --exit-code -- index.html assets catalog favicon.svg icons manifest.webmanifest sw.js
+          test -z "$(git ls-files --others --exclude-standard)"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: portal-browser-evidence
+          path: test-results/
+          retention-days: 14

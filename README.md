@@ -7,7 +7,8 @@
 
 ## โครงสร้าง
 
-- `index.html`, `assets/`, `catalog/`, `favicon.svg` ที่ root คือไฟล์ที่ GitHub Pages เสิร์ฟจาก branch `main` ห้ามแก้ด้วยมือ ให้สร้างจาก `npm run publish:root`
+- `index.html`, `assets/`, `catalog/`, `favicon.svg`, `icons/`, `manifest.webmanifest`, `sw.js` ที่ root คือไฟล์ที่ GitHub Pages เสิร์ฟจาก branch `main` ห้ามแก้ด้วยมือ ให้สร้างจาก `npm run publish:root`
+- `pwa/` ซอร์ส manifest, install icons และ service worker เฉพาะ Portal อ่าน [ข้อจำกัดออฟไลน์และวิธีอัปเดต](pwa/README.md)
 - `src/` ซอร์สหน้าเว็บ (`src/index.html` คือแม่แบบ), `scripts/render.ts` สร้าง HTML ของการ์ดตอน build
 - `data/tools.registry.v1.json` ข้อมูลเครื่องมือ รวม `identity` (สีประจำเครื่องมือ + ไอคอน) ตรวจด้วย `schemas/`
 - `integrations/nav/` แถบร่วม `ro-suite-nav` ที่เว็บลูกนำไปติดตั้ง รุ่นที่ออกแล้วอยู่ใน `releases/<version>/` และห้ามแก้ภายหลัง
@@ -18,7 +19,7 @@
 ```bash
 npm ci
 npx playwright install chromium
-npm run check          # build พอร์ทัล + build nav + Playwright ทั้งหมด
+npm run check          # build พอร์ทัล + build nav + PWA unit tests + Playwright ทั้งหมด
 npm run publish:root   # build แล้วคัดลอกผลไปที่ root เพื่อ commit ขึ้น Pages
 ```
 
