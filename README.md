@@ -33,3 +33,9 @@ npm run publish:root   # build แล้วคัดลอกผลไปที�
 3. `npm run build:nav` แล้ว `npm test` ตรวจ `sourceCommit` และ SHA-256; commit artifact แยกจาก source
 4. `npm run prompts:nav` ใช้เฉพาะเมื่ออัปเกรด prompt ของ repo ลูกเป็นงานที่อนุมัติแล้ว
 5. งาน Best Status เตรียม 1.3.0 สำหรับ Draft PR เท่านั้น ไม่มี tag/release/deploy; bundle ของ repo อื่นยังคง pin รุ่นเดิม ดู [ขอบเขตและลำดับการรวมงาน](integrations/nav/README.md)
+
+## สถานะข้อมูลและหลักฐาน
+
+สถานะการเปิดอ่าน (`listingStatus`), อายุเนื้อหา (`contentLifecycle`), การติดตั้งเมนูร่วม, ผลตรวจลิงก์จริง, วันที่ทบทวน metadata และการยืนยันข้อมูลในเกมเป็นคนละด้านกัน คู่มือ Ocean Week ยังเปิดอ่านได้ แต่รอบ 6 พ.ค.–4 มิ.ย. 2569 สิ้นสุดแล้ว วันที่สิ้นสุดเป็นก่อนปิดปรับปรุงเซิร์ฟเวอร์ ไม่ได้ระบุเวลานาฬิกา และไม่ได้ยืนยันข้อมูลสำหรับกิจกรรมรอบใหม่
+
+การแก้ metadata ใน registry ไม่ออก nav รุ่นใหม่เมื่อ navigation projection และ bundle เหมือนเดิมทุก byte: release lock ยังตรวจ source hashes จาก commit ประวัติเดิม ซอร์ส runtime ปัจจุบันยังต้องตรง ยกเว้น registry ส่วน metadata ที่ไม่ส่งออกสู่ snapshot

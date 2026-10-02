@@ -208,7 +208,7 @@
     {
       "id": "ocean-week-guide",
       "title": "Sessrumnir Ocean Week",
-      "description": "คู่มือเควสและคำสั่ง /navi ของกิจกรรมรอบที่ระบุในหน้าเดิม",
+      "description": "คู่มือ NPC, /navi และขั้นตอนของ Sessrumnir Ocean Week รอบ 6 พ.ค.–4 มิ.ย. 2569",
       "repository": "econDS/sessrumnir-ocean-week-guide",
       "repositoryUrl": "https://github.com/econDS/sessrumnir-ocean-week-guide",
       "canonicalUrl": "https://econds.github.io/sessrumnir-ocean-week-guide/",
@@ -244,18 +244,19 @@
         "navigation-copy",
         "quest-guide"
       ],
-      "suiteCapabilitiesConfirmed": [],
+      "suiteCapabilitiesConfirmed": [
+        "navigation.v1"
+      ],
       "plannedSuiteCapabilities": [
-        "navigation.v1",
         "tool-manifest.v1"
       ],
       "linkHealth": {
-        "state": "unverified",
-        "lastCheckedAt": null,
-        "reason": "Source and declared URLs inspected; live HTTP verification was unavailable in this session."
+        "state": "ok",
+        "lastCheckedAt": "2026-10-02T14:02:29Z",
+        "reason": "Guide URL returned HTTP 200. Official source returned HTTP 403; game data not verified. See qa/ocean-status/live-http.json."
       },
-      "urlEvidence": "derived-project-url",
-      "metadataReviewedOn": "2026-09-19",
+      "urlEvidence": "confirmed-http",
+      "metadataReviewedOn": "2026-10-02",
       "gameDataVerifiedOn": null,
       "event": {
         "editionId": "sessrumnir-ocean-week-2026",
