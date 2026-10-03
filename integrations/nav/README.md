@@ -1,6 +1,33 @@
-# ro-suite-nav 1.4.1 — local artifact
+# ro-suite-nav 1.5.1 — local artifact
 
-Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.4.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.5.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+
+## เปลี่ยนใน 1.5.1
+
+แก้ private defaults ให้มี prefix `--_ro-nav-` เพื่อไม่ชนกับตัวแปร host เช่น `--ink`, `--muted`, `--line`, `--accent` ขณะ resolve semantic mapping รุ่น 1.5.0 เป็น candidate ที่พบข้อผิดพลาดก่อน merge/deploy และเก็บ byte เดิมไว้ครบ
+
+## เปลี่ยนใน 1.5.0 — semantic theme API
+
+เพิ่ม API แบบ backward-compatible จึงเป็น minor release; โครงสร้าง, spacing, alignment API, ขนาดพื้นที่กด และ interaction เดิมไม่เปลี่ยน
+ค่า default เป็น neutral light/dark ไม่ผูกสีของ Portal แอปกำหนดตัวแปรบน `ro-suite-nav` เท่านั้น:
+
+| Token | บทบาท |
+| --- | --- |
+| `--ro-suite-font-family` | UI/body font ที่ host โหลดอยู่แล้ว; default system-ui,sans-serif |
+| `--ro-suite-surface` | พื้น navbar |
+| `--ro-suite-surface-hover` | พื้น hover/current |
+| `--ro-suite-text` | ข้อความปกติและ control |
+| `--ro-suite-muted` | planned/status text |
+| `--ro-suite-border` | เส้นแบ่งและขอบปุ่ม |
+| `--ro-suite-accent` | ไอคอนปัจจุบันและ marker บาง |
+| `--ro-suite-focus` | keyboard focus ring |
+
+`--ro-suite-background` และ `--ro-suite-color` เดิมยังเป็น fallback alias เมื่อไม่มี token ใหม่
+ไม่กำหนด public token ใน shadow host เพื่อให้ inherited host tokens ใช้ได้; private defaults เปลี่ยนตาม theme attribute/system เดิม
+Current item มีทั้งตัวหนา พื้นบาง และ marker; ไม่พึ่งสีอย่างเดียว ไอคอนของปลายทางอื่นยังคง identity เดิม
+ไม่มี font request หรือ dependency ใหม่ nav ใช้ font ที่แอปโหลดอยู่แล้ว; fallback light DOM ต้อง map token เดียวกันใน integration CSS
+แอปที่มีสองธีมต้อง map token ตาม theme state จริง และตรวจ contrast >=4.5:1 สำหรับข้อความ กับ >=3:1 สำหรับ focus
+Portal ไม่มี component นี้บนหน้า production จึงเก็บ mapping เป็นตัวอย่าง integration และทดสอบด้วย host CSS จริง ไม่เพิ่ม navbar ใหม่บน Portal
 
 ## เปลี่ยนใน 1.4.1
 - แก้ accessibility ของ optional catalog: empty `role="status"` คงอยู่ใน accessibility tree ก่อนข้อความ async มาถึง โดยใช้ margin:0 แทน display:none
@@ -26,7 +53,7 @@ Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.
 - มีหมวดคราฟต์และค่าสเตตัส พร้อมคำค้น Rune/Poison/Potion และภาษาไทย
 - รุ่น 1.0.0–1.2.0 คงเดิมทุก byte; build ใน staging แล้วตรวจ release เดิมแทนการเขียนทับ
 
-งานนี้เตรียม 1.4.1 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.3.0 สำหรับ rollback
+งานนี้เตรียม 1.5.1 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.4.1 สำหรับ rollback
 
 ## สร้าง release แบบตรวจซ้ำได้
 
@@ -41,7 +68,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
 ## ติดตั้งใน selected checkout ของแอป (งานแยก)
 
 1. เก็บ baseline การคำนวณ storage keys share URLs และ publishing path ก่อนแก้
-2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.4.1/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
+2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.5.1/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
 3. ใส่ light-DOM fallback ก่อน script; ใช้ `tool-id` จากทะเบียน ไม่เปลี่ยน header เดิม
 4. Ocean ยังคงใช้ `docs/` บน branch `master` และ URL สาธารณะไม่มี `/docs/` ใน rollout นี้ต้องรักษาโครงสร้างดังกล่าว
 5. ทดสอบมือถือ คีย์บอร์ด modal ตาราง share/export และกรณีบล็อก nav.js/catalog
@@ -54,7 +81,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
     <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
   </nav>
 </ro-suite-nav>
-<script type="module" src="./assets/ro-suite/1.4.1/nav.js"></script>
+<script type="module" src="./assets/ro-suite/1.5.1/nav.js"></script>
 ```
 
 ## Optional catalog และความปลอดภัย

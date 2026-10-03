@@ -1,0 +1,14 @@
+/* Optional host mapping, using Portal's existing src/styles.css tokens.
+   Portal does not mount ro-suite-nav on its production page. No special case
+   exists in the shared component; integrations must synchronize theme with
+   their own existing state, as documented in integrations/nav/README.md. */
+ro-suite-nav {
+  --ro-suite-font-family: "Leelawadee UI", Tahoma, system-ui, sans-serif;
+  --ro-suite-surface: var(--surface);
+  --ro-suite-surface-hover: var(--soft);
+  --ro-suite-text: var(--ink);
+  --ro-suite-muted: var(--muted);
+  --ro-suite-border: var(--line);
+  --ro-suite-accent: var(--green);
+  --ro-suite-focus: var(--green);
+}

@@ -1,0 +1,104 @@
+name: Navigation 1.5.1 theme regression
+on:
+  pull_request:
+    paths:
+      - 'qa/nav-theme/**'
+      - 'integrations/nav/**'
+      - '.github/workflows/nav-theme-qa.yml'
+permissions:
+  contents: read
+jobs:
+  compare-pinned-consumers:
+    if: github.head_ref == 'ui/nav-theme-api'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Checkout baseline leveling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-leveling-map
+          ref: aa6b4c9a9d4bbde0f527e3128c5fdce6a1648bb9
+          path: .nav-theme-baseline/leveling
+          persist-credentials: false
+      - name: Checkout baseline reform
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-reform-preparation
+          ref: 4db99b1037c01ab35beea01b2541ad28d264bc06
+          path: .nav-theme-baseline/reform
+          persist-credentials: false
+      - name: Checkout baseline dim
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/dim_glacier_planner
+          ref: 986b7d5cac0e163ccfc41b39e6f91ef02925489a
+          path: .nav-theme-baseline/dim
+          persist-credentials: false
+      - name: Checkout baseline best
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-best-status
+          ref: 81b8e316bfc4a81c3457c265da96586d9949a8e0
+          path: .nav-theme-baseline/best
+          persist-credentials: false
+      - name: Checkout baseline ocean
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/sessrumnir-ocean-week-guide
+          ref: 7d0862765923d6b7df9ec60a16132fc375af9ba0
+          path: .nav-theme-baseline/ocean
+          persist-credentials: false
+      - name: Checkout candidate leveling
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-leveling-map
+          ref: 1d2d791f859856b62d09f84759468da5f6995531
+          path: .nav-theme-candidates/leveling
+          persist-credentials: false
+      - name: Checkout candidate reform
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-reform-preparation
+          ref: 60b27b5ab689e9101927aa0b33000057e843afa1
+          path: .nav-theme-candidates/reform
+          persist-credentials: false
+      - name: Checkout candidate dim
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/dim_glacier_planner
+          ref: 2e45ab41cd9c3f78dcc7e7b01bc6458f59839fb2
+          path: .nav-theme-candidates/dim
+          persist-credentials: false
+      - name: Checkout candidate best
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/ro-best-status
+          ref: 32209ebd7a8a34b809a555d228923ae79505e9c3
+          path: .nav-theme-candidates/best
+          persist-credentials: false
+      - name: Checkout candidate ocean
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: econDS/sessrumnir-ocean-week-guide
+          ref: b657f54e4076faf167f50cddc5e92602f5ef966d
+          path: .nav-theme-candidates/ocean
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '24.19.0'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Paired real-app geometry, themes, keyboard, fallback, and contrast
+        run: bash qa/nav-theme/run-pair.sh qa/nav-theme/baseline.json qa/nav-theme/candidate.json qa-results/nav-theme
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: nav-theme-evidence-${{ github.sha }}
+          path: qa-results/nav-theme/
+          if-no-files-found: error
+          retention-days: 14
