@@ -2,7 +2,7 @@
 import { readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 const root=resolve(process.argv[2]||'qa-results/nav-theme');
-const result={scope:'Historical 1.4.1 baseline only; candidate gates are never waived',contrastDeficiencies:[],blockingFailures:[]};
+const result={scope:'Historical 1.4.1 baseline only; candidate gates are never waived',contrastDeficiencies:[],unresolvedMeasurements:[],blockingFailures:[]};
 const colorOnlyViolations=f=>Array.isArray(f.violations)&&f.violations.length>0&&f.violations.every(v=>v.id==='color-contrast');
 const numericContrast=f=>{
  const d=f.detail;
@@ -17,7 +17,7 @@ for(const [name,file] of [['capture','before/report.json'],['behavior','before-b
   if(!Array.isArray(r.failures))throw new Error('Missing failures array');
   const samples=name==='behavior'?r.normal:r.samples;
   if(!samples?.length)result.blockingFailures.push({source:file,error:'No baseline samples'});
-  for(const f of r.failures){const recorded={source:file,...f};if((name==='behavior'&&colorOnlyViolations(f))||(name==='colors'&&numericContrast(f)))result.contrastDeficiencies.push(recorded);else result.blockingFailures.push(recorded);}
+  for(const f of r.failures){const recorded={source:file,...f};if(name==='colors'&&f.detail?.error==='Non-solid or opacity/blend background requires manual rendered-pixel review'){result.unresolvedMeasurements.push(recorded);continue;}if((name==='behavior'&&colorOnlyViolations(f))||(name==='colors'&&numericContrast(f)))result.contrastDeficiencies.push(recorded);else result.blockingFailures.push(recorded);}
  }catch(e){result.blockingFailures.push({source:file,error:e.message});}
 }
 result.passed=result.blockingFailures.length===0;

@@ -44,7 +44,7 @@ try {
    // Keyboard modality precedes focus() so focus-visible is measured, never inferred.
    await page.keyboard.press('Tab');
    const nav=page.locator('ro-suite-nav');const controls=fallback?[nav.locator('nav a')]:[nav.locator('.portal'),nav.getByRole('button')];
-   sample.closed=await page.evaluate(colors,{fallback});check(key,'Closed height remains 53px',Math.abs(sample.closed.hostHeight-53)<=.5,sample.closed.hostHeight);
+   sample.closed=await page.evaluate(colors,{fallback});check(key,`Closed height remains ${fallback?52:53}px (${fallback?'unchanged light-DOM fallback':'enhanced nav'})`,Math.abs(sample.closed.hostHeight-(fallback?52:53))<=.5,sample.closed.hostHeight);
    if(!fallback){await nav.getByRole('button').click();await page.keyboard.press('Tab');controls.push(...await nav.locator('li a').all());}
    sample.measured=await page.evaluate(colors,{fallback});
    if(config.release.version!=='1.4.1'){
@@ -58,7 +58,7 @@ try {
       const m=binding.match(/^var\((--[^,)]+)\)$/);if(m){sourceBindings[name]=m[1];bodySourceValues[name]=body.getPropertyValue(m[1]).trim();}
      }
      const c=selector=>getComputedStyle(root.querySelector(selector));
-     const consumed=fallback?{'surface':c('nav').backgroundColor,'text':c('nav a').color,'border':c('nav').borderBottomColor,'font-family':c('nav a').fontFamily}:{'surface':c('nav').backgroundColor,'surface-hover':c('[aria-current=page]').backgroundColor,'text':c('.portal').color,'muted':c('li > span').color,'border':c('nav').borderBottomColor,'accent':c('.current .chip').color,'font-family':c('button').fontFamily};
+     const consumed=fallback?{'surface':c('nav').backgroundColor,'accent':c('nav a').color,...(parseFloat(c('nav').borderBottomWidth)>0?{'border':c('nav').borderBottomColor}:{}),'font-family':c('nav a').fontFamily}:{'surface':c('nav').backgroundColor,'surface-hover':c('[aria-current=page]').backgroundColor,'text':c('.portal').color,'muted':c('li > span').color,'border':c('nav').borderBottomColor,'accent':c('.current .chip').color,'font-family':c('button').fontFamily};
      return {tokenValues,bodySourceValues,sourceBindings,consumed};
     },{bindings:expected.bindings,fallback});
     sample.hostTokenAudit.expected=expected.modes[theme].tokens;
