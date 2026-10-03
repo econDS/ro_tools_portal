@@ -53,7 +53,7 @@ Portal ไม่มี component นี้บนหน้า production จึ�
 - มีหมวดคราฟต์และค่าสเตตัส พร้อมคำค้น Rune/Poison/Potion และภาษาไทย
 - รุ่น 1.0.0–1.2.0 คงเดิมทุก byte; build ใน staging แล้วตรวจ release เดิมแทนการเขียนทับ
 
-งานนี้เตรียม 1.4.1 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.3.0 สำหรับ rollback
+งานนี้เตรียม 1.5.1 สำหรับ review และ rollout แบบ additive ไปยังทั้งห้าแอป ไม่สร้าง tag/release ไม่ merge/deploy จนได้รับอนุมัติ แหล่งจริงคือ Portal; consumer ต้องคัดลอก artifact ทั้งสามแบบ byte-identical และเก็บ 1.4.1 สำหรับ rollback
 
 ## สร้าง release แบบตรวจซ้ำได้
 
@@ -68,7 +68,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
 ## ติดตั้งใน selected checkout ของแอป (งานแยก)
 
 1. เก็บ baseline การคำนวณ storage keys share URLs และ publishing path ก่อนแก้
-2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.4.1/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
+2. คัดลอก release ทั้งสามจาก commit ที่ review แล้วลง `assets/ro-suite/1.5.1/` ใน publishing root แล้วตรวจ SHA-256 ตาม lock
 3. ใส่ light-DOM fallback ก่อน script; ใช้ `tool-id` จากทะเบียน ไม่เปลี่ยน header เดิม
 4. Ocean ยังคงใช้ `docs/` บน branch `master` และ URL สาธารณะไม่มี `/docs/` ใน rollout นี้ต้องรักษาโครงสร้างดังกล่าว
 5. ทดสอบมือถือ คีย์บอร์ด modal ตาราง share/export และกรณีบล็อก nav.js/catalog
@@ -81,7 +81,7 @@ Source commit ต้องอยู่ใน Git history ของ checkout (CI 
     <a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a>
   </nav>
 </ro-suite-nav>
-<script type="module" src="./assets/ro-suite/1.4.1/nav.js"></script>
+<script type="module" src="./assets/ro-suite/1.5.1/nav.js"></script>
 ```
 
 ## Optional catalog และความปลอดภัย
