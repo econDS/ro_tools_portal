@@ -3,7 +3,36 @@ import { toolIconPaths, ICON_ATTRS } from '../../../src/tool-icons';
 import { snapshot, validateNavCatalog, fetchCatalog, CATALOG_URL, type NavCatalog, type NavIdentity } from './catalog';
 
 // theme="light"|"dark" pins the bar to the app's own theme; anything else follows prefers-color-scheme. Only the bar is themed, never the host app.
-const css = `:host{display:block;position:static;font:14px/1.6 Tahoma,"Leelawadee UI",sans-serif;--bg:#f1f5ed;--ink:#233b2c;--line:#cbd7c7;--button:#fff;--button-line:#becbb9;--focus:#315d45;--current:#dee9d7;--muted:#52604f;color-scheme:light;color:var(--ink)}@media(prefers-color-scheme:dark){:host(:not([theme=light])){--bg:#16211b;--ink:#ecf2e8;--line:#2f3f35;--button:#1b2620;--button-line:#415447;--focus:#b6d7a8;--current:#23342a;--muted:#b3c1b6;color-scheme:dark}}:host([theme=dark]){--bg:#16211b;--ink:#ecf2e8;--line:#2f3f35;--button:#1b2620;--button-line:#415447;--focus:#b6d7a8;--current:#23342a;--muted:#b3c1b6;color-scheme:dark}*{box-sizing:border-box}nav{font:14px/1.6 Tahoma,"Leelawadee UI",sans-serif;background:var(--ro-suite-background,var(--bg));color:var(--ro-suite-color,var(--ink));border:1px solid var(--line);border-bottom:3px solid var(--tool-accent,var(--line));border-radius:8px;padding:10px 14px}a,button{font:inherit;color:inherit;min-height:44px;display:inline-flex;align-items:center;padding:8px 12px;border-radius:5px}a{text-underline-offset:3px}button{background:var(--button);color:var(--ink);border:1px solid var(--button-line);cursor:pointer}a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}.bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.current{font-weight:bold;flex:1;display:inline-flex;align-items:center;gap:8px}.chip{flex:none;display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--chip);color:#fff}.chip svg{width:18px;height:18px}li a,li span{gap:8px}li .chip{width:22px;height:22px;border-radius:6px;padding:0;min-height:0;color:#fff}li .chip svg{width:14px;height:14px}ul{list-style:none;padding:12px 0 0;margin:10px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px}li{margin:0}li span{display:inline-flex;align-items:center;padding:8px 12px;min-height:44px;color:var(--muted)}[aria-current=page]{font-weight:bold;background:var(--current)}p{font:12px/1.6 Tahoma,sans-serif;margin:8px 0 0;color:var(--muted)}[hidden]{display:none!important}@media(max-width:480px){nav{padding:8px}.bar{gap:6px}.current{flex-basis:100%;order:3;padding:0 12px}button{margin-left:auto}ul{display:block}li a{width:100%}}`;
+const css = `
+:host{display:block;position:static;font:14px/1.6 Tahoma,"Leelawadee UI",sans-serif;--bg:#f1f5ed;--ink:#233b2c;--line:#cbd7c7;--button:#fff;--button-line:#becbb9;--focus:#315d45;--current:#dee9d7;--muted:#52604f;color-scheme:light;color:var(--ink)}
+@media(prefers-color-scheme:dark){:host(:not([theme=light])){--bg:#16211b;--ink:#ecf2e8;--line:#2f3f35;--button:#1b2620;--button-line:#415447;--focus:#b6d7a8;--current:#23342a;--muted:#b3c1b6;color-scheme:dark}}
+:host([theme=dark]){--bg:#16211b;--ink:#ecf2e8;--line:#2f3f35;--button:#1b2620;--button-line:#415447;--focus:#b6d7a8;--current:#23342a;--muted:#b3c1b6;color-scheme:dark}
+*{box-sizing:border-box}
+nav{font:inherit;background:var(--ro-suite-background,var(--bg));color:var(--ro-suite-color,var(--ink));border:0;border-bottom:1px solid var(--line);border-radius:0}
+.shell{width:100%;max-width:var(--ro-suite-content-max-width,none);margin-inline:auto;padding:4px var(--ro-suite-inline-padding,16px)}
+a,button{font:inherit;color:inherit;min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;padding:8px 10px;border-radius:4px}
+a{text-underline-offset:3px}
+button{background:var(--button);color:var(--ink);border:1px solid var(--button-line);cursor:pointer;gap:6px;flex:none}
+a:focus-visible,button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.bar{display:flex;align-items:center;gap:12px;min-height:44px;flex-wrap:nowrap}
+.portal{flex:none;white-space:nowrap;text-decoration:none;padding-inline:0;font-weight:600}
+.portal:hover{text-decoration:underline}
+.current{font-weight:600;flex:1 1 0;min-width:0;display:inline-flex;align-items:center;gap:6px}
+.current-text{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chip{flex:none;display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:3px;background:var(--chip);color:#fff}
+.chip svg{width:14px;height:14px}
+.menu-icon{width:18px;height:18px;flex:none}
+li a,li span{gap:8px}
+ul{list-style:none;padding:8px 0 0;margin:4px 0 0;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:4px}
+li{margin:0}
+li span{display:inline-flex;align-items:center;padding:8px 10px;min-height:44px;color:var(--muted)}
+li .chip{padding:0;min-height:0;color:#fff}
+[aria-current=page]{font-weight:bold;background:var(--current)}
+p{font:12px/1.6 Tahoma,sans-serif;margin:4px 0;color:var(--muted)}
+p:empty{margin:0}
+[hidden]{display:none!important}
+@media(max-width:480px){.bar{gap:8px}.menu-label{display:none}button{padding:8px;width:44px}ul{display:block}li a{width:100%;justify-content:flex-start}}
+`;
 function link(label: string, href: string) { const a = document.createElement('a'); a.textContent = label; a.href = href; return a; }
 // Decorative icon chip built from bundled path data; identity values were validated in validateNavCatalog.
 function chip(identity: NavIdentity | undefined) {
@@ -29,15 +58,22 @@ export class RoSuiteNav extends HTMLElement {
     const configuredPortal = this.getAttribute('portal-url');
     const portalUrl = configuredPortal === 'https://econds.github.io/ro_tools_portal/' && approvedUrl(configuredPortal) ? configuredPortal : 'https://econds.github.io/ro_tools_portal/';
     const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'เครื่องมือ RO');
+    const shell = document.createElement('div'); shell.className = 'shell'; nav.append(shell);
     const bar = document.createElement('div'); bar.className = 'bar';
-    bar.append(link('กลับ RO Tools Portal', portalUrl)); nav.append(bar);
+    const portal = link('RO Tools', portalUrl); portal.className = 'portal'; portal.setAttribute('aria-label', 'กลับ RO Tools Portal');
+    bar.append(portal); shell.append(bar);
     if (current) {
       if (current.identity) nav.style.setProperty('--tool-accent', current.identity.accent);
-      const name = labelled(document.createElement('span'), current.identity, current.title); name.className = 'current'; bar.append(name);
-      const button = document.createElement('button'); button.type = 'button'; button.textContent = 'เครื่องมืออื่น'; button.setAttribute('aria-expanded', 'false'); button.setAttribute('aria-controls', 'tools');
+      const name = document.createElement('span'); name.className = 'current';
+      const icon = chip(current.identity); if (icon) name.append(icon);
+      const title = document.createElement('span'); title.className = 'current-text'; title.textContent = current.title; name.append(title); bar.append(name);
+      const button = document.createElement('button'); button.type = 'button'; button.setAttribute('aria-label', 'เครื่องมืออื่น');
+      const menuLabel = document.createElement('span'); menuLabel.className = 'menu-label'; menuLabel.textContent = 'เครื่องมืออื่น';
+      const menuIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); menuIcon.classList.add('menu-icon'); menuIcon.setAttribute('viewBox', '0 0 24 24'); menuIcon.setAttribute('aria-hidden', 'true');
+      const menuPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); menuPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); menuPath.setAttribute('fill', 'none'); menuPath.setAttribute('stroke', 'currentColor'); menuPath.setAttribute('stroke-width', '2'); menuIcon.append(menuPath); button.append(menuLabel, menuIcon); button.setAttribute('aria-expanded', 'false'); button.setAttribute('aria-controls', 'tools');
       const panel = document.createElement('div'); panel.id = 'tools'; panel.hidden = true;
       const list = document.createElement('ul'); const notice = document.createElement('p'); notice.setAttribute('role', 'status');
-      panel.append(list, notice); bar.append(button); nav.append(panel);
+      panel.append(list, notice); bar.append(button); shell.append(panel);
       const render = () => {
         const nodes = catalog.tools.map(tool => {
           const li = document.createElement('li');

@@ -32,7 +32,7 @@ npm run publish:root   # build แล้วคัดลอกผลไปที�
 2. `node scripts/generate-nav-snapshot.mjs` แล้ว commit source ทั้งหมดก่อน build
 3. `npm run build:nav` แล้ว `npm test` ตรวจ `sourceCommit` และ SHA-256; commit artifact แยกจาก source
 4. `npm run prompts:nav` ใช้เฉพาะเมื่ออัปเกรด prompt ของ repo ลูกเป็นงานที่อนุมัติแล้ว
-5. งาน Best Status เตรียม 1.3.0 สำหรับ Draft PR เท่านั้น ไม่มี tag/release/deploy; bundle ของ repo อื่นยังคง pin รุ่นเดิม ดู [ขอบเขตและลำดับการรวมงาน](integrations/nav/README.md)
+5. งาน utility-nav เตรียม 1.4.1 พร้อม alignment API สำหรับ Draft PR และ rollout ห้าแอป ไม่มี tag/release/deploy; เก็บรุ่นเดิมไว้สำหรับ rollback ดู [ขอบเขตและลำดับการรวมงาน](integrations/nav/README.md)
 
 ## สถานะข้อมูลและหลักฐาน
 

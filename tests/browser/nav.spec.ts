@@ -126,13 +126,14 @@ for (const width of [360, 390, 768, 1440]) test(`nav layout and targets at ${wid
   for (const el of await page.locator('ro-suite-nav').locator('a:visible, button:visible').all()) expect((await el.boundingBox())!.height).toBeGreaterThanOrEqual(44);
 });
 
-test('current tool shows its catalog accent line and icon; switcher keeps icons when remote catalog omits identity', async ({ page }) => {
+test('current tool keeps its accent icon with a subtle utility border; switcher keeps icons when remote catalog omits identity', async ({ page }) => {
   const plain = structuredClone(snapshot); for (const tool of plain.tools) delete tool.identity; plain.tools[0].title = 'แผนที่เก็บเลเวล ฉบับ fixture';
   await page.route(CATALOG_URL, route => route.fulfill({ contentType: 'application/json', body: JSON.stringify(plain) }));
   await fixture(page, { remote: true });
   const reform = snapshot.tools.find(tool => tool.id === 'reform-workshop')!;
   const nav = page.getByRole('navigation', {name: 'เครื่องมือ RO'});
-  expect(await nav.evaluate(el => getComputedStyle(el).borderBottomColor)).toBe(await page.evaluate(hex => { const d = document.createElement('div'); d.style.color = hex; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, reform.identity!.accent));
+  expect(await nav.evaluate(el => getComputedStyle(el).borderBottomWidth)).toBe('1px');
+  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).backgroundColor)).toBe(await page.evaluate(hex => { const d = document.createElement('div'); d.style.color = hex; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, reform.identity!.accent));
   await expect(page.locator('ro-suite-nav .current .chip svg')).toHaveCount(1);
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล ฉบับ fixture', exact: true})).toBeVisible();
@@ -171,4 +172,45 @@ for (const width of [390, 1440]) test(`Best Status current identity and keyboard
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   await toggle.click(); await toggle.click();
   await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+});
+
+for (const width of [320, 360, 390, 430, 768, 1440]) test(`compact utility bar preserves identity and 44px controls at ${width}px`, async ({ page }) => {
+  await page.setViewportSize({ width, height: 900 });
+  await fixture(page, { id: 'ocean-week-guide', path: '/sessrumnir-ocean-week-guide/' });
+  const host = page.locator('ro-suite-nav');
+  await host.evaluate(el => { (el as HTMLElement).style.setProperty('--ro-suite-content-max-width', '980px'); (el as HTMLElement).style.setProperty('--ro-suite-inline-padding', '16px'); });
+  const measurements = await host.evaluate(el => {
+    const nav = el.shadowRoot!.querySelector('nav')!, bar = el.shadowRoot!.querySelector('.bar')!;
+    const r = bar.getBoundingClientRect(), h = el.getBoundingClientRect();
+    return { height: nav.getBoundingClientRect().height, left: r.left, right: r.right, expectedLeft: h.left + Math.max(0, (h.width - 980) / 2) + 16, expectedRight: h.right - Math.max(0, (h.width - 980) / 2) - 16, border: getComputedStyle(nav).borderBottomWidth, radius: getComputedStyle(nav).borderRadius, current: el.shadowRoot!.querySelector('.current')!.textContent };
+  });
+  expect(measurements.height).toBeLessThanOrEqual(56);
+  expect(measurements.height).toBeGreaterThanOrEqual(52);
+  expect(Math.abs(measurements.left - measurements.expectedLeft)).toBeLessThanOrEqual(1);
+  expect(Math.abs(measurements.right - measurements.expectedRight)).toBeLessThanOrEqual(1);
+  expect(measurements.border).toBe('1px'); expect(measurements.radius).toBe('0px');
+  expect(measurements.current).toBe('Sessrumnir Ocean Week');
+  await expect(host.getByRole('link', { name: 'กลับ RO Tools Portal' })).toHaveText('RO Tools');
+  const toggle = host.getByRole('button', { name: 'เครื่องมืออื่น' });
+  for (const control of await host.locator('a:visible,button:visible').all()) {
+    const box = (await control.boundingBox())!; expect(box.width).toBeGreaterThanOrEqual(44); expect(box.height).toBeGreaterThanOrEqual(44);
+  }
+  await toggle.focus(); await page.keyboard.press('Enter'); await expect(toggle).toHaveAttribute('aria-expanded', 'true');
+  await page.keyboard.press('Escape'); await expect(toggle).toBeFocused();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+});
+
+test('empty catalogue status region stays exposed before its asynchronous message', async ({ page }) => {
+  let rejectRequest!: () => void;
+  const gate = new Promise<void>(resolve => { rejectRequest = resolve; });
+  await page.route(CATALOG_URL, async route => { await gate; await route.abort(); });
+  await fixture(page, { remote: true });
+  await page.getByRole('button', { name: 'เครื่องมืออื่น' }).click();
+  const notice = page.locator('ro-suite-nav p[role="status"]');
+  expect(await notice.textContent()).toBe('');
+  expect(await notice.evaluate(el => getComputedStyle(el).display)).not.toBe('none');
+  expect(await notice.evaluate(el => getComputedStyle(el).visibility)).toBe('visible');
+  expect(await notice.evaluate(el => el.closest('[hidden]'))).toBeNull();
+  rejectRequest();
+  await expect(notice).toHaveText('อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้');
 });

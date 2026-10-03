@@ -18,8 +18,9 @@ test('released 1.2.0 bytes remain frozen', async () => {
 test('new nav artifact and all sources match the recorded committed source', async () => {
   const dir = `integrations/nav/releases/${NAV_VERSION}`;
   const lock = JSON.parse(await readFile(`${dir}/nav.lock.json`, 'utf8'));
-  assert.equal(lock.bundleVersion, '1.3.0');
+  assert.equal(lock.bundleVersion, NAV_VERSION);
   assert.match(lock.sourceCommit, /^[0-9a-f]{40}$/);
+  execFileSync('git', ['merge-base', '--is-ancestor', lock.sourceCommit, 'HEAD']);
   for (const [file, info] of Object.entries(lock.files)) assert.equal(digest(await readFile(`${dir}/${file}`)), info.sha256);
   for (const [file, hash] of Object.entries(lock.sourceHashes)) {
     if (!['data/tools.registry.v1.json', 'scripts/package-nav.mjs'].includes(file)) assert.equal(digest(await readFile(file)), hash, file);
@@ -37,4 +38,15 @@ test('current registry navigation projection still matches immutable release', a
   const registry = JSON.parse(await readFile('data/tools.registry.v1.json', 'utf8'));
   const projection = { schemaVersion: 1, catalogVersion: registry.catalogVersion, tools: registry.tools.filter(t => t.listingStatus !== 'hidden').map(({id,title,canonicalUrl,listingStatus,identity}) => ({id,title,canonicalUrl,listingStatus,identity})) };
   assert.equal(JSON.stringify(projection, null, 2) + '\n', await readFile(`integrations/nav/releases/${NAV_VERSION}/catalog.snapshot.json`, 'utf8'));
+});
+
+ test('all pre-1.4 release files remain byte-identical to the reviewed baseline', async () => {
+  const paths = execFileSync('git', ['ls-tree', '-r', '--name-only', '8a3683579bb8281e2243a000d6f2ebbac64ffbd9', 'integrations/nav/releases'], {encoding:'utf8'}).trim().split('\n');
+  for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `8a3683579bb8281e2243a000d6f2ebbac64ffbd9:${path}`])), path);
+  assert.equal(await readFile('integrations/nav/releases/1.4.0/catalog.snapshot.json', 'utf8'), await readFile('integrations/nav/releases/1.3.0/catalog.snapshot.json', 'utf8'));
+});
+
+test('reviewed 1.4.0 candidate remains frozen when the accessibility patch supersedes it', async () => {
+  const files = {'nav.js':'629b6da9aab2b0e6470f0a955d112261fc2406275a6260145d9056b612a98735','catalog.snapshot.json':'a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d','nav.lock.json':'558e1a00ad34b2b4921934380d7e12205a99be361307b16d43bc60825e36f098'};
+  for (const [file, expected] of Object.entries(files)) assert.equal(digest(await readFile(`integrations/nav/releases/1.4.0/${file}`)), expected);
 });
