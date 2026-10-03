@@ -1,0 +1,76 @@
+[
+  {
+    "app": "leveling",
+    "theme": "light",
+    "axeIncompleteReason": "bgGradient",
+    "renderedForegroundRGB": [
+      31,
+      37,
+      45
+    ],
+    "foregroundPixelsMatchingComputedColor": 156,
+    "baseBackgroundRGB": [
+      245,
+      246,
+      248
+    ],
+    "gradientRGB": [
+      11,
+      122,
+      117
+    ],
+    "maximumGradientAlpha": 0.1,
+    "worstCaseCompositeRGB": [
+      221.6,
+      233.6,
+      234.9
+    ],
+    "contrastAtBase": 14.27141353474879,
+    "contrastAtMaxAlpha": 12.50414718540464,
+    "conservativeMinimumContrast": 12.50414718540464,
+    "wcagNormalTextMinimum": 4.5,
+    "manualContrastPass": true,
+    "method": "Computed foreground from actual browser capture verified in screenshot pixels; conservative contrast over entire known radial-gradient alpha range, using verified source body colors. No background is sampled through antialiased text.",
+    "sourceCss": "https://github.com/econDS/ro-leveling-map/blob/3fb15909885adf02d9cd1b632c3dba0a58bfa623/assets/theme.css",
+    "finalRunId": 37079690223,
+    "finalComputedColor": "rgb(31, 37, 45)",
+    "finalScreenshot": "after-leveling-390-light-blocked-module.png"
+  },
+  {
+    "app": "leveling",
+    "theme": "dark",
+    "axeIncompleteReason": "bgGradient",
+    "renderedForegroundRGB": [
+      227,
+      233,
+      240
+    ],
+    "foregroundPixelsMatchingComputedColor": 161,
+    "baseBackgroundRGB": [
+      15,
+      20,
+      26
+    ],
+    "gradientRGB": [
+      60,
+      192,
+      182
+    ],
+    "maximumGradientAlpha": 0.08,
+    "worstCaseCompositeRGB": [
+      18.6,
+      33.760000000000005,
+      38.480000000000004
+    ],
+    "contrastAtBase": 15.132692852641213,
+    "contrastAtMaxAlpha": 13.405331828899095,
+    "conservativeMinimumContrast": 13.405331828899095,
+    "wcagNormalTextMinimum": 4.5,
+    "manualContrastPass": true,
+    "method": "Computed foreground from actual browser capture verified in screenshot pixels; conservative contrast over entire known radial-gradient alpha range, using verified source body colors. No background is sampled through antialiased text.",
+    "sourceCss": "https://github.com/econDS/ro-leveling-map/blob/3fb15909885adf02d9cd1b632c3dba0a58bfa623/assets/theme.css",
+    "finalRunId": 37079690223,
+    "finalComputedColor": "rgb(227, 233, 240)",
+    "finalScreenshot": "after-leveling-390-dark-blocked-module.png"
+  }
+]
