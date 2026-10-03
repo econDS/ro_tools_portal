@@ -1,6 +1,29 @@
-# ro-suite-nav 1.4.1 — local artifact
+# ro-suite-nav 1.5.0 — local artifact
 
-Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.4.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.5.0/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+
+## เปลี่ยนใน 1.5.0 — semantic theme API
+
+เพิ่ม API แบบ backward-compatible จึงเป็น minor release; โครงสร้าง, spacing, alignment API, ขนาดพื้นที่กด และ interaction เดิมไม่เปลี่ยน
+ค่า default เป็น neutral light/dark ไม่ผูกสีของ Portal แอปกำหนดตัวแปรบน `ro-suite-nav` เท่านั้น:
+
+| Token | บทบาท |
+| --- | --- |
+| `--ro-suite-font-family` | UI/body font ที่ host โหลดอยู่แล้ว; default system-ui,sans-serif |
+| `--ro-suite-surface` | พื้น navbar |
+| `--ro-suite-surface-hover` | พื้น hover/current |
+| `--ro-suite-text` | ข้อความปกติและ control |
+| `--ro-suite-muted` | planned/status text |
+| `--ro-suite-border` | เส้นแบ่งและขอบปุ่ม |
+| `--ro-suite-accent` | ไอคอนปัจจุบันและ marker บาง |
+| `--ro-suite-focus` | keyboard focus ring |
+
+`--ro-suite-background` และ `--ro-suite-color` เดิมยังเป็น fallback alias เมื่อไม่มี token ใหม่
+ไม่กำหนด public token ใน shadow host เพื่อให้ inherited host tokens ใช้ได้; private defaults เปลี่ยนตาม theme attribute/system เดิม
+Current item มีทั้งตัวหนา พื้นบาง และ marker; ไม่พึ่งสีอย่างเดียว ไอคอนของปลายทางอื่นยังคง identity เดิม
+ไม่มี font request หรือ dependency ใหม่ nav ใช้ font ที่แอปโหลดอยู่แล้ว; fallback light DOM ต้อง map token เดียวกันใน integration CSS
+แอปที่มีสองธีมต้อง map token ตาม theme state จริง และตรวจ contrast >=4.5:1 สำหรับข้อความ กับ >=3:1 สำหรับ focus
+Portal ไม่มี component นี้บนหน้า production จึงเก็บ mapping เป็นตัวอย่าง integration และทดสอบด้วย host CSS จริง ไม่เพิ่ม navbar ใหม่บน Portal
 
 ## เปลี่ยนใน 1.4.1
 - แก้ accessibility ของ optional catalog: empty `role="status"` คงอยู่ใน accessibility tree ก่อนข้อความ async มาถึง โดยใช้ margin:0 แทน display:none

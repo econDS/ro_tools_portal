@@ -54,7 +54,7 @@ test('keyboard toggle, Escape focus return, current page, CSS and calculator iso
   await page.keyboard.press('Escape');
   await expect(toggle).toBeFocused(); await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   expect(await page.locator('#calculate').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 0, 0)');
-  expect(await toggle.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
+  expect(await toggle.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
   expect(await page.locator('table').evaluate(el => getComputedStyle(el).borderTopWidth)).toBe('3px');
   await page.locator('#quantity').fill('7'); await page.locator('#calculate').click(); await expect(page.locator('#total')).toHaveText('70');
   await page.locator('#open').click(); await expect(page.locator('dialog')).toBeVisible(); await page.locator('#close').click();
@@ -133,7 +133,8 @@ test('current tool keeps its accent icon with a subtle utility border; switcher 
   const reform = snapshot.tools.find(tool => tool.id === 'reform-workshop')!;
   const nav = page.getByRole('navigation', {name: 'เครื่องมือ RO'});
   expect(await nav.evaluate(el => getComputedStyle(el).borderBottomWidth)).toBe('1px');
-  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).backgroundColor)).toBe(await page.evaluate(hex => { const d = document.createElement('div'); d.style.color = hex; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, reform.identity!.accent));
+  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).color)).toBe('rgb(3, 105, 161)');
   await expect(page.locator('ro-suite-nav .current .chip svg')).toHaveCount(1);
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล ฉบับ fixture', exact: true})).toBeVisible();
@@ -141,7 +142,7 @@ test('current tool keeps its accent icon with a subtle utility border; switcher 
   await expect(page.getByRole('link', {name: reform.title, exact: true})).toHaveAttribute('aria-current', 'page');
 });
 
-const LIGHT_BG = 'rgb(241, 245, 237)', DARK_BG = 'rgb(22, 33, 27)';
+const LIGHT_BG = 'rgb(248, 250, 252)', DARK_BG = 'rgb(15, 23, 42)';
 for (const [scheme, theme, expected] of [['light', '', LIGHT_BG], ['dark', '', DARK_BG], ['light', 'dark', DARK_BG], ['dark', 'light', LIGHT_BG], ['dark', 'bogus', DARK_BG]] as const) test(`nav theme="${theme}" under ${scheme} system scheme`, async ({ page }) => {
   await page.emulateMedia({ colorScheme: scheme });
   await fixture(page, { theme });
