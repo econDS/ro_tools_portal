@@ -215,3 +215,72 @@ test('empty catalogue status region stays exposed before its asynchronous messag
   rejectRequest();
   await expect(notice).toHaveText('อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้');
 });
+// Append to tests/browser/nav.spec.ts. Intentionally labeled component fixtures.
+test('all eight public theme tokens reach computed styles without geometry or host leakage', async ({ page }) => {
+  await fixture(page, { theme: 'light' });
+  const host=page.locator('ro-suite-nav');
+  const before=await host.boundingBox();
+  const appBefore=await page.locator('#calculate').evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}));
+  await host.evaluate(el=>{
+    const tokens:Record<string,string>={surface:'#f5f5f5','surface-hover':'#dddddd',text:'#202020',muted:'#444444',border:'#666666',accent:'#005599',focus:'#770077','font-family':'Arial, sans-serif'};
+    for(const [key,value] of Object.entries(tokens))(el as HTMLElement).style.setProperty(`--ro-suite-${key}`,value);
+  });
+  const toggle=host.getByRole('button');await toggle.click();
+  const computed=await host.evaluate(el=>{const s=el.shadowRoot!,css=(sel:string)=>getComputedStyle(s.querySelector(sel)!);return {surface:css('nav').backgroundColor,text:css('.portal').color,muted:css('li > span').color,border:css('nav').borderBottomColor,current:css('[aria-current]').backgroundColor,accent:css('.current .chip').color,marker:css('[aria-current]').boxShadow,font:css('button').fontFamily,buttonText:css('button').color};});
+  expect(computed).toMatchObject({surface:'rgb(245, 245, 245)',text:'rgb(32, 32, 32)',muted:'rgb(68, 68, 68)',border:'rgb(102, 102, 102)',current:'rgb(221, 221, 221)',accent:'rgb(0, 85, 153)',buttonText:'rgb(32, 32, 32)'});
+  expect(computed.font).toContain('Arial');expect(computed.marker).toContain('rgb(0, 85, 153)');expect(computed.marker).toContain('inset');
+  await toggle.hover();expect(await toggle.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(221, 221, 221)');
+  await page.keyboard.press('Tab');await toggle.focus();
+  expect(await toggle.evaluate(el=>({visible:el.matches(':focus-visible'),color:getComputedStyle(el).outlineColor,width:getComputedStyle(el).outlineWidth}))).toEqual({visible:true,color:'rgb(119, 0, 119)',width:'3px'});
+  await page.keyboard.press('Escape');
+  expect((await host.boundingBox())!.height).toBe(before!.height);
+  expect(await page.locator('#calculate').evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}))).toEqual(appBefore);
+});
+
+test('legacy surface and text aliases work and new tokens take precedence',async({page})=>{
+  await fixture(page,{theme:'light'});const host=page.locator('ro-suite-nav');
+  const read=()=>host.evaluate(el=>{const s=getComputedStyle(el.shadowRoot!.querySelector('nav')!);return [s.backgroundColor,s.color];});
+  await host.evaluate(el=>{(el as HTMLElement).style.setProperty('--ro-suite-background','#ffeecc');(el as HTMLElement).style.setProperty('--ro-suite-color','#332211');});
+  expect(await read()).toEqual(['rgb(255, 238, 204)','rgb(51, 34, 17)']);
+  await host.evaluate(el=>{(el as HTMLElement).style.setProperty('--ro-suite-surface','#eeeeee');(el as HTMLElement).style.setProperty('--ro-suite-text','#111111');});
+  expect(await read()).toEqual(['rgb(238, 238, 238)','rgb(17, 17, 17)']);
+});
+
+test('same-page explicit theme and system changes resolve neutral defaults without remount or storage writes',async({page})=>{
+ await page.emulateMedia({colorScheme:'light'});await fixture(page);
+ const host=page.locator('ro-suite-nav');const read=()=>host.evaluate(el=>{const s=getComputedStyle(el.shadowRoot!.querySelector('nav')!);return {background:s.backgroundColor,color:s.color,scheme:getComputedStyle(el).colorScheme};});
+ const storage=()=>page.evaluate(()=>({local:{...localStorage},session:{...sessionStorage},url:location.href}));const before=await storage();
+ expect(await read()).toEqual({background:'rgb(248, 250, 252)',color:'rgb(30, 41, 59)',scheme:'light'});
+ await page.emulateMedia({colorScheme:'dark'});expect(await read()).toEqual({background:'rgb(15, 23, 42)',color:'rgb(241, 245, 249)',scheme:'dark'});
+ await host.evaluate(el=>el.setAttribute('theme','light'));expect((await read()).scheme).toBe('light');
+ await page.emulateMedia({colorScheme:'light'});await host.evaluate(el=>el.setAttribute('theme','dark'));expect((await read()).scheme).toBe('dark');
+ await host.evaluate(el=>el.removeAttribute('theme'));expect((await read()).scheme).toBe('light');expect(await storage()).toEqual(before);
+});
+
+test('isolated navigation loads no remote fonts in either scheme',async({page})=>{
+ const fonts:string[]=[];page.on('request',request=>{if(request.resourceType()==='font'||/fonts\.googleapis|fonts\.gstatic|\.(woff2?|ttf|otf)([?#]|$)/i.test(request.url()))fonts.push(request.url());});
+ for(const colorScheme of ['light','dark'] as const){await page.emulateMedia({colorScheme});await fixture(page);await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();await page.evaluate(()=>document.fonts.ready);}
+ expect(fonts).toEqual([]);
+});
+
+for (const mode of ['light', 'dark']) test(`Portal host mapping uses the same supported API in ${mode} fixture`, async ({ page }) => {
+  await fixture(page, {theme: mode});
+  await page.addStyleTag({content: await readFile('src/styles.css', 'utf8')});
+  await page.addStyleTag({content: await readFile('examples/nav-portal-theme.css', 'utf8')});
+  await page.evaluate(mode=>document.documentElement.dataset.theme=mode,mode);
+  const actual = await page.locator('ro-suite-nav').evaluate(el=>{
+    const root=getComputedStyle(document.documentElement), nav=getComputedStyle(el.shadowRoot!.querySelector('nav')!);
+    const resolve=(value:string)=>{const e=document.createElement('span');e.style.color=value;document.body.append(e);const v=getComputedStyle(e).color;e.remove();return v;};
+    return {surface:nav.backgroundColor,text:nav.color,wantedSurface:resolve(root.getPropertyValue('--surface')),wantedText:resolve(root.getPropertyValue('--ink'))};
+  });
+  expect(actual.surface).toBe(actual.wantedSurface);expect(actual.text).toBe(actual.wantedText);
+  await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();
+  const results=await new AxeBuilder({page}).include('ro-suite-nav').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  expect(results.violations).toEqual([]);
+  await page.screenshot({path:`test-results/portal-theme-fixture-${mode}.png`});
+});
+test('isolated navigation loads no remote fonts in either scheme',async({page})=>{
+ const fonts:string[]=[];page.on('request',request=>{if(request.resourceType()==='font'||/fonts\.googleapis|fonts\.gstatic|\.(woff2?|ttf|otf)([?#]|$)/i.test(request.url()))fonts.push(request.url());});
+ for(const colorScheme of ['light','dark'] as const){await page.emulateMedia({colorScheme});await fixture(page);await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();await page.evaluate(()=>document.fonts.ready);}
+ expect(fonts).toEqual([]);
+});
