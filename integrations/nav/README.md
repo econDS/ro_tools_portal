@@ -1,6 +1,10 @@
-# ro-suite-nav 1.5.0 — local artifact
+# ro-suite-nav 1.5.1 — local artifact
 
-Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.5.0/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.5.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`
+
+## เปลี่ยนใน 1.5.1
+
+แก้ private defaults ให้มี prefix `--_ro-nav-` เพื่อไม่ชนกับตัวแปร host เช่น `--ink`, `--muted`, `--line`, `--accent` ขณะ resolve semantic mapping รุ่น 1.5.0 เป็น candidate ที่พบข้อผิดพลาดก่อน merge/deploy และเก็บ byte เดิมไว้ครบ
 
 ## เปลี่ยนใน 1.5.0 — semantic theme API
 
