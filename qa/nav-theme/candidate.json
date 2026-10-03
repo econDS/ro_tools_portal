@@ -1,0 +1,126 @@
+{
+  "widths": [
+    320,
+    360,
+    390,
+    430,
+    768,
+    1440
+  ],
+  "apps": [
+    {
+      "id": "leveling",
+      "repository": "econDS/ro-leveling-map",
+      "checkout": ".nav-theme-candidates/leveling",
+      "documentRoot": ".",
+      "expectedCommit": "1d2d791f859856b62d09f84759468da5f6995531",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": "main",
+        "header": "body > header",
+        "headerInner": "header .brand",
+        "title": "header h1"
+      },
+      "alignmentReference": "Main content box; existing app header has different legacy mobile/wide padding",
+      "publicPath": "ro-leveling-map",
+      "toolId": "leveling-map",
+      "expectedTitle": "\u0e41\u0e1c\u0e19\u0e17\u0e35\u0e48\u0e40\u0e01\u0e47\u0e1a\u0e40\u0e25\u0e40\u0e27\u0e25"
+    },
+    {
+      "id": "reform",
+      "repository": "econDS/ro-reform-preparation",
+      "checkout": ".nav-theme-candidates/reform",
+      "documentRoot": ".",
+      "expectedCommit": "60b27b5ab689e9101927aa0b33000057e843afa1",
+      "themes": [
+        "light",
+        "dark"
+      ],
+      "themeMode": "automatic-device",
+      "selectors": {
+        "shell": ".header-inner",
+        "header": ".site-header",
+        "headerInner": ".header-inner",
+        "title": ".brand-text"
+      },
+      "alignmentReference": "Header-inner content box per app header, including 18px padding at 641\u2013900px",
+      "publicPath": "ro-reform-preparation",
+      "toolId": "reform-workshop",
+      "expectedTitle": "Reform Workshop"
+    },
+    {
+      "id": "dim",
+      "repository": "econDS/dim_glacier_planner",
+      "checkout": ".nav-theme-candidates/dim",
+      "documentRoot": ".",
+      "expectedCommit": "2e45ab41cd9c3f78dcc7e7b01bc6458f59839fb2",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": ".container",
+        "header": "body > h1",
+        "title": "body > h1"
+      },
+      "alignmentReference": "Container edges; the app's 20px body padding stays unchanged",
+      "publicPath": "dim_glacier_planner",
+      "toolId": "dim-glacier",
+      "expectedTitle": "Dim Glacier Planner"
+    },
+    {
+      "id": "best",
+      "repository": "econDS/ro-best-status",
+      "checkout": ".nav-theme-candidates/best",
+      "documentRoot": ".",
+      "expectedCommit": "32209ebd7a8a34b809a555d228923ae79505e9c3",
+      "themes": [
+        "dark"
+      ],
+      "themeMode": "fixed-dark",
+      "selectors": {
+        "shell": "main.shell",
+        "header": ".site-header",
+        "title": ".site-header .brand"
+      },
+      "alignmentReference": "Main .shell content box; existing shared .shell padding must not be doubled",
+      "publicPath": "ro-best-status",
+      "toolId": "best-status",
+      "expectedTitle": "Best Status"
+    },
+    {
+      "id": "ocean",
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "checkout": ".nav-theme-candidates/ocean",
+      "documentRoot": "docs",
+      "expectedCommit": "b657f54e4076faf167f50cddc5e92602f5ef966d",
+      "themes": [
+        "light"
+      ],
+      "themeMode": "fixed-light",
+      "selectors": {
+        "shell": "main.page",
+        "header": "main.page > header",
+        "title": "main.page > header h1"
+      },
+      "alignmentReference": "Page container edges in docs publishing root; original master branch stays unchanged",
+      "publicPath": "sessrumnir-ocean-week-guide",
+      "toolId": "ocean-week-guide",
+      "expectedTitle": "Sessrumnir Ocean Week"
+    }
+  ],
+  "release": {
+    "version": "1.5.1",
+    "directory": "integrations/nav/releases/1.5.1",
+    "files": [
+      "nav.js",
+      "catalog.snapshot.json",
+      "nav.lock.json"
+    ],
+    "repositoryRoot": "."
+  }
+}
