@@ -50,3 +50,9 @@ test('reviewed 1.4.0 candidate remains frozen when the accessibility patch super
   const files = {'nav.js':'629b6da9aab2b0e6470f0a955d112261fc2406275a6260145d9056b612a98735','catalog.snapshot.json':'a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d','nav.lock.json':'558e1a00ad34b2b4921934380d7e12205a99be361307b16d43bc60825e36f098'};
   for (const [file, expected] of Object.entries(files)) assert.equal(digest(await readFile(`integrations/nav/releases/1.4.0/${file}`)), expected);
 });
+
+test('all releases before theming remain byte-identical to 1.4.1 baseline', async () => {
+  const base = '4caf4c4cc305d2771bcb72184234bdb0a474a2b4';
+  const paths = execFileSync('git', ['ls-tree', '-r', '--name-only', base, 'integrations/nav/releases'], {encoding:'utf8'}).trim().split('\n');
+  for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `${base}:${path}`])), path);
+});

@@ -54,7 +54,7 @@ test('keyboard toggle, Escape focus return, current page, CSS and calculator iso
   await page.keyboard.press('Escape');
   await expect(toggle).toBeFocused(); await expect(toggle).toHaveAttribute('aria-expanded', 'false');
   expect(await page.locator('#calculate').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 0, 0)');
-  expect(await toggle.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgb(255, 255, 255)');
+  expect(await toggle.evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
   expect(await page.locator('table').evaluate(el => getComputedStyle(el).borderTopWidth)).toBe('3px');
   await page.locator('#quantity').fill('7'); await page.locator('#calculate').click(); await expect(page.locator('#total')).toHaveText('70');
   await page.locator('#open').click(); await expect(page.locator('dialog')).toBeVisible(); await page.locator('#close').click();
@@ -133,7 +133,8 @@ test('current tool keeps its accent icon with a subtle utility border; switcher 
   const reform = snapshot.tools.find(tool => tool.id === 'reform-workshop')!;
   const nav = page.getByRole('navigation', {name: 'เครื่องมือ RO'});
   expect(await nav.evaluate(el => getComputedStyle(el).borderBottomWidth)).toBe('1px');
-  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).backgroundColor)).toBe(await page.evaluate(hex => { const d = document.createElement('div'); d.style.color = hex; document.body.append(d); const c = getComputedStyle(d).color; d.remove(); return c; }, reform.identity!.accent));
+  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).backgroundColor)).toBe('rgba(0, 0, 0, 0)');
+  expect(await page.locator('ro-suite-nav .current .chip').evaluate(el => getComputedStyle(el).color)).toBe('rgb(3, 105, 161)');
   await expect(page.locator('ro-suite-nav .current .chip svg')).toHaveCount(1);
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล ฉบับ fixture', exact: true})).toBeVisible();
@@ -141,7 +142,7 @@ test('current tool keeps its accent icon with a subtle utility border; switcher 
   await expect(page.getByRole('link', {name: reform.title, exact: true})).toHaveAttribute('aria-current', 'page');
 });
 
-const LIGHT_BG = 'rgb(241, 245, 237)', DARK_BG = 'rgb(22, 33, 27)';
+const LIGHT_BG = 'rgb(248, 250, 252)', DARK_BG = 'rgb(15, 23, 42)';
 for (const [scheme, theme, expected] of [['light', '', LIGHT_BG], ['dark', '', DARK_BG], ['light', 'dark', DARK_BG], ['dark', 'light', LIGHT_BG], ['dark', 'bogus', DARK_BG]] as const) test(`nav theme="${theme}" under ${scheme} system scheme`, async ({ page }) => {
   await page.emulateMedia({ colorScheme: scheme });
   await fixture(page, { theme });
@@ -213,4 +214,77 @@ test('empty catalogue status region stays exposed before its asynchronous messag
   expect(await notice.evaluate(el => el.closest('[hidden]'))).toBeNull();
   rejectRequest();
   await expect(notice).toHaveText('อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้');
+});
+// Append to tests/browser/nav.spec.ts. Intentionally labeled component fixtures.
+test('all eight public theme tokens reach computed styles without geometry or host leakage', async ({ page }) => {
+  await fixture(page, { theme: 'light' });
+  const host=page.locator('ro-suite-nav');
+  const before=await host.boundingBox();
+  const appBefore=await page.locator('#calculate').evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}));
+  await host.evaluate(el=>{
+    const tokens:Record<string,string>={surface:'#f5f5f5','surface-hover':'#dddddd',text:'#202020',muted:'#444444',border:'#666666',accent:'#005599',focus:'#770077','font-family':'Arial, sans-serif'};
+    for(const [key,value] of Object.entries(tokens))(el as HTMLElement).style.setProperty(`--ro-suite-${key}`,value);
+  });
+  const toggle=host.getByRole('button');await toggle.click();
+  const computed=await host.evaluate(el=>{const s=el.shadowRoot!,css=(sel:string)=>getComputedStyle(s.querySelector(sel)!);return {surface:css('nav').backgroundColor,text:css('.portal').color,muted:css('li > span').color,border:css('nav').borderBottomColor,current:css('[aria-current]').backgroundColor,accent:css('.current .chip').color,marker:css('[aria-current]').boxShadow,font:css('button').fontFamily,buttonText:css('button').color};});
+  expect(computed).toMatchObject({surface:'rgb(245, 245, 245)',text:'rgb(32, 32, 32)',muted:'rgb(68, 68, 68)',border:'rgb(102, 102, 102)',current:'rgb(221, 221, 221)',accent:'rgb(0, 85, 153)',buttonText:'rgb(32, 32, 32)'});
+  expect(computed.font).toContain('Arial');expect(computed.marker).toContain('rgb(0, 85, 153)');expect(computed.marker).toContain('inset');
+  await toggle.hover();expect(await toggle.evaluate(el=>getComputedStyle(el).backgroundColor)).toBe('rgb(221, 221, 221)');
+  await page.keyboard.press('Tab');await toggle.focus();
+  expect(await toggle.evaluate(el=>({visible:el.matches(':focus-visible'),color:getComputedStyle(el).outlineColor,width:getComputedStyle(el).outlineWidth}))).toEqual({visible:true,color:'rgb(119, 0, 119)',width:'3px'});
+  await page.keyboard.press('Escape');
+  expect((await host.boundingBox())!.height).toBe(before!.height);
+  expect(await page.locator('#calculate').evaluate(el=>({color:getComputedStyle(el).color,background:getComputedStyle(el).backgroundColor}))).toEqual(appBefore);
+});
+
+test('legacy surface and text aliases work and new tokens take precedence',async({page})=>{
+  await fixture(page,{theme:'light'});const host=page.locator('ro-suite-nav');
+  const read=()=>host.evaluate(el=>{const s=getComputedStyle(el.shadowRoot!.querySelector('nav')!);return [s.backgroundColor,s.color];});
+  await host.evaluate(el=>{(el as HTMLElement).style.setProperty('--ro-suite-background','#ffeecc');(el as HTMLElement).style.setProperty('--ro-suite-color','#332211');});
+  expect(await read()).toEqual(['rgb(255, 238, 204)','rgb(51, 34, 17)']);
+  await host.evaluate(el=>{(el as HTMLElement).style.setProperty('--ro-suite-surface','#eeeeee');(el as HTMLElement).style.setProperty('--ro-suite-text','#111111');});
+  expect(await read()).toEqual(['rgb(238, 238, 238)','rgb(17, 17, 17)']);
+});
+
+test('same-page explicit theme and system changes resolve neutral defaults without remount or storage writes',async({page})=>{
+ await page.emulateMedia({colorScheme:'light'});await fixture(page);
+ const host=page.locator('ro-suite-nav');const read=()=>host.evaluate(el=>{const s=getComputedStyle(el.shadowRoot!.querySelector('nav')!);return {background:s.backgroundColor,color:s.color,scheme:getComputedStyle(el).colorScheme};});
+ const storage=()=>page.evaluate(()=>({local:{...localStorage},session:{...sessionStorage},url:location.href}));const before=await storage();
+ expect(await read()).toEqual({background:'rgb(248, 250, 252)',color:'rgb(30, 41, 59)',scheme:'light'});
+ await page.emulateMedia({colorScheme:'dark'});expect(await read()).toEqual({background:'rgb(15, 23, 42)',color:'rgb(241, 245, 249)',scheme:'dark'});
+ await host.evaluate(el=>el.setAttribute('theme','light'));expect((await read()).scheme).toBe('light');
+ await page.emulateMedia({colorScheme:'light'});await host.evaluate(el=>el.setAttribute('theme','dark'));expect((await read()).scheme).toBe('dark');
+ await host.evaluate(el=>el.removeAttribute('theme'));expect((await read()).scheme).toBe('light');expect(await storage()).toEqual(before);
+});
+
+test('isolated navigation loads no remote fonts in either scheme',async({page})=>{
+ const fonts:string[]=[];page.on('request',request=>{if(request.resourceType()==='font'||/fonts\.googleapis|fonts\.gstatic|\.(woff2?|ttf|otf)([?#]|$)/i.test(request.url()))fonts.push(request.url());});
+ for(const colorScheme of ['light','dark'] as const){await page.emulateMedia({colorScheme});await fixture(page);await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();await page.evaluate(()=>document.fonts.ready);}
+ expect(fonts).toEqual([]);
+});
+
+for (const mode of ['light', 'dark']) test(`Portal host mapping uses the same supported API in ${mode} fixture`, async ({ page }) => {
+  await fixture(page, {theme: mode});
+  await page.addStyleTag({content: await readFile('src/styles.css', 'utf8')});
+  await page.addStyleTag({content: await readFile('examples/nav-portal-theme.css', 'utf8')});
+  await page.evaluate(mode=>document.documentElement.dataset.theme=mode,mode);
+  const actual = await page.locator('ro-suite-nav').evaluate(el=>{
+    const root=getComputedStyle(document.documentElement), nav=getComputedStyle(el.shadowRoot!.querySelector('nav')!);
+    const resolve=(value:string)=>{const e=document.createElement('span');e.style.color=value;document.body.append(e);const v=getComputedStyle(e).color;e.remove();return v;};
+    return {surface:nav.backgroundColor,text:nav.color,wantedSurface:resolve(root.getPropertyValue('--surface')),wantedText:resolve(root.getPropertyValue('--ink'))};
+  });
+  expect(actual.surface).toBe(actual.wantedSurface);expect(actual.text).toBe(actual.wantedText);
+  await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();
+  const results=await new AxeBuilder({page}).include('ro-suite-nav').withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+  expect(results.violations).toEqual([]);
+  await page.screenshot({path:`test-results/portal-theme-fixture-${mode}.png`});
+});
+
+// Regression for aliases inherited from the real host app.
+test('semantic aliases keep host values instead of shadow-private defaults', async ({page}) => {
+ await fixture(page,{theme:'light'});
+ await page.addStyleTag({content:':root{--bg:#fafafa;--ink:#123456;--line:#567890;--muted:#345678;--accent:#246810;--focus:#642080;--current:#eeeeee}ro-suite-nav{--ro-suite-surface:var(--bg);--ro-suite-text:var(--ink);--ro-suite-muted:var(--muted);--ro-suite-border:var(--line);--ro-suite-accent:var(--accent);--ro-suite-focus:var(--focus);--ro-suite-surface-hover:var(--current)}'});
+ await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();
+ const actual=await page.locator('ro-suite-nav').evaluate(el=>{const s=el.shadowRoot!,css=(x:string)=>getComputedStyle(s.querySelector(x)!);return {bg:css('nav').backgroundColor,ink:css('nav').color,line:css('nav').borderBottomColor,muted:css('li>span').color,accent:css('.current .chip').color,current:css('[aria-current]').backgroundColor};});
+ expect(actual).toEqual({bg:'rgb(250, 250, 250)',ink:'rgb(18, 52, 86)',line:'rgb(86, 120, 144)',muted:'rgb(52, 86, 120)',accent:'rgb(36, 104, 16)',current:'rgb(238, 238, 238)'});
 });
