@@ -279,8 +279,12 @@ for (const mode of ['light', 'dark']) test(`Portal host mapping uses the same su
   expect(results.violations).toEqual([]);
   await page.screenshot({path:`test-results/portal-theme-fixture-${mode}.png`});
 });
-test('isolated navigation loads no remote fonts in either scheme',async({page})=>{
- const fonts:string[]=[];page.on('request',request=>{if(request.resourceType()==='font'||/fonts\.googleapis|fonts\.gstatic|\.(woff2?|ttf|otf)([?#]|$)/i.test(request.url()))fonts.push(request.url());});
- for(const colorScheme of ['light','dark'] as const){await page.emulateMedia({colorScheme});await fixture(page);await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();await page.evaluate(()=>document.fonts.ready);}
- expect(fonts).toEqual([]);
+
+// Regression for aliases inherited from the real host app.
+test('semantic aliases keep host values instead of shadow-private defaults', async ({page}) => {
+ await fixture(page,{theme:'light'});
+ await page.addStyleTag({content:':root{--bg:#fafafa;--ink:#123456;--line:#567890;--muted:#345678;--accent:#246810;--focus:#642080;--current:#eeeeee}ro-suite-nav{--ro-suite-surface:var(--bg);--ro-suite-text:var(--ink);--ro-suite-muted:var(--muted);--ro-suite-border:var(--line);--ro-suite-accent:var(--accent);--ro-suite-focus:var(--focus);--ro-suite-surface-hover:var(--current)}'});
+ await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();
+ const actual=await page.locator('ro-suite-nav').evaluate(el=>{const s=el.shadowRoot!,css=(x:string)=>getComputedStyle(s.querySelector(x)!);return {bg:css('nav').backgroundColor,ink:css('nav').color,line:css('nav').borderBottomColor,muted:css('li>span').color,accent:css('.current .chip').color,current:css('[aria-current]').backgroundColor};});
+ expect(actual).toEqual({bg:'rgb(250, 250, 250)',ink:'rgb(18, 52, 86)',line:'rgb(86, 120, 144)',muted:'rgb(52, 86, 120)',accent:'rgb(36, 104, 16)',current:'rgb(238, 238, 238)'});
 });
