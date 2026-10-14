@@ -36,10 +36,10 @@ class DesignKitTests(unittest.TestCase):
     def test_unique_tool_ids(self):
         ids=[t['id'] for t in REG['tools']]
         self.assertEqual(len(ids), len(set(ids)))
-    def test_exact_five_existing_repos(self):
+    def test_exact_six_existing_repos(self):
         self.assertEqual({t['repository'] for t in REG['tools'] if t['listingStatus']=='listed'}, {
           'econDS/ro-leveling-map','econDS/ro-reform-preparation',
-          'econDS/dim_glacier_planner','econDS/sessrumnir-ocean-week-guide','econDS/ro-best-status'})
+          'econDS/dim_glacier_planner','econDS/sessrumnir-ocean-week-guide','econDS/ro-best-status','econDS/RO-Juno-Fall-Academic-Festival-2026'})
     def test_existing_urls_are_approved(self):
         for t in REG['tools']:
             if t['listingStatus']=='listed': self.assertTrue(approved_launch_url(t['canonicalUrl']))

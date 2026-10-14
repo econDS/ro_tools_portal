@@ -1,0 +1,67 @@
+{
+  "catalogHash": "054775b742c6b8f96499c8a95852391271a771767111f655f379ac4c6f6c2f21",
+  "historicalReleaseFilesUnchanged": 27,
+  "children": [
+    {
+      "repo": "ro-leveling-map",
+      "sourceCommit": "5b9b4410669e925f37f1d6df31697678f6b27ade",
+      "hashes": {
+        "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+        "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+        "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+      },
+      "automaticDiscoveryBeforeOpening": true,
+      "mobileSearch": true,
+      "escape": true
+    },
+    {
+      "repo": "ro-reform-preparation",
+      "sourceCommit": "70d337278446c745fbfaa6fd6dcb593495c79d65",
+      "hashes": {
+        "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+        "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+        "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+      },
+      "automaticDiscoveryBeforeOpening": true,
+      "mobileSearch": true,
+      "escape": true
+    },
+    {
+      "repo": "dim_glacier_planner",
+      "sourceCommit": "6d42e8af4deccab6f4c94debe99284c0b2073606",
+      "hashes": {
+        "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+        "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+        "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+      },
+      "automaticDiscoveryBeforeOpening": true,
+      "mobileSearch": true,
+      "escape": true
+    },
+    {
+      "repo": "sessrumnir-ocean-week-guide",
+      "sourceCommit": "be2943db1b19f34b964dd968a26652c8b464a48c",
+      "hashes": {
+        "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+        "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+        "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+      },
+      "automaticDiscoveryBeforeOpening": true,
+      "mobileSearch": true,
+      "escape": true
+    },
+    {
+      "repo": "ro-best-status",
+      "sourceCommit": "2ca6c18f55e7adb0e520466f9429e1dfb8c186f7",
+      "hashes": {
+        "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+        "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+        "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+      },
+      "automaticDiscoveryBeforeOpening": true,
+      "mobileSearch": true,
+      "escape": true
+    }
+  ],
+  "liveHttpVerified": false
+}

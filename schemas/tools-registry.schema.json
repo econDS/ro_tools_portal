@@ -175,6 +175,7 @@
         "contentLifecycle": {
           "enum": [
             "evergreen",
+            "dated-period",
             "archived-period",
             "planned"
           ]

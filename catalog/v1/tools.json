@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "0.2.0",
+  "catalogVersion": "0.3.0",
   "tools": [
     {
       "id": "leveling-map",
@@ -49,6 +49,16 @@
       "listingStatus": "listed",
       "identity": {
         "accent": "#7047a8",
+        "icon": "gem"
+      }
+    },
+    {
+      "id": "juno-festival-2026",
+      "title": "Juno Fall Academic Festival 2026",
+      "canonicalUrl": "https://econds.github.io/RO-Juno-Fall-Academic-Festival-2026/",
+      "listingStatus": "listed",
+      "identity": {
+        "accent": "#8a5b13",
         "icon": "gem"
       }
     },

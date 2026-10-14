@@ -169,6 +169,18 @@
         "shared equipment and buffs",
         "per-card class and job controls"
       ]
+    },
+    {
+      "id": "S10",
+      "title": "Juno Fall Academic Festival 2026 — guide at reviewed source commit",
+      "url": "https://github.com/econDS/RO-Juno-Fall-Academic-Festival-2026/blob/c5d1aaf4eecccbcdbb876dee2d3eaa61615b11ea/index.html",
+      "sourceBlobSha": "20bd2059486f7e1b4e9774f76e21084d53e0d264",
+      "checkedOn": "2026-10-14",
+      "supports": [
+        "guide title and stated event period",
+        "navigation copy and daily checklist",
+        "reward and Rising Circlet guide; no live game verification"
+      ]
     }
   ]
 }
