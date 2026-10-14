@@ -1,12 +1,6 @@
-// Production allowlist. Test fixtures use request routing; never ship localhost URLs.
-export const approvedUrls = new Set([
-  'https://econds.github.io/ro_tools_portal/',
-  'https://econds.github.io/ro-leveling-map/',
-  'https://econds.github.io/ro-best-status/',
-  'https://econds.github.io/ro-reform-preparation/',
-  'https://econds.github.io/dim_glacier_planner/',
-  'https://econds.github.io/sessrumnir-ocean-week-guide/',
-]);
+// Only canonical HTTPS GitHub Pages repository roots owned by econDS.
+// Validate raw bytes before URL parsing: normalization must never hide an unsafe input.
 export function approvedUrl(value: unknown): value is string {
-  return typeof value === 'string' && approvedUrls.has(value);
+  return typeof value === 'string' && value.length <= 256 && value === value.trim() &&
+    /^https:\/\/econds\.github\.io\/[A-Za-z0-9][A-Za-z0-9_-]*\/$/.test(value);
 }

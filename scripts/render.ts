@@ -1,3 +1,4 @@
+import { validateNavCatalog, MAX_BYTES } from '../integrations/nav/src/catalog.ts';
 import Ajv from 'ajv/dist/2020.js';
 import addFormats from 'ajv-formats';
 import schema from '../schemas/tools-registry.schema.json' with { type: 'json' };
@@ -10,8 +11,8 @@ export function validateCatalog() {
   const ajv = new Ajv({ allErrors: true, strict: false });
   addFormats(ajv);
   if (!ajv.validate(schema, catalog)) throw new Error(ajv.errorsText());
-  const ids = new Set(tools.map(tool => tool.id));
-  if (ids.size !== tools.length) throw new Error('Duplicate tool IDs');
+  const ids = new Set(catalog.tools.map(tool => tool.id));
+  if (ids.size !== catalog.tools.length) throw new Error('Duplicate tool IDs');
   for (const tool of tools) {
     if (tool.listingStatus === 'listed' && !approvedUrl(tool.canonicalUrl)) throw new Error(`Unapproved URL: ${tool.id}`);
     if (tool.repositoryUrl && tool.repositoryUrl !== `https://github.com/${tool.repository}`) throw new Error('Repository URL mismatch');
@@ -20,7 +21,8 @@ export function validateCatalog() {
     if (tool.sourceIds.some(id => !sources.sources.some(source => source.id === id))) throw new Error('Unknown source');
     if (contrastOnWhite(tool.identity.accent) < 4.5) throw new Error(`Accent too light for white icons: ${tool.id}`);
   }
-  if (new Set(tools.map(tool => tool.identity.accent)).size !== tools.length) throw new Error('Duplicate tool accent');
+  validateNavCatalog(publicCatalog());
+  if (Buffer.byteLength(JSON.stringify(publicCatalog(), null, 2) + '\n') > MAX_BYTES) throw new Error('Catalog payload too large');
   for (const journey of journeys.journeys) if (journey.toolIds.some(id => !ids.has(id))) throw new Error('Unknown journey tool');
 }
 

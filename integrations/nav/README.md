@@ -1,3 +1,7 @@
+# ro-suite-nav 2.0.0 — dynamic registry
+
+See [V2 contract, migration and rollback](V2-CONTRACT.md). The historical notes below describe older versions; V2 automatically fetches at load and uses scalable URL rules.
+
 # ro-suite-nav 1.5.1 — local artifact
 
 Standalone Web Component มี snapshot อยู่ใน bundle; `releases/1.5.1/nav.js`, `catalog.snapshot.json` และ `nav.lock.json` สร้างด้วย `npm run build:nav`

@@ -12,7 +12,7 @@
     "build": "npm run typecheck && vite build && node scripts/build-pwa.mjs",
     "preview": "vite preview --host 127.0.0.1 --port 4173 --strictPort",
     "test": "playwright test",
-    "build:nav": "node scripts/generate-nav-snapshot.mjs && vite build --config vite.nav.config.ts && node scripts/package-nav.mjs",
+    "build:nav": "vite build --config vite.nav.config.ts && node scripts/package-nav.mjs",
     "test:nav": "node --test tests/unit/nav-release.test.mjs",
     "test:pwa": "node --test tests/unit/pwa.test.mjs",
     "check": "npm run build && npm run build:nav && npm run test:nav && npm run test:pwa && npm test",

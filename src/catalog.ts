@@ -16,7 +16,7 @@ export function matches(tool: Tool, query: string, category: string): boolean {
   return (category === 'all' || tool.categories.includes(category)) && normalize(query).split(/\s+/u).every(word => haystack.includes(word));
 }
 
-export { approvedUrl, approvedUrls } from './urls.ts';
+export { approvedUrl } from './urls.ts';
 export function escapeHtml(value: string): string {
   return value.replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!);
 }

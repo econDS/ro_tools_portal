@@ -33,13 +33,6 @@ test('new nav artifact and all sources match the recorded committed source', asy
   assert.equal(planned.canonicalUrl, null);
 });
 
-// The live registry owns review/health metadata, while released sources remain historical.
-test('current registry navigation projection still matches immutable release', async () => {
-  const registry = JSON.parse(await readFile('data/tools.registry.v1.json', 'utf8'));
-  const projection = { schemaVersion: 1, catalogVersion: registry.catalogVersion, tools: registry.tools.filter(t => t.listingStatus !== 'hidden').map(({id,title,canonicalUrl,listingStatus,identity}) => ({id,title,canonicalUrl,listingStatus,identity})) };
-  assert.equal(JSON.stringify(projection, null, 2) + '\n', await readFile(`integrations/nav/releases/${NAV_VERSION}/catalog.snapshot.json`, 'utf8'));
-});
-
  test('all pre-1.4 release files remain byte-identical to the reviewed baseline', async () => {
   const paths = execFileSync('git', ['ls-tree', '-r', '--name-only', '8a3683579bb8281e2243a000d6f2ebbac64ffbd9', 'integrations/nav/releases'], {encoding:'utf8'}).trim().split('\n');
   for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `8a3683579bb8281e2243a000d6f2ebbac64ffbd9:${path}`])), path);
