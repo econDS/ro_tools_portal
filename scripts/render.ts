@@ -23,7 +23,8 @@ export function validateCatalog() {
   }
   validateNavCatalog(publicCatalog());
   if (Buffer.byteLength(JSON.stringify(publicCatalog(), null, 2) + '\n') > MAX_BYTES) throw new Error('Catalog payload too large');
-  for (const journey of journeys.journeys) if (journey.toolIds.some(id => !ids.has(id))) throw new Error('Unknown journey tool');
+  // Journeys are optional editorial shortcuts: a registry-only retirement may
+  // leave an old shortcut behind, which renderPortal omits until it is edited.
 }
 
 // Tool identity (accent + icon) is shared with the tool's own site via ro-suite-nav; accent is schema-validated hex.
@@ -70,13 +71,14 @@ function card(tool: Tool, index: number) {
     <details class="evidence"><summary>สถานะข้อมูลและเครื่องมือที่เกี่ยวข้อง</summary>
       <dl><dt>ทบทวน metadata ล่าสุด</dt><dd>${e(tool.metadataReviewedOn)}</dd><dt>การติดตั้งเมนูร่วม</dt><dd>${(tool.suiteCapabilitiesConfirmed as string[]).includes('navigation.v1') ? 'ติดตั้งและทดสอบแล้ว' : 'ยังไม่ได้ยืนยัน'}</dd><dt>ยืนยันข้อมูลในเกม</dt><dd>${e(tool.gameDataVerifiedOn || 'ยังไม่ได้ยืนยัน')}</dd><dt>สถานะลิงก์</dt><dd>${e(health[tool.linkHealth.state])}</dd><dt>ตรวจลิงก์ล่าสุด</dt><dd>${e(tool.linkHealth.lastCheckedAt || 'ยังไม่มีผลตรวจ')}</dd></dl>
       ${tool.sourceIds.length ? `<p>แหล่งข้อมูล: ${tool.sourceIds.map(id => { const source = sources.sources.find(s => s.id === id)!; return `<a href="${e(source.url)}">${e(source.title)}</a>`; }).join(' · ')}</p>` : ''}
-      <p>เครื่องมือที่เกี่ยวข้อง</p><ul>${tool.relatedToolIds.map(id => { const other = tools.find(t => t.id === id)!; return `<li>${other.listingStatus === 'planned' ? `${e(other.title)} — อยู่ในแผน` : `<a data-launch="${e(other.id)}" href="${e(other.canonicalUrl!)}">${e(other.title)}</a>`}</li>`; }).join('')}</ul>
+      <p>เครื่องมือที่เกี่ยวข้อง</p><ul>${tool.relatedToolIds.filter(id => tools.some(t => t.id === id)).map(id => { const other = tools.find(t => t.id === id)!; return `<li>${other.listingStatus === 'planned' ? `${e(other.title)} — อยู่ในแผน` : `<a data-launch="${e(other.id)}" href="${e(other.canonicalUrl!)}">${e(other.title)}</a>`}</li>`; }).join('')}</ul>
     </details>
   </article>`;
 }
 
 function renderJourney(journey: typeof journeys.journeys[number], index: number) {
-  const tool = tools.find(t => t.id === journey.toolIds[0])!;
+  const tool = tools.find(t => t.id === journey.toolIds[0]);
+  if (!tool) return '';
   return `<article class="journey" data-task="${e(tool.id)}"><span class="journey-index" aria-hidden="true">0${index + 1}</span><div><h3>${e(journey.title)}</h3><p>${e(journey.description)}</p>${launch(tool, 'เปิด ' + tool.title)}</div></article>`;
 }
 function renderGroup(id: string, title: string, entries: Tool[]) {
@@ -90,7 +92,7 @@ export function renderPortal() {
   <header class="site-header"><a class="brand" href="#"><span class="brand-mark" aria-hidden="true">R<span>O</span></span><span>RO TOOLS<span class="brand-sub">เครื่องมือของ econDS</span></span></a><nav aria-label="เมนูหลัก"><a href="#journeys">เริ่มจากสิ่งที่อยากทำ</a><a href="#about">เกี่ยวกับ</a><button id="theme-toggle" type="button" hidden>โหมดมืด</button></nav></header>
   <main id="main" tabindex="-1"><p id="offline-status" class="pwa-status" role="status" hidden></p><p id="pwa-update" class="pwa-status" role="status" hidden>มีรุ่นใหม่พร้อมแล้ว ปิดแท็บและหน้าต่างแอป Portal ทั้งหมด แล้วเปิดใหม่เพื่ออัปเดตสำเนาออฟไลน์</p><section class="hero" aria-labelledby="page-title"><div><p class="eyebrow"><span aria-hidden="true">✦</span> RAGNAROK ONLINE · RO TOOLS PORTAL</p><h1 id="page-title">วางแผนก่อนลงมือ</h1><p class="hero-copy">เลือกสิ่งที่อยากทำ แล้วเปิดเครื่องมือที่เหมาะกับงานนั้น</p><div class="hero-actions"><a class="hero-link" href="#journeys">เริ่มจากสิ่งที่อยากทำ <span aria-hidden="true">↓</span></a><a class="hero-secondary" href="#tools">ค้นหา / ดูเครื่องมือทั้งหมด</a></div></div></section>
   <section id="quick-access" class="quick-access" hidden aria-label="ทางลัดส่วนตัว"><div id="favorites-panel"><h2>ใช้บ่อย · เครื่องมือที่ปักหมุด</h2><ul id="favorites"></ul></div><div id="recent-panel"><h2>เปิดล่าสุด</h2><ul id="recent"></ul></div></section><p id="shortcut-hint" class="shortcut-hint" hidden>กด ☆ บนเครื่องมือเพื่อปักหมุดไว้ตรงนี้</p>
-  <section id="journeys" aria-labelledby="journeys-title"><div class="section-title"><div><p class="eyebrow">A PLACE TO START</p><h2 id="journeys-title">เริ่มจากสิ่งที่อยากทำ</h2></div></div><div class="journey-grid">${journeys.journeys.filter(journey => tools.find(t => t.id === journey.toolIds[0])!.contentLifecycle !== 'archived-period').map(renderJourney).join('')}</div></section>
+  <section id="journeys" aria-labelledby="journeys-title"><div class="section-title"><div><p class="eyebrow">A PLACE TO START</p><h2 id="journeys-title">เริ่มจากสิ่งที่อยากทำ</h2></div></div><div class="journey-grid">${journeys.journeys.filter(journey => tools.some(t => t.id === journey.toolIds[0] && t.contentLifecycle !== 'archived-period')).map(renderJourney).join('')}</div></section>
   <section id="tools" aria-labelledby="tools-title"><div class="section-title"><div><p class="eyebrow">YOUR NEXT ADVENTURE</p><h2 id="tools-title">เครื่องมือทั้งหมด</h2></div><p>เครื่องคำนวณ ${tools.filter(t => t.listingStatus === 'listed' && t.contentType === 'calculator').length} ตัว · คู่มือย้อนหลัง ${tools.filter(t => t.contentLifecycle === 'archived-period').length} ชุด · กำลังพัฒนา ${tools.filter(t => t.listingStatus === 'planned').length} ตัว</p></div>
   <div id="search-controls" class="search-controls" hidden><label class="search-field" for="search"><span aria-hidden="true">⌕</span><span class="sr-only">ค้นหาเครื่องมือ</span><input id="search" type="search" maxlength="160" placeholder="ค้นหา เช่น เก็บเวล, Reform, Rune, Dim Glacier…" aria-describedby="search-help"></label><div class="filters" role="group" aria-label="หมวดเครื่องมือ"><button type="button" data-category="all" aria-pressed="true">ทั้งหมด</button>${categories.map(cat => `<button type="button" data-category="${e(cat.id)}" aria-pressed="false">${e(cat.label)}</button>`).join('')}</div><p id="search-help">ค้นได้ทั้งชื่อ คำอธิบาย และคำสำคัญ ทั้งภาษาไทยและอังกฤษ</p><p id="result-count" role="status"></p></div>
   <noscript><p class="notice">เปิดเครื่องมือได้จากลิงก์ด้านล่าง เปิด JavaScript เพื่อใช้การค้นหาและปักหมุด</p></noscript>

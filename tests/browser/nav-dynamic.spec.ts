@@ -93,3 +93,33 @@ for (const remove of [false,true]) test(`remote ${remove ? 'removal' : 'rename'}
   await page.getByRole('button',{name:'เครื่องมืออื่น'}).click();
   await expect(page.locator('[aria-current=page]')).toHaveCount(remove ? 0 : 1);
 });
+
+for (const operation of ['hide', 'remove', 'dangling-reference']) test(`registry-only ${operation} handles referenced tools safely`, async () => {
+  const temp = await mkdtemp(join(tmpdir(), 'ro-retire-'));
+  try {
+    for (const path of ['src','scripts','schemas','data','integrations/nav/src','pwa','vite.config.ts','package.json','favicon.svg']) await cp(path, join(temp,path), {recursive:true});
+    await symlink(join(process.cwd(),'node_modules'), join(temp,'node_modules'), 'dir');
+    const registryPath = join(temp,'data/tools.registry.v1.json');
+    const registry = JSON.parse(await readFile(registryPath,'utf8'));
+    const target = 'reform-workshop';
+    if (operation === 'hide') registry.tools.find((tool:any) => tool.id === target).listingStatus = 'hidden';
+    else {
+      registry.tools = registry.tools.filter((tool:any) => tool.id !== target);
+      // Physical deletion must clean references inside the same canonical registry.
+      // Separate editorial journeys must not require an additional file edit.
+      if (operation === 'remove') for (const tool of registry.tools) tool.relatedToolIds = tool.relatedToolIds.filter((id:string) => id !== target);
+    }
+    await writeFile(registryPath,JSON.stringify(registry));
+    const build = () => execFileSync(process.execPath,[join(process.cwd(),'node_modules/vite/bin/vite.js'),'build'],{cwd:temp,stdio:'pipe'});
+    if (operation === 'dangling-reference') { expect(build).toThrow(/Invalid related ID/); return; }
+    build();
+    const catalog = JSON.parse(await readFile(join(temp,'dist/catalog/v1/tools.json'),'utf8'));
+    expect(catalog.tools.some((tool:any) => tool.id === target)).toBe(false);
+    const html = await readFile(join(temp,'dist/index.html'),'utf8');
+    expect(html).not.toContain('data-task="reform-workshop"');
+    expect(html).not.toContain('data-tool="reform-workshop"');
+    expect(html).not.toContain('href="https://econds.github.io/ro-reform-preparation/"');
+    expect(html).toContain('data-tool="leveling-map"');
+    expect(await readFile('integrations/nav/releases/2.0.0/nav.js','utf8')).toBe(bundle);
+  } finally { await rm(temp,{recursive:true,force:true}); }
+});
