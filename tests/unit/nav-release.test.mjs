@@ -49,3 +49,9 @@ test('all releases before theming remain byte-identical to 1.4.1 baseline', asyn
   const paths = execFileSync('git', ['ls-tree', '-r', '--name-only', base, 'integrations/nav/releases'], {encoding:'utf8'}).trim().split('\n');
   for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `${base}:${path}`])), path);
 });
+
+test('every historical release through 1.5.1 remains frozen at the V2 baseline', async () => {
+  const baseline = 'a86bb412979e9f4e0b87ce7a306a2ff2bc7b0c67';
+  const paths = execFileSync('git', ['ls-tree', '-r', '--name-only', baseline, 'integrations/nav/releases'], {encoding:'utf8'}).trim().split('\n');
+  for (const path of paths) assert.equal(digest(await readFile(path)), digest(execFileSync('git', ['show', `${baseline}:${path}`])), path);
+});
