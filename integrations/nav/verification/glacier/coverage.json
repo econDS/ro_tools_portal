@@ -1,0 +1,91 @@
+{
+  "candidateCommit": "0b93fdfca36d70955efdd625c5b83e4f92dcf92d",
+  "ci": {
+    "runId": 38651867679,
+    "url": "https://github.com/econDS/dim_glacier_planner/actions/runs/38651867679",
+    "conclusion": "success",
+    "node": "22.14.0",
+    "playwright": "1.55.1",
+    "job": "dynamic-navigation",
+    "scope": "same-repository pull request to main whose head branch is feat/dynamic-ro-suite-nav",
+    "commands": [
+      "node --test tests/nav200.test.cjs tests/nav150.test.cjs",
+      "node tests/nav200.browser.cjs"
+    ]
+  },
+  "ciIncludedHistoricalSourceTests": [
+    "nav150 public tokens map exactly to audited host colors and font",
+    "nav150 exact pinned release integrity and unchanged catalog",
+    "theme QA runs on rollout draft PR with read-only permission",
+    "original 1.5.0 release remains byte-identical"
+  ],
+  "ciIncludedNewSourceTests": [
+    "raw candidate installs one local v2 component with stable identity and script-failure Portal fallback",
+    "only production HTML change is approved script version; all historical assets remain byte-identical",
+    "immutable v2 artifact integrity and exact central endpoint"
+  ],
+  "ciExcludedHistoricalSourceFiles": [
+    "tests/dim-nav.test.cjs",
+    "tests/first-run.test.cjs",
+    "tests/nav130-rollout.test.cjs",
+    "tests/nav140.test.cjs",
+    "tests/price-metadata.test.cjs",
+    "tests/ui-cohesion.test.cjs"
+  ],
+  "ciExcludedHistoricalBrowserFiles": [
+    "tests/dim-nav.browser.cjs",
+    "tests/first-run.browser.cjs",
+    "tests/ui-cohesion.browser.cjs",
+    "tests/price-metadata.browser.cjs (module invoked by the historical dim-nav runner)"
+  ],
+  "skippedHistoricalWorkflows": [
+    "Dim Glacier RO Suite navigation QA",
+    "Dim Glacier price metadata and labels QA",
+    "RO Suite nav 1.4 alignment regression",
+    "First-run UX regression QA",
+    "UI cohesion regression QA",
+    "RO Suite nav host theme regression"
+  ],
+  "browserPassed": {
+    "widths": [
+      320,
+      390,
+      1440
+    ],
+    "navigation": [
+      "exact endpoint mocked before page navigation; request occurs before menu opening",
+      "add tool without changing local bundle",
+      "remote rename/removal/reorder;126 tools",
+      "search returns matching destination",
+      "Escape closes and restores toggle focus",
+      "new component unknown tool-id immediately renders ID then resolves remote title",
+      "fixed light theme preserved under OS dark preference",
+      "closed navigation fits width and is less than160px tall",
+      "offline/unsupported schema/duplicate IDs/javascript URL/unexpected host/501 tools/oversized payload/timeout retain fallback",
+      "local nav.js blocked retains light-DOM Portal link",
+      "no uncaught page errors"
+    ],
+    "application": [
+      "edit cube quantity2, device quantity3 and manual cost1234567",
+      "reload retains cube value and same calculated total",
+      "JSON export is an actual browser download; app marker and cube value asserted",
+      "JSON import is an actual file chooser upload after changing cube to0; cube2 and same total restored",
+      "same calculated total survives script-blocked reload"
+    ]
+  },
+  "notClaimedAsExecutedInScopedCI": [
+    "CSV export/import",
+    "XLSX export/import via SheetJS",
+    "XLS legacy import",
+    "full historical calculator formula scenario matrix",
+    "historical state migration matrix",
+    "clipboard and all destination/back navigation interactions",
+    "historical first-run interaction and price-metadata browser suites",
+    "pixel/screenshot comparison against historical baseline",
+    "complete Tab/Space keyboard sequence (scoped runner covers Escape focus restoration)",
+    "malformed JSON response (schema and payload invalidity are covered)"
+  ],
+  "preservationEvidence": "new source test reverses only the single nav.js version path and hashes entire HTML against current main; all existing assets individually hash-match. This proves code preservation, not execution of every formula or import/export format.",
+  "fullSuiteEvidence": "base.tap and candidate.tap independently rerun from pristine git archives using Node v24.19.0; comparison.json compares seven exact failure names/error signatures. Full suite is not the scoped CI command.",
+  "repoUnmodified": true
+}

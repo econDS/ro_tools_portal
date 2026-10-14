@@ -1,0 +1,207 @@
+{
+  "command": "node --test --test-reporter=tap tests/*.test.*",
+  "nodeVersion": "v24.19.0",
+  "execution": "Independent pristine git archives, no source modifications",
+  "base": {
+    "revision": "base",
+    "sha": "08d2d0e7c70a7057dce5272abe2e44716fcb927c",
+    "exitCode": 1,
+    "totals": {
+      "tests": 24,
+      "suites": 0,
+      "pass": 17,
+      "fail": 7,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "tapSha256": "b278391e5e7cc498bc6f546f6a06a3d7460a8fc94bda5bfe42d942a6a4769e7f",
+    "failures": [
+      {
+        "name": "tests/dim-nav.test.cjs",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "exitCode": "1",
+          "error": "'test failed'",
+          "code": "'ERR_TEST_FAILURE'",
+          "moduleLoadAssertion": "# AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n#           <div>ราค\n# 0 !== 1\n#   code: 'ERR_ASSERTION',\n#   actual: 0,\n#   expected: 1,\n#   operator: 'strictEqual',"
+        }
+      },
+      {
+        "name": "only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'\n    - 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'",
+          "actual": "'48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'\n    - '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'",
+          "actual": "'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "all original export functions, parser, formulas and default prices remain exact bytes",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "only the reviewed presentation delta: reversing it reproduces the previous index byte for byte",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'\n    - '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'",
+          "actual": "'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'",
+          "operator": "'strictEqual'"
+        }
+      }
+    ]
+  },
+  "candidate": {
+    "revision": "candidate",
+    "sha": "0b93fdfca36d70955efdd625c5b83e4f92dcf92d",
+    "exitCode": 1,
+    "totals": {
+      "tests": 27,
+      "suites": 0,
+      "pass": 20,
+      "fail": 7,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0
+    },
+    "tapSha256": "4d8cacb36dc2d2f93e6c5666aa4e6eb0f6eb5f6d2f5582d21c522aa685377615",
+    "failures": [
+      {
+        "name": "tests/dim-nav.test.cjs",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "exitCode": "1",
+          "error": "'test failed'",
+          "code": "'ERR_TEST_FAILURE'",
+          "moduleLoadAssertion": "# AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n#           <div>ราค\n# 0 !== 1\n#   code: 'ERR_ASSERTION',\n#   actual: 0,\n#   expected: 1,\n#   operator: 'strictEqual',"
+        }
+      },
+      {
+        "name": "only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'\n    - 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'",
+          "actual": "'48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'\n    - '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'",
+          "actual": "'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "all original export functions, parser, formulas and default prices remain exact bytes",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id=\"default_price_date\">12 เม.ย. 2569</strong>\n              <div>ราค\n    \n    0 !== 1",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "1",
+          "actual": "0",
+          "operator": "'strictEqual'"
+        }
+      },
+      {
+        "name": "only the reviewed presentation delta: reversing it reproduces the previous index byte for byte",
+        "signature": {
+          "failureType": "'testCodeFailure'",
+          "error": "|-\n    Expected values to be strictly equal:\n    + actual - expected\n    \n    + 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'\n    - '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'",
+          "code": "'ERR_ASSERTION'",
+          "name": "'AssertionError'",
+          "expected": "'8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'",
+          "actual": "'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'",
+          "operator": "'strictEqual'"
+        }
+      }
+    ]
+  },
+  "sameFailingNames": true,
+  "sameErrorSignatures": true,
+  "addedPassingTests": 3,
+  "comparisonPolicy": "Compare exact failure names and error/code/expected/actual/operator/module-load assertion text; omit duration, absolute archive paths and stack frames."
+}

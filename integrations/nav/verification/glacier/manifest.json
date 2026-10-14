@@ -1,0 +1,7 @@
+{
+  "base.tap": "b278391e5e7cc498bc6f546f6a06a3d7460a8fc94bda5bfe42d942a6a4769e7f",
+  "candidate.tap": "4d8cacb36dc2d2f93e6c5666aa4e6eb0f6eb5f6d2f5582d21c522aa685377615",
+  "comparison.json": "a9683d3bac94ea1ff49c3f679149c4578327143967810ad967d3c415a4fb7452",
+  "coverage.json": "2a2e1c5a8add2904be2e6ae74f1f91d8286a69a031231101a9fbaf732a662690",
+  "compare.py": "5b19ed2b313a47d899068531ed71c5cc7cf67f1fee8c3111454eba6da4c188d5"
+}
