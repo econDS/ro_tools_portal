@@ -1,6 +1,7 @@
 import { test, expect, type Page } from '@playwright/test';
 import { createServer } from 'node:http';
-import { readFile } from 'node:fs/promises';
+import { readFile, mkdtemp, rm } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const BASE = '/ro_tools_portal/';
@@ -12,19 +13,25 @@ async function control(page: Page) {
   await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true);
 }
 
-test('manifest is installable in Chromium and registration stays inside the portal', async ({ page, context }) => {
-  await control(page);
-  const cdp = await context.newCDPSession(page);
-  const manifest = await cdp.send('Page.getAppManifest');
-  expect(manifest.errors).toEqual([]);
-  expect(manifest.url).toBe(new URL('manifest.webmanifest', page.url()).href);
-  expect(JSON.parse(manifest.data!).scope).toBe(BASE);
-  expect((await cdp.send('Page.getInstallabilityErrors')).installabilityErrors).toEqual([]);
-  const registrations = await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).map(r => ({ scope: new URL(r.scope).pathname, script: new URL(r.active!.scriptURL).pathname, cache: r.updateViaCache })));
-  expect(registrations).toEqual([{ scope: BASE, script: `${BASE}sw.js`, cache: 'none' }]);
-  expect(await page.evaluate(async () => (await navigator.serviceWorker.getRegistration('/dim_glacier_planner/'))?.scope)).toBeUndefined();
-  await page.getByRole('button', { name: 'โหมดสว่าง', exact: true }).click();
-  await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f5f7f1');
+test('manifest is installable in Chromium and registration stays inside the portal', async ({ playwright, baseURL }) => {
+  // Installability is a normal-profile feature; isolated page fixtures are incognito.
+  const profile = await mkdtemp(path.join(tmpdir(), 'portal-installability-'));
+  const context = await playwright.chromium.launchPersistentContext(profile, { headless: true, baseURL, ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}) });
+  const page = await context.newPage();
+  try {
+    await control(page);
+    const cdp = await context.newCDPSession(page);
+    const manifest = await cdp.send('Page.getAppManifest');
+    expect(manifest.errors).toEqual([]);
+    expect(manifest.url).toBe(new URL('manifest.webmanifest', page.url()).href);
+    expect(JSON.parse(manifest.data!).scope).toBe(BASE);
+    expect((await cdp.send('Page.getInstallabilityErrors')).installabilityErrors).toEqual([]);
+    const registrations = await page.evaluate(async () => (await navigator.serviceWorker.getRegistrations()).map(r => ({ scope: new URL(r.scope).pathname, script: new URL(r.active!.scriptURL).pathname, cache: r.updateViaCache })));
+    expect(registrations).toEqual([{ scope: BASE, script: `${BASE}sw.js`, cache: 'none' }]);
+    expect(await page.evaluate(async () => (await navigator.serviceWorker.getRegistration('/dim_glacier_planner/'))?.scope)).toBeUndefined();
+    await page.getByRole('button', { name: 'โหมดสว่าง', exact: true }).click();
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute('content', '#f5f7f1');
+  } finally { await context.close(); await rm(profile, { recursive: true, force: true }); }
 });
 
 test('offline relaunch keeps filters, pins and theme and clearly limits offline support', async ({ page, context }, testInfo) => {
