@@ -24,7 +24,8 @@ button:hover,li a:hover{background:var(--ro-suite-surface-hover,var(--_ro-nav-cu
 .chip svg{width:14px;height:14px}
 .menu-icon{width:18px;height:18px;flex:none}
 li a,li span{gap:8px}
-ul{list-style:none;padding:8px 0 0;margin:4px 0 0;border-top:1px solid var(--ro-suite-border,var(--_ro-nav-line));display:flex;flex-wrap:wrap;gap:4px}
+input{font:inherit;color:inherit;background:transparent;border:1px solid var(--ro-suite-border,var(--_ro-nav-line));border-radius:4px;min-height:44px;width:100%;margin-top:8px;padding:8px}input:focus-visible{outline:3px solid var(--ro-suite-focus,var(--_ro-nav-focus));outline-offset:2px}
+ul{max-height:min(50vh,320px);overflow-y:auto;list-style:none;padding:8px 0 0;margin:4px 0 0;border-top:1px solid var(--ro-suite-border,var(--_ro-nav-line));display:flex;flex-wrap:wrap;gap:4px}
 li{margin:0}
 li span{display:inline-flex;align-items:center;padding:8px 10px;min-height:44px;color:var(--ro-suite-muted,var(--_ro-nav-muted))}
 li .chip{padding:0;min-height:0;color:#fff}
@@ -56,7 +57,7 @@ export class RoSuiteNav extends HTMLElement {
   private initialize() {
     let catalog = validateNavCatalog(snapshot);
     const toolId = this.getAttribute('tool-id');
-    const current = catalog.tools.find(tool => tool.id === toolId);
+    let current = catalog.tools.find(tool => tool.id === toolId);
     const configuredPortal = this.getAttribute('portal-url');
     const portalUrl = configuredPortal === 'https://econds.github.io/ro_tools_portal/' && approvedUrl(configuredPortal) ? configuredPortal : 'https://econds.github.io/ro_tools_portal/';
     const nav = document.createElement('nav'); nav.setAttribute('aria-label', 'เครื่องมือ RO');
@@ -64,20 +65,22 @@ export class RoSuiteNav extends HTMLElement {
     const bar = document.createElement('div'); bar.className = 'bar';
     const portal = link('RO Tools', portalUrl); portal.className = 'portal'; portal.setAttribute('aria-label', 'กลับ RO Tools Portal');
     bar.append(portal); shell.append(bar);
-    if (current) {
-      if (current.identity) nav.style.setProperty('--tool-accent', current.identity.accent);
+    {
+      if (current?.identity) nav.style.setProperty('--tool-accent', current.identity.accent);
       const name = document.createElement('span'); name.className = 'current';
-      const icon = chip(current.identity); if (icon) name.append(icon);
-      const title = document.createElement('span'); title.className = 'current-text'; title.textContent = current.title; name.append(title); bar.append(name);
+      const icon = chip(current?.identity); if (icon) name.append(icon);
+      const title = document.createElement('span'); title.className = 'current-text'; title.textContent = current?.title ?? toolId ?? 'เครื่องมือ RO'; name.append(title); bar.append(name);
       const button = document.createElement('button'); button.type = 'button'; button.setAttribute('aria-label', 'เครื่องมืออื่น');
       const menuLabel = document.createElement('span'); menuLabel.className = 'menu-label'; menuLabel.textContent = 'เครื่องมืออื่น';
       const menuIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg'); menuIcon.classList.add('menu-icon'); menuIcon.setAttribute('viewBox', '0 0 24 24'); menuIcon.setAttribute('aria-hidden', 'true');
       const menuPath = document.createElementNS('http://www.w3.org/2000/svg', 'path'); menuPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16'); menuPath.setAttribute('fill', 'none'); menuPath.setAttribute('stroke', 'currentColor'); menuPath.setAttribute('stroke-width', '2'); menuIcon.append(menuPath); button.append(menuLabel, menuIcon); button.setAttribute('aria-expanded', 'false'); button.setAttribute('aria-controls', 'tools');
       const panel = document.createElement('div'); panel.id = 'tools'; panel.hidden = true;
       const list = document.createElement('ul'); const notice = document.createElement('p'); notice.setAttribute('role', 'status');
-      panel.append(list, notice); bar.append(button); shell.append(panel);
+      const search = document.createElement('input'); search.type = 'search'; search.maxLength = 160; search.setAttribute('aria-label', 'ค้นหาเครื่องมือ'); search.placeholder = 'ค้นหาเครื่องมือ';
+      panel.append(search, list, notice); bar.append(button); shell.append(panel);
       const render = () => {
-        const nodes = catalog.tools.map(tool => {
+        const query = search.value.normalize('NFKC').toLocaleLowerCase('th').trim();
+        const nodes = catalog.tools.filter(tool => tool.title.normalize('NFKC').toLocaleLowerCase('th').includes(query)).map(tool => {
           const li = document.createElement('li');
           if (tool.listingStatus === 'listed' && tool.canonicalUrl) {
             const a = labelled(link('', tool.canonicalUrl), tool.identity, tool.title); if (tool.id === toolId) a.setAttribute('aria-current', 'page'); li.append(a);
@@ -87,24 +90,24 @@ export class RoSuiteNav extends HTMLElement {
         list.replaceChildren(...nodes);
       };
       const close = (returnFocus: boolean) => { panel.hidden = true; button.setAttribute('aria-expanded', 'false'); if (returnFocus) button.focus(); };
-      let requested = false;
+      search.addEventListener('input', render);
       button.addEventListener('click', () => {
         const open = panel.hidden; panel.hidden = !open; button.setAttribute('aria-expanded', String(open));
-        const url = this.getAttribute('catalog-url');
-        if (open && url && !requested) {
-          requested = true;
-          if (url !== CATALOG_URL) { notice.textContent = 'ใช้รายการเครื่องมือที่ติดตั้งไว้'; return; }
-          void fetchCatalog(url).then(updated => {
-            // Keep current identity stable and do not remove the focused link during navigation.
-            if (!updated.tools.some(tool => tool.id === toolId && tool.title === current.title)) throw new Error('Missing current identity');
-            const focusedId = list.querySelector('a:focus')?.getAttribute('href');
-            // A remote catalog without identity keeps the bundled identity instead of dropping the icons.
-            catalog = { ...updated, tools: updated.tools.map(tool => tool.identity ? tool : { ...tool, identity: catalog.tools.find(known => known.id === tool.id)?.identity }) }; render();
-            if (focusedId) [...list.querySelectorAll('a')].find(a => a.href === focusedId)?.focus();
-            notice.textContent = '';
-          }).catch(() => { notice.textContent = 'อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้'; });
-        }
       });
+      // Start immediately, independent of menu interaction. Keep the local fallback on any failure.
+      void fetchCatalog(CATALOG_URL).then(updated => {
+        const focusedId = list.querySelector('a:focus')?.getAttribute('href');
+        catalog = { ...updated, tools: updated.tools.map(tool => tool.identity ? tool : { ...tool, identity: snapshot.tools.find(known => known.id === tool.id)?.identity }) };
+        current = catalog.tools.find(tool => tool.id === toolId);
+        const icon = chip(current?.identity);
+        title.textContent = current?.title ?? toolId ?? 'เครื่องมือ RO';
+        name.replaceChildren(...(icon ? [icon, title] : [title]));
+        if (current?.identity) nav.style.setProperty('--tool-accent', current.identity.accent);
+        else nav.style.removeProperty('--tool-accent');
+        render();
+        if (focusedId) ([...list.querySelectorAll('a')].find(a => a.href === focusedId) ?? search).focus();
+        notice.textContent = '';
+      }).catch(() => { notice.textContent = 'อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้'; });
       nav.addEventListener('keydown', event => { if (event.key === 'Escape' && !panel.hidden) { event.preventDefault(); close(true); } });
       nav.addEventListener('focusout', event => { if (event.relatedTarget instanceof Node && !nav.contains(event.relatedTarget)) close(false); });
       render();

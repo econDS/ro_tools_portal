@@ -6,6 +6,6 @@ export default defineConfig({
   fullyParallel: true,
   workers: 2,
   reporter: 'list',
-  use: { baseURL: `${origin}/ro_tools_portal/`, browserName: 'chromium', trace: 'retain-on-failure' },
+  use: { baseURL: `${origin}/ro_tools_portal/`, browserName: 'chromium', launchOptions: process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}, trace: 'retain-on-failure' },
   webServer: { command: `npx vite preview --host 127.0.0.1 --port ${process.env.PORTAL_TEST_PORT || 4173} --strictPort`, url: `${origin}/ro_tools_portal/`, reuseExistingServer: false },
 });

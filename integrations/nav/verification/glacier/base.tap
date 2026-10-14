@@ -1,0 +1,305 @@
+TAP version 13
+# node:assert:152
+#   throw new AssertionError(obj);
+#   ^
+# AssertionError [ERR_ASSERTION]: Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+#           <div>ราค
+# 0 !== 1
+#     at module.exports (/tmp/glacier-final-evidence/base/tests/price-metadata-normalize.cjs:8:12)
+#     at Object.<anonymous> (/tmp/glacier-final-evidence/base/tests/dim-nav.test.cjs:12:55)
+#     at Module._compile (node:internal/modules/cjs/loader:1872:14)
+#     at Object..js (node:internal/modules/cjs/loader:2003:10)
+#     at Module.load (node:internal/modules/cjs/loader:1594:32)
+#     at Module._load (node:internal/modules/cjs/loader:1396:12)
+#     at wrapModuleLoad (node:internal/modules/cjs/loader:255:19)
+#     at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:154:5)
+#     at node:internal/main/run_main_module:33:47 {
+#   generatedMessage: false,
+#   code: 'ERR_ASSERTION',
+#   actual: 0,
+#   expected: 1,
+#   operator: 'strictEqual',
+#   diff: 'simple'
+# }
+# Node.js v24.19.0
+# Subtest: tests/dim-nav.test.cjs
+not ok 1 - tests/dim-nav.test.cjs
+  ---
+  duration_ms: 80.632184
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/dim-nav.test.cjs:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged
+not ok 2 - only exact first-run HTML/CSS delta; entire calculation and persistence implementation unchanged
+  ---
+  duration_ms: 8.499843
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/first-run.test.cjs:1:293'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'
+    - 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 'ab6eb4f04d654ad6ef2060f191a598e3c0e63bfcbd6d5ac411958c0998e38ce6'
+  actual: '48129ee9e91d691254414c0035564c55b548663c7d25b51d787b2c46e12eac67'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/first-run.test.cjs:1:409)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: new disclosure text uses an existing dark token with AA contrast on its light card
+ok 3 - new disclosure text uses an existing dark token with AA contrast on its light card
+  ---
+  duration_ms: 0.473386
+  type: 'test'
+  ...
+# Subtest: 1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback
+not ok 4 - 1.3.0 exact source artifacts, lock, Best Status, planned status, and additive rollback
+  ---
+  duration_ms: 40.48009
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/nav130-rollout.test.cjs:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+              <div>ราค
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    module.exports (/tmp/glacier-final-evidence/base/tests/price-metadata-normalize.cjs:8:12)
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/nav130-rollout.test.cjs:11:54)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte
+not ok 5 - nav140 reverses exactly to untouched latest main, preserving every original app/first-run byte
+  ---
+  duration_ms: 4.750067
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/nav140.test.cjs:5:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'
+    - '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '8f0a58b99a328837dfa99c6ed102d29c4d1b231d2bc6cd06f3ee5476b5b90ce4'
+  actual: 'bf5e06ff72fe5fac700f9a29c0fd8cb8d4a2bbaacdc75cea9f2644ce38632ef6'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/nav140.test.cjs:6:9)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: nav140 exact immutable source bundle, catalog and lock; old releases remain frozen
+ok 6 - nav140 exact immutable source bundle, catalog and lock; old releases remain frozen
+  ---
+  duration_ms: 2.264822
+  type: 'test'
+  ...
+# Subtest: nav140 host CSS is scoped and derives the real app shell without altering app CSS
+ok 7 - nav140 host CSS is scoped and derives the real app shell without altering app CSS
+  ---
+  duration_ms: 0.666357
+  type: 'test'
+  ...
+# Subtest: nav140 QA is pinned, same-repository read-only PR validation without publication
+ok 8 - nav140 QA is pinned, same-repository read-only PR validation without publication
+  ---
+  duration_ms: 0.41007
+  type: 'test'
+  ...
+# Subtest: 1.4.1 accessibility patch is exact and keeps the 1.4.0 release immutable
+ok 9 - 1.4.1 accessibility patch is exact and keeps the 1.4.0 release immutable
+  ---
+  duration_ms: 0.648219
+  type: 'test'
+  ...
+# Subtest: nav150 public tokens map exactly to audited host colors and font
+ok 10 - nav150 public tokens map exactly to audited host colors and font
+  ---
+  duration_ms: 2.565926
+  type: 'test'
+  ...
+# Subtest: nav150 exact pinned release integrity and unchanged catalog
+ok 11 - nav150 exact pinned release integrity and unchanged catalog
+  ---
+  duration_ms: 10.009312
+  type: 'test'
+  ...
+# Subtest: theme QA runs on rollout draft PR with read-only permission
+ok 12 - theme QA runs on rollout draft PR with read-only permission
+  ---
+  duration_ms: 0.32419
+  type: 'test'
+  ...
+# Subtest: original 1.5.0 release remains byte-identical
+ok 13 - original 1.5.0 release remains byte-identical
+  ---
+  duration_ms: 0.327314
+  type: 'test'
+  ...
+# Subtest: only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged
+not ok 14 - only exact reviewed metadata/labels edits; old default inputs, styles, business logic and nav reconstruct unchanged
+  ---
+  duration_ms: 7.40641
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/price-metadata.test.cjs:7:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+              <div>ราค
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    module.exports (/tmp/glacier-final-evidence/base/tests/price-metadata-normalize.cjs:8:12)
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/price-metadata.test.cjs:7:185)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: all 21 numeric fields have explicit labels; labels and IDs are valid and unique
+ok 15 - all 21 numeric fields have explicit labels; labels and IDs are valid and unique
+  ---
+  duration_ms: 0.66859
+  type: 'test'
+  ...
+# Subtest: fresh metadata blank; all 18 price fields stamp on effective edits, including rate
+ok 16 - fresh metadata blank; all 18 price fields stamp on effective edits, including rate
+  ---
+  duration_ms: 17.754806
+  type: 'test'
+  ...
+# Subtest: non-price fields, unchanged values, commas and composing input do not stamp
+ok 17 - non-price fields, unchanged values, commas and composing input do not stamp
+  ---
+  duration_ms: 1.246032
+  type: 'test'
+  ...
+# Subtest: invalid, missing or noncanonical stored timestamps gracefully display a dash
+ok 18 - invalid, missing or noncanonical stored timestamps gracefully display a dash
+  ---
+  duration_ms: 0.737975
+  type: 'test'
+  ...
+# Subtest: date formatting has Thai Buddhist year and a graceful Intl fallback using local components
+ok 19 - date formatting has Thai Buddhist year and a graceful Intl fallback using local components
+  ---
+  duration_ms: 1.102305
+  type: 'test'
+  ...
+# Subtest: all original export functions, parser, formulas and default prices remain exact bytes
+not ok 20 - all original export functions, parser, formulas and default prices remain exact bytes
+  ---
+  duration_ms: 5.657568
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/price-metadata.test.cjs:13:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected exactly one reviewed change: ชุดราคาเริ่มต้น: <strong id="default_price_date">12 เม.ย. 2569</strong>
+              <div>ราค
+    
+    0 !== 1
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: 1
+  actual: 0
+  operator: 'strictEqual'
+  stack: |-
+    module.exports (/tmp/glacier-final-evidence/base/tests/price-metadata-normalize.cjs:8:12)
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/price-metadata.test.cjs:13:155)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+    Test.postRun (node:internal/test_runner/test:1522:19)
+    Test.run (node:internal/test_runner/test:1447:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:960:7)
+  ...
+# Subtest: only the reviewed presentation delta: reversing it reproduces the previous index byte for byte
+not ok 21 - only the reviewed presentation delta: reversing it reproduces the previous index byte for byte
+  ---
+  duration_ms: 7.345569
+  type: 'test'
+  location: '/tmp/glacier-final-evidence/base/tests/ui-cohesion.test.cjs:6:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+    
+    + 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'
+    - '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'
+    
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '8c13358731ab8457825ee9cbf76a9230b90fd2ef0128df9d69cbb4e1ab6aab9b'
+  actual: 'f62b5f5b4bbe40ac8c6429d40c5654b64872db630b1b7538436d9fea5769f67c'
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (/tmp/glacier-final-evidence/base/tests/ui-cohesion.test.cjs:7:10)
+    Test.runInAsyncScope (node:async_hooks:227:14)
+    Test.run (node:internal/test_runner/test:1382:25)
+    Test.start (node:internal/test_runner/test:1242:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17)
+  ...
+# Subtest: inline scripts (formulas, prices, storage, import/export) are untouched
+ok 22 - inline scripts (formulas, prices, storage, import/export) are untouched
+  ---
+  duration_ms: 5.14985
+  type: 'test'
+  ...
+# Subtest: existing styles are untouched; new rules live only in the ui-cohesion block and add no new palette
+ok 23 - existing styles are untouched; new rules live only in the ui-cohesion block and add no new palette
+  ---
+  duration_ms: 4.270833
+  type: 'test'
+  ...
+# Subtest: protected ids, native labels, stage order and shared nav remain
+ok 24 - protected ids, native labels, stage order and shared nav remain
+  ---
+  duration_ms: 2.267085
+  type: 'test'
+  ...
+1..24
+# tests 24
+# suites 0
+# pass 17
+# fail 7
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 341.680782

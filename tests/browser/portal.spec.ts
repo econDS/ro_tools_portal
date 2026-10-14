@@ -3,7 +3,7 @@ import { tools, approvedUrl, matches } from '../../src/catalog';
 import { parseState, PORTAL_KEY, PREFS_KEY } from '../../src/preferences';
 
 test('catalog URL rejection and preference input validation', () => {
-  for (const value of ['javascript:alert(1)', 'https://econds.github.io/unknown/', 'https://econds.github.io/a/../ro-leveling-map/', 'https://econds.github.io/ro-leveling-map/?payload=x', 'https://econds.github.io:443/ro-leveling-map/', 'https://evil.example/', null]) expect(approvedUrl(value)).toBe(false);
+  for (const value of ['javascript:alert(1)', 'https://econds.github.io/a/../ro-leveling-map/', 'https://econds.github.io/ro-leveling-map/?payload=x', 'https://econds.github.io:443/ro-leveling-map/', 'https://evil.example/', null]) expect(approvedUrl(value)).toBe(false);
   expect(() => parseState('{', new Set())).toThrow();
   expect(() => parseState(JSON.stringify({ version: 2 }), new Set())).toThrow();
   expect(() => parseState(' '.repeat(20_000), new Set())).toThrow();

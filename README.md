@@ -39,3 +39,7 @@ npm run publish:root   # build แล้วคัดลอกผลไปที�
 สถานะการเปิดอ่าน (`listingStatus`), อายุเนื้อหา (`contentLifecycle`), การติดตั้งเมนูร่วม, ผลตรวจลิงก์จริง, วันที่ทบทวน metadata และการยืนยันข้อมูลในเกมเป็นคนละด้านกัน คู่มือ Ocean Week ยังเปิดอ่านได้ แต่รอบ 6 พ.ค.–4 มิ.ย. 2569 สิ้นสุดแล้ว วันที่สิ้นสุดเป็นก่อนปิดปรับปรุงเซิร์ฟเวอร์ ไม่ได้ระบุเวลานาฬิกา และไม่ได้ยืนยันข้อมูลสำหรับกิจกรรมรอบใหม่
 
 การแก้ metadata ใน registry ไม่ออก nav รุ่นใหม่เมื่อ navigation projection และ bundle เหมือนเดิมทุก byte: release lock ยังตรวจ source hashes จาก commit ประวัติเดิม ซอร์ส runtime ปัจจุบันยังต้องตรง ยกเว้น registry ส่วน metadata ที่ไม่ส่งออกสู่ snapshot
+
+## Dynamic navigation V2
+
+See [the agreed V2 contract](integrations/nav/V2-CONTRACT.md). Catalog-only changes no longer regenerate the frozen fallback: `publish:root` emits the live registry, while `build:nav` verifies immutable release bytes. Run `generate-nav-snapshot.mjs` only when preparing a new component release before its source commit.

@@ -6,13 +6,13 @@ export type NavTool = { id: string; title: string; canonicalUrl: string | null; 
 export type NavCatalog = { schemaVersion: 1; catalogVersion: string; tools: NavTool[] };
 export const snapshot = bundledSnapshot as NavCatalog;
 export const CATALOG_URL = 'https://econds.github.io/ro_tools_portal/catalog/v1/tools.json';
-export const MAX_BYTES = 32_768;
+export const MAX_BYTES = 262_144;
 const object = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 export function validateNavCatalog(value: unknown): NavCatalog {
-  if (!object(value) || value.schemaVersion !== 1 || typeof value.catalogVersion !== 'string' || !value.catalogVersion.length || value.catalogVersion.length > 80 || !Array.isArray(value.tools) || value.tools.length < 1 || value.tools.length > 50) throw new Error('Unsupported catalog');
+  if (!object(value) || value.schemaVersion !== 1 || typeof value.catalogVersion !== 'string' || !value.catalogVersion.length || value.catalogVersion.length > 80 || !Array.isArray(value.tools) || value.tools.length > 500) throw new Error('Unsupported catalog');
   const ids = new Set<string>();
   const tools = value.tools.map((tool): NavTool => {
-    if (!object(tool) || typeof tool.id !== 'string' || !/^[a-z][a-z0-9-]{0,63}$/.test(tool.id) || ids.has(tool.id) || typeof tool.title !== 'string' || !tool.title.trim() || tool.title.length > 160 || /[<>\u0000-\u001f]/.test(tool.title)) throw new Error('Invalid tool');
+    if (!object(tool) || typeof tool.id !== 'string' || tool.id !== tool.id.trim() || !/^[a-z][a-z0-9-]{0,63}$/.test(tool.id) || ids.has(tool.id) || typeof tool.title !== 'string' || !tool.title.trim() || tool.title.length > 160 || /[<>\u0000-\u001f]/.test(tool.title)) throw new Error('Invalid tool');
     ids.add(tool.id);
     if (tool.listingStatus !== 'listed' && tool.listingStatus !== 'planned') throw new Error('Unknown listing status');
     if (tool.listingStatus === 'listed' ? !approvedUrl(tool.canonicalUrl) : tool.canonicalUrl !== null) throw new Error('Unsafe launch URL');
@@ -32,7 +32,7 @@ export async function fetchCatalog(url: string): Promise<NavCatalog> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 1500);
   try {
-    const response = await fetch(url, { signal: controller.signal, credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer' });
+    const response = await fetch(url, { signal: controller.signal, cache: 'no-cache', credentials: 'omit', redirect: 'error', referrerPolicy: 'no-referrer' });
     if (!response.ok || response.url !== CATALOG_URL || !response.headers.get('content-type')?.includes('application/json') || !response.body) throw new Error('Invalid catalog response');
     const reader = response.body.getReader();
     const decoder = new TextDecoder(); let text = ''; let bytes = 0;

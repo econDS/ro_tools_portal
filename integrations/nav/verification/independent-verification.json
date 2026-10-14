@@ -1,0 +1,110 @@
+{
+  "historicalFilesVerified": 111,
+  "sourceCommit": "e2712f1cc4d7c72ccd31f384e5292c3d9bb19529",
+  "identicalReleaseCopies": 5,
+  "hashes": {
+    "nav.js": "4dbb1926029f87aa7ba9b8bbd826d579feae3b1938e7a203fd8f6a0df5961e6a",
+    "catalog.snapshot.json": "a198338ddcb7857094ef950fb1315c532840cf53ac8e7a69b331d8cb4a87dd5d",
+    "nav.lock.json": "7c195d008803b8e19248dffba327b3824edf2c8eeeefbb94e4ad308bb8c11d58"
+  },
+  "checks": [
+    {
+      "repo": "ro-leveling-map",
+      "automaticRequest": true,
+      "unchangedBundleDiscoversNewTool": true,
+      "search120": true,
+      "mobileEscape": true
+    },
+    {
+      "repo": "ro-reform-preparation",
+      "automaticRequest": true,
+      "unchangedBundleDiscoversNewTool": true,
+      "search120": true,
+      "mobileEscape": true
+    },
+    {
+      "repo": "dim_glacier_planner",
+      "automaticRequest": true,
+      "unchangedBundleDiscoversNewTool": true,
+      "search120": true,
+      "mobileEscape": true
+    },
+    {
+      "repo": "sessrumnir-ocean-week-guide",
+      "automaticRequest": true,
+      "unchangedBundleDiscoversNewTool": true,
+      "search120": true,
+      "mobileEscape": true
+    },
+    {
+      "repo": "ro-best-status",
+      "automaticRequest": true,
+      "unchangedBundleDiscoversNewTool": true,
+      "search120": true,
+      "mobileEscape": true
+    }
+  ],
+  "repositories": [
+    {
+      "repository": "econDS/ro_tools_portal",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "e68d567230c798e70bb351bc8d67f71c68f6c0d1",
+      "draftPR": "https://github.com/econDS/ro_tools_portal/pull/8",
+      "workingTreeClean": true
+    },
+    {
+      "repository": "econDS/ro-leveling-map",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "cc5b0150a3804316aedeceaeca46c146a9d1d47e",
+      "draftPR": "https://github.com/econDS/ro-leveling-map/pull/6",
+      "workingTreeClean": true
+    },
+    {
+      "repository": "econDS/ro-reform-preparation",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "d777741e5a4a9ec584e187ff3175601f4d59d4bc",
+      "draftPR": "https://github.com/econDS/ro-reform-preparation/pull/8",
+      "workingTreeClean": true
+    },
+    {
+      "repository": "econDS/dim_glacier_planner",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "0b93fdfca36d70955efdd625c5b83e4f92dcf92d",
+      "draftPR": "https://github.com/econDS/dim_glacier_planner/pull/12",
+      "workingTreeClean": true
+    },
+    {
+      "repository": "econDS/sessrumnir-ocean-week-guide",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "7f7f6ecb08a9f63920cde09477e96b8280ff99ca",
+      "draftPR": "https://github.com/econDS/sessrumnir-ocean-week-guide/pull/10",
+      "workingTreeClean": true
+    },
+    {
+      "repository": "econDS/ro-best-status",
+      "branch": "feat/dynamic-ro-suite-nav",
+      "head": "9180d9cb2c94cfb2eebead59fe240644ab632ea6",
+      "draftPR": "https://github.com/econDS/ro-best-status/pull/7",
+      "workingTreeClean": true
+    }
+  ],
+  "verifiedCIRuns": {
+    "ro_tools_portal": 38652210683,
+    "ro-leveling-map": 38652015802,
+    "dim_glacier_planner": 38651867679,
+    "ro-best-status": 38651853752,
+    "ro-reform-preparation": 38652015655,
+    "sessrumnir-ocean-week-guide": 38652348425
+  },
+  "architecture": "Local immutable 2.0.0 Web Component; automatic schema-v1 JSON fetch at connection; immediate frozen fallback; 500 tools/256KiB/1.5 seconds; controlled HTTPS econds.github.io repository roots; no remote executable code.",
+  "migration": "Review Portal and child Draft PRs together; preserve Portal source commit ancestry with normal merge; publish Portal catalog first after separate approval; roll out children independently, Ocean master/docs and others main/root.",
+  "rollback": "Restore child script URL to retained assets/ro-suite/1.5.1/nav.js; no storage migration. Revert bad central registry change and republish catalog separately.",
+  "allPRs": "draft, unmerged, mergeable",
+  "limitations": [
+    "Glacier full historical suite: base 17 pass/7 fail; candidate 20 pass/7 fail with identical failure signatures. Scoped CI passes four historical theme and three new source tests plus V2 browser scenarios.",
+    "Glacier JSON export/import roundtrip passed at 320/390/1440px; CSV/XLSX/XLS and broader historical browser matrices were not run by scoped CI. Byte preservation is not runtime coverage."
+  ],
+  "recordScope": "Implementation-head verification snapshot; later documentation-only Portal commit CI is linked in PR #8.",
+  "implementationHeadsCI": "success",
+  "glacierEvidence": "glacier/README.md"
+}

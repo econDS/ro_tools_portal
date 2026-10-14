@@ -6,12 +6,13 @@ import { NAV_VERSION } from '../../scripts/nav-version.mjs';
 import AxeBuilder from '@axe-core/playwright';
 import { snapshot, validateNavCatalog, CATALOG_URL } from '../../integrations/nav/src/catalog';
 
-const script = await readFile(`integrations/nav/releases/${NAV_VERSION}/nav.js`, 'utf8');
+const script = await readFile(process.env.NAV_TEST_BUNDLE || `integrations/nav/releases/${NAV_VERSION}/nav.js`, 'utf8');
 const toolPaths = ['/ro-leveling-map/', '/ro-reform-preparation/', '/dim_glacier_planner/', '/sessrumnir-ocean-week-guide/', '/ro-best-status/'];
 async function fixture(page: Page, { id = 'reform-workshop', remote = false, blocked = false, path = '/ro-reform-preparation/', theme = '' } = {}) {
   const html = `<!doctype html><html lang="th"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Nav fixture only</title><style>body{margin:8px;font:16px Tahoma}button{background:rgb(255,0,0)}h1{font-size:28px}table{border:3px solid blue}td{padding:10px}</style><ro-suite-nav tool-id="${id}" ${theme ? `theme="${theme}"` : ''} portal-url="https://econds.github.io/ro_tools_portal/" ${remote ? `catalog-url="${CATALOG_URL}"` : ''}><nav aria-label="เมนูสำรอง"><a href="https://econds.github.io/ro_tools_portal/">กลับ RO Tools Portal</a></nav></ro-suite-nav><h1>เครื่องคิดเลขจำลองสำหรับทดสอบเมนู</h1><label>จำนวน <input id="quantity" type="number" value="2"></label><button id="calculate">คำนวณ fixture</button><output id="total">20</output><table><tr><td>ตารางเดิม</td></tr></table><dialog id="dialog">หน้าต่างเดิม<button id="close">ปิด</button></dialog><button id="open">เปิดหน้าต่าง</button><script>document.querySelector('#calculate').onclick=()=>document.querySelector('#total').textContent=Number(document.querySelector('#quantity').value)*10;document.querySelector('#open').onclick=()=>document.querySelector('#dialog').showModal();document.querySelector('#close').onclick=()=>document.querySelector('#dialog').close()</script><script type="module" src="./assets/ro-suite/${NAV_VERSION}/nav.js"></script></html>`;
   await page.route(`**${path}`, route => route.fulfill({ contentType: 'text/html', body: html }));
   await page.route(`**/assets/ro-suite/${NAV_VERSION}/nav.js`, route => blocked ? route.abort() : route.fulfill({ contentType: 'text/javascript', body: script }));
+  if (!remote) await page.route(CATALOG_URL, route => route.abort());
   await page.goto(new URL(path, test.info().project.use.baseURL!).href);
   if (!blocked) await page.waitForFunction(() => !!document.querySelector('ro-suite-nav')?.shadowRoot);
 }
@@ -48,6 +49,8 @@ test('keyboard toggle, Escape focus return, current page, CSS and calculator iso
   await toggle.focus(); await page.keyboard.press('Space');
   await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   await page.keyboard.press('Tab');
+  await expect(page.getByRole('searchbox')).toBeFocused();
+  await page.keyboard.press('Tab');
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล', exact: true})).toBeFocused();
   await expect(page.locator('[aria-current="page"]')).toHaveAttribute('href', 'https://econds.github.io/ro-reform-preparation/');
   await expect(page.getByRole('link', {name: /Grade & Refine/})).toHaveCount(0);
@@ -81,7 +84,7 @@ test('blocked script retains visible light-DOM fallback', async ({ page }) => {
 test('unknown tool gets generic safe return without invented current identity', async ({ page }) => {
   await fixture(page, { id: 'unknown' });
   await expect(page.getByRole('link', {name: 'กลับ RO Tools Portal'})).toHaveCount(1);
-  await expect(page.getByRole('button', {name: 'เครื่องมืออื่น'})).toHaveCount(0);
+  await expect(page.getByRole('button', {name: 'เครื่องมืออื่น'})).toHaveCount(1);
 });
 
 for (const mode of ['blocked', 'malformed', 'major', 'unsafe', 'identity', 'oversized', 'timeout', 'redirect']) test(`remote catalog ${mode} falls back without blocking fixture`, async ({ page }) => {
@@ -95,10 +98,10 @@ for (const mode of ['blocked', 'malformed', 'major', 'unsafe', 'identity', 'over
     if (mode === 'major') (data as any).schemaVersion = 99;
     if (mode === 'unsafe') data.tools[0].canonicalUrl = 'https://evil.example/';
     if (mode === 'identity') (data.tools[0] as any).identity = { accent: '#ffffff', icon: 'map' };
-    await route.fulfill({ contentType: 'application/json', body: mode === 'oversized' ? ' '.repeat(40_000) : mode === 'malformed' ? '{' : JSON.stringify(data) });
+    await route.fulfill({ contentType: 'application/json', body: mode === 'oversized' ? ' '.repeat(262_145) : mode === 'malformed' ? '{' : JSON.stringify(data) });
   });
   await fixture(page, { remote: true });
-  expect(requests).toBe(0);
+  await expect.poll(() => requests).toBe(1);
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล', exact: true})).toBeVisible();
   await expect(page.locator('ro-suite-nav').getByRole('status')).toHaveText('อัปเดตรายการไม่ได้ ใช้รายการที่ติดตั้งไว้');
@@ -114,7 +117,7 @@ test('validated remote update stays navigation-only and preserves keyboard focus
   await page.route(CATALOG_URL, async route => { await pending; await route.fulfill({ contentType: 'application/json', body: JSON.stringify(data) }); });
   await fixture(page, {remote: true});
   await page.getByRole('button', {name: 'เครื่องมืออื่น'}).click();
-  await page.keyboard.press('Tab'); deliver();
+  await page.keyboard.press('Tab'); await page.keyboard.press('Tab'); deliver();
   await expect(page.getByRole('link', {name: 'แผนที่เก็บเลเวล ฉบับ fixture', exact: true})).toBeFocused();
   expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
 });
