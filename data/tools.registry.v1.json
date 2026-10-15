@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "0.2.0",
-  "reviewedOn": "2026-10-02",
+  "catalogVersion": "0.3.0",
+  "reviewedOn": "2026-10-14",
   "portal": {
     "id": "ro-tools-portal",
     "title": "RO Tools Portal",
@@ -339,6 +339,72 @@
       "sourceIds": [
         "S8",
         "S9"
+      ]
+    },
+    {
+      "id": "juno-festival-2026",
+      "title": "Juno Fall Academic Festival 2026",
+      "description": "คู่มือพิกัด /navi เช็คลิสต์รายวัน ตารางแลกรางวัล และ Enchant Rising Circlet รอบ 14 ต.ค.–11 พ.ย. 2569",
+      "repository": "econDS/RO-Juno-Fall-Academic-Festival-2026",
+      "repositoryUrl": "https://github.com/econDS/RO-Juno-Fall-Academic-Festival-2026",
+      "canonicalUrl": "https://econds.github.io/RO-Juno-Fall-Academic-Festival-2026/",
+      "listingStatus": "listed",
+      "contentType": "guide",
+      "contentLifecycle": "dated-period",
+      "categories": [
+        "events"
+      ],
+      "tags": [
+        "Juno",
+        "Academic Festival",
+        "เควส",
+        "Rising Circlet"
+      ],
+      "searchAliases": [
+        "จูโน",
+        "juno",
+        "festival",
+        "navi",
+        "circlet"
+      ],
+      "identity": {
+        "accent": "#8a5b13",
+        "icon": "gem"
+      },
+      "relatedToolIds": [
+        "ocean-week-guide"
+      ],
+      "defaultBranchObserved": "main",
+      "publishingSourceObserved": "root",
+      "declaredExistingFeatures": [
+        "navigation-copy",
+        "quest-guide",
+        "daily-checklist"
+      ],
+      "suiteCapabilitiesConfirmed": [],
+      "plannedSuiteCapabilities": [
+        "navigation.v1"
+      ],
+      "linkHealth": {
+        "state": "unverified",
+        "lastCheckedAt": null,
+        "reason": "Repository source and successful Pages workflow inspected; live HTTP unavailable from this environment."
+      },
+      "urlEvidence": "derived-project-url",
+      "metadataReviewedOn": "2026-10-14",
+      "gameDataVerifiedOn": null,
+      "event": {
+        "editionId": "juno-fall-academic-festival-2026",
+        "startsOn": "2026-10-14",
+        "endsOn": "2026-11-11",
+        "timeZone": "Asia/Bangkok",
+        "endBoundary": "before-maintenance",
+        "exactEndAt": null,
+        "periodEvidence": "existing-guide",
+        "stateAsOfReview": "stated-period-not-live-verified"
+      },
+      "sourceIds": [
+        "S10"
       ]
     },
     {

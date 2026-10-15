@@ -38,7 +38,7 @@ test('Thai and English search, filters, no results, URL and keyboard reset', asy
   await page.getByRole('button', {name: 'ล้างการค้นหาและตัวกรอง'}).focus();
   await page.keyboard.press('Enter');
   await expect(search).toBeFocused();
-  await expect(page.locator('[data-tool]:visible')).toHaveCount(6);
+  await expect(page.locator('[data-tool]:visible')).toHaveCount(tools.length);
   expect(page.url()).toContain('?keep=1#tools');
   await page.goto('./?q=รีฟอร์ม&category=equipment');
   await expect(page.locator('[data-tool]:visible')).toHaveCount(1);
@@ -86,7 +86,7 @@ for (const mode of ['blocked', 'quota', 'corrupt']) test(`storage ${mode} does n
 test('runtime network failure and script blocking preserve static navigation', async ({ page }) => {
   await page.route('**/*.js', route => route.abort());
   await page.goto('./');
-  await expect(page.locator('.tool-card a.launch')).toHaveCount(5);
+  await expect(page.locator('.tool-card a.launch')).toHaveCount(tools.filter(tool => tool.listingStatus === 'listed').length);
   await expect(page.locator('.tool-card').first()).toBeVisible();
 });
 
@@ -114,7 +114,7 @@ test('public catalog has only navigation fields and no capabilities or private s
   expect(response.ok()).toBe(true);
   const catalog = await response.json();
   expect(catalog.schemaVersion).toBe(1);
-  expect(catalog.tools).toHaveLength(6);
+  expect(catalog.tools).toHaveLength(tools.filter(tool => tool.listingStatus !== 'hidden').length);
   expect(Object.keys(catalog.tools[0]).sort()).toEqual(['canonicalUrl', 'id', 'identity', 'listingStatus', 'title']);
 });
 
