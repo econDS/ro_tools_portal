@@ -14,7 +14,7 @@ jobs:
           fetch-depth: 0
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 24.19.0
+          node-version: 24.22.1
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
@@ -47,7 +47,7 @@ jobs:
           path: baseline
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: 24.19.0
+          node-version: 24.22.1
       - working-directory: baseline
         run: npm ci && npx playwright install --with-deps chromium && npm run check
       - working-directory: baseline
