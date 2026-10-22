@@ -1,4 +1,4 @@
-# ro-suite-nav 2.0.0 — dynamic registry
+# ro-suite-nav 2.0.1 — dynamic registry
 
 See [V2 contract, migration and rollback](V2-CONTRACT.md). The historical notes below describe older versions; V2 automatically fetches at load and uses scalable URL rules.
 
@@ -104,3 +104,10 @@ Enter/Space เปิดปิด, Escape ปิดและคืน focus, Tab
 ไม่ intercept shortcuts ไม่แก้ URL hash/query ไม่อ่าน localStorage ไม่เปลี่ยนสูตรหรือราคาของแอป
 
 รุ่นเก่า: 1.2.0 เพิ่ม theme support; 1.1.0 แก้ URL Portal และเพิ่ม identity; 1.0.0 ชี้ URL Portal เก่าที่ไม่ถูกต้อง จึงห้ามติดตั้งใหม่
+
+## 2.0.1 security toolchain rebuild
+
+Vite 8.3.3 and source-map-js 1.2.2 replace vulnerable build dependencies.
+The frozen fallback and runtime source are unchanged; the new artifact records the
+patched toolchain provenance without rewriting 2.0.0 or earlier releases.
+Child applications remain on their existing release until a separate reviewed rollout.

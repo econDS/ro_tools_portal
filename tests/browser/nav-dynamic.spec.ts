@@ -120,6 +120,6 @@ for (const operation of ['hide', 'remove', 'dangling-reference']) test(`registry
     expect(html).not.toContain('data-tool="reform-workshop"');
     expect(html).not.toContain('href="https://econds.github.io/ro-reform-preparation/"');
     expect(html).toContain('data-tool="leveling-map"');
-    expect(await readFile('integrations/nav/releases/2.0.0/nav.js','utf8')).toBe(bundle);
+    expect(await readFile(`integrations/nav/releases/${NAV_VERSION}/nav.js`,'utf8')).toBe(bundle);
   } finally { await rm(temp,{recursive:true,force:true}); }
 });
